@@ -1,0 +1,13 @@
+{
+  "baseURL": "",
+  "title": "Matúš Námešný",
+  "coverimage": "",
+  "avatar": "https://pbs.twimg.com/profile_images/512708501840228352/MbawoT5E.jpeg",
+  "description": "Hello",
+  "name": "Matúš Námešný",
+  "email": "matus@namesny.com",
+  "social": {
+    "github": "https://github.com/LordMathis",
+    "twitter": "https://twitter.com/matus_n"
+  }
+}

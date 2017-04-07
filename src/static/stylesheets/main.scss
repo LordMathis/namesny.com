@@ -1,0 +1,109 @@
+$font-header: 'Concert One', cursive;
+$font-paragraph: 'Open Sans', sans-serif;
+$white: #fdfdfd;
+$black: #2f2f2f;
+$break-medium: 768px;
+$break-large: 1200px;
+
+#cover-page {
+  background: linear-gradient(140deg,rgba(68, 68, 68, 0.6) 20%, rgba(0, 0, 0, 0.9)), url(../images/background-cover.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: $white;
+  transition-property: width;
+  transition-duration: 1s;
+  -webkit-transition-property: width;
+  -webkit-transition-duration: 1s;
+}
+
+#cover-page.cover-page-full{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#cover-page.cover-page-collapsed {
+  float: left;
+  width: 320px;
+  height: 100%;
+  @media screen and (max-width: $break-medium) {
+    width: 100%;
+    float: none;
+  }
+  @media screen and (min-width: $break-large) {
+    width: 500px;
+    float: none;
+  }
+}
+
+body {
+  font-family: $font-paragraph;
+  color: $black;
+  margin: 0;
+}
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    font-family: $font-header;
+  }
+}
+
+#cover-page-name {
+  font-size: 5em;
+}
+
+#cover-page-name a, #cover-page-name a:hover {
+    color: $white;
+    text-decoration: none;
+}
+
+.content {
+  margin-left: 320px;
+  @media screen and (max-width: $break-medium) {
+    width: 100%;
+    float: none;
+  }
+  @media screen and (min-width: $break-large) {
+    margin-left: 500px;
+  }
+}
+
+.social {
+  text-align: center;
+  a {
+    color: $white;
+    display: inline-block;
+    margin: 10px;
+  }
+}
+
+.menu-links ul{
+  list-style: none;
+  margin-left: 0;
+  padding: 10px;
+  li {
+    display: inline-block;
+  }
+  li a {
+    color: $white;
+    display: block;
+    text-decoration: none;
+    font-size: 1.4em;
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 2px;
+    margin: 2px;
+    width: initial;
+
+  }
+}
