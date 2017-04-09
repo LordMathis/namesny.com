@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Portfolio</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Roboto|Montserrat|Concert+One" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  </head>
+  <body>
+    <div id="app">
+      <div data-reactroot="" data-reactid="1" data-react-checksum="-1250583058"><div id="cover-page" class="cover-page-collapsed" data-reactid="2"><div id="cover-page-content" data-reactid="3"><div data-reactid="4"><h1 id="cover-page-name" data-reactid="5"><a href="/" data-reactid="6">Matúš Námešný</a></h1></div><div class="social" data-reactid="7"><a href="https://github.com/LordMathis" data-reactid="8"><i class="fa fa-github fa-3x" data-reactid="9"></i></a><a href="https://twitter.com/matus_n" data-reactid="10"><i class="fa fa-twitter fa-3x" data-reactid="11"></i></a><a href="mailto:matus@namesny.com" data-reactid="12"><i class="fa fa-envelope-o fa-3x" aria-hidden="true" data-reactid="13"></i></a></div><div class="menu-links" data-reactid="14"><ul data-reactid="15"><li data-reactid="16"><a href="/about" data-reactid="17">About</a></li><li data-reactid="18"><a href="/blog" data-reactid="19">Blog</a></li><li data-reactid="20"><a href="/portfolio" data-reactid="21">Portfolio</a></li><li data-reactid="22"><a href="/resume" data-reactid="23">Resume</a></li></ul></div></div></div><div class="content" data-reactid="24"><h1 data-reactid="25">404</h1><h2 data-reactid="26">Page not found!</h2><p data-reactid="27"><a href="/" data-reactid="28">Go back to the main page</a></p></div></div>    </div>
+    <script src="/js/bundle.js"></script>
+  </body>
+</html>

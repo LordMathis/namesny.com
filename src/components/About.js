@@ -1,15 +1,9 @@
 import React, {Component} from 'react';
 
-export default class About extends Component{
-  constructor() {
-    super();
-  }
+export const About = () => (
+  <div className="content">
+    <h1>About</h1>
+  </div>
+);
 
-  render() {
-    return (
-      <div className="content">
-        <h1>About</h1>
-      </div>
-    );
-  }
-}
+export default About;

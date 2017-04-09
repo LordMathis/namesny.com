@@ -3,9 +3,6 @@ import config from '../config/config.json';
 import {Link} from 'react-router-dom';
 
 export default class Home extends Component {
-  constructor() {
-    super();
-  }
 
   render() {
     var socialLinks = [];
@@ -33,10 +30,10 @@ export default class Home extends Component {
           </div>
           <div className="menu-links">
             <ul>
-              <li><Link to='/about'>About</Link></li>
-              <li><Link to='/blog'>Blog</Link></li>
-              <li><Link to='/portfolio'>Portfolio</Link></li>
-              <li><Link to='/resume'>Resume</Link></li>
+              <li><Link to='/about'><i className="fa fa-question" aria-hidden="true"></i> About</Link></li>
+              <li><Link to='/blog'><i className="fa fa-rss" aria-hidden="true"></i> Blog</Link></li>
+              <li><Link to='/portfolio'><i className="fa fa-briefcase" aria-hidden="true"></i> Portfolio</Link></li>
+              <li><Link to='/resume'><i className="fa fa-file-text-o" aria-hidden="true"></i> Resume</Link></li>
             </ul>
           </div>
         </div>
