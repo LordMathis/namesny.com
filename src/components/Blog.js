@@ -1,12 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-export default class Blog extends Component {
+export const Blog = () => (
+  <div>
+    <div className="content">
+      <h1>Hello</h1>
+    </div>
+  </div>
+);
 
-  render () {
-    return (
-      <div className="content">
-        <h1>Hello</h1>
-      </div>
-    )
-  }
-}
+export default Blog;

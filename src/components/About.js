@@ -1,9 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
+//  import { Home } from '.';
 
 export const About = () => (
-  <div className="content">
-    <h1>About</h1>
+  <div>
+    <div className="content">
+      <h1>About</h1>
+    </div>
   </div>
 );
 
 export default About;
+
+//    <Home key={'home'} fullwidth={false} />

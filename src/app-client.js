@@ -13,6 +13,6 @@ const AppClient = () => (
 window.onload = () => {
   render(
     <AppClient />,
-    document.getElementById('app')
+    document.getElementById('root')
   );
 };

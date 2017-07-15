@@ -1,19 +1,46 @@
-const path = require('path');
+const { resolve, join } = require('path')
+const webpack = require('webpack')
 
-module.exports = {
-  entry: [
-    './src/app-client.js'
-  ],
+const config = {
+  devtool: 'cheap-eval-source-map',
+  context: resolve(__dirname, 'src'),
+  entry: {
+    home: [
+      'webpack-hot-middleware/client',
+      './app-client.js'
+    ]
+  },
   output: {
-    path: path.join(__dirname, 'src', 'static', 'js'),
-    publicPath: "/js/",
-    filename: 'bundle.js'
+    path: resolve(__dirname,'public/static'),
+    filename: 'bundle.js',
+    publicPath: '/static/'
   },
   module: {
-    loaders: [
-      {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
-      {test: /\.json$/, exclude: /node_modules/, loader: 'json-loader' },
-      {test: /\.(png|jpg)$/, exclude: /node_modules/, loader: 'url-loader'},
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
+          'babel-loader'
+        ],
+        exclude: '/node_modules/'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
+          {
+            loader: 'postcss-loader'
+          }
+        ]
+      },
       {test: /\.scss$/,
             use: [{
                 loader: "style-loader" // creates style nodes from JS strings
@@ -22,8 +49,19 @@ module.exports = {
             }, {
                 loader: "sass-loader" // compiles Sass to CSS
             }]
-        }
+      },
+      {
+        test: /\.(png|jpg)$/, 
+        exclude: /node_modules/,
+        loader: 'url-loader'
+      },
+
     ]
   },
-  plugins: []
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NamedModulesPlugin()
+  ]
 }
+module.exports = config

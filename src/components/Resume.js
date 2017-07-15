@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-export default class Resume extends Component{
-  render() {
-    return (
-      <div className="content">
-        <h1>Resume</h1>
-      </div>
-    );
-  }
-}
+export const Resume = () => (
+  <div>
+    <div className="content">
+      <h1>Resume</h1>
+    </div>
+  </div>
+);
+
+export default Resume;

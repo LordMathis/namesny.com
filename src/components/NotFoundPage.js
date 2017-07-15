@@ -1,23 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-export class NotFoundPage extends React.Component {
-  componentWillMount() {
-    const { staticContext } = this.props;
-    if (staticContext) {
-      staticContext.is404 = true;
-    }
+export const NotFoundPage = (props) => {
+  if (props.location.pathname === '/') {
+    return null;
   }
-
-  render() {
-    return (
+  return (
+    <div>
       <div className="content">
         <h1>Uhm... WHAT?</h1>
-        <h2>Looks like you're lost</h2>
+        <h2>Looks like you&apos;re lost</h2>
         <p>404 Page not found</p>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default NotFoundPage;
