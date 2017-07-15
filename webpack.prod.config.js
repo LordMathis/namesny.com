@@ -1,19 +1,12 @@
 
 const { resolve, join } = require('path')
 const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const config = {
   context: resolve(__dirname, 'src'),
   entry: {
     bundle: [
       './app-client.js'
-    ],
-    'vendor/js': [
-      'react',
-      'react-dom',
-      'redux',
-      'react-redux'
     ]
   },
   output: {
@@ -32,22 +25,35 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                importLoaders: 1,
-                localIdentName: '[name]_[local]___[hash:base64:5]'
-              }
-            },
-            {
-              loader: 'postcss-loader'
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
             }
-          ]
-        })
-      }
+          },
+          {
+            loader: 'postcss-loader'
+          }
+        ]
+      },
+      {test: /\.scss$/,
+            use: [{
+                loader: "style-loader" // creates style nodes from JS strings
+            }, {
+                loader: "css-loader" // translates CSS into CommonJS
+            }, {
+                loader: "sass-loader" // compiles Sass to CSS
+            }]
+      },
+      {
+        test: /\.(png|jpg)$/,
+        exclude: /node_modules/,
+        loader: 'url-loader'
+      },
     ]
   },
   plugins: [
@@ -57,11 +63,6 @@ const config = {
          // this assumes your vendor imports exist in the node_modules directory
          return module.context && module.context.indexOf('node_modules') !== -1
       }
-    }),
-    new ExtractTextPlugin({
-      filename: '[name].css',
-      disable: false,
-      allChunks: true
     })
   ]
 }
