@@ -26,7 +26,7 @@ function renderFullPage(html) {
     <!DOCTYPE html>
     <html>
       <head>
-        <title>Redux Hello World</title>
+        <title>Matúš Námešný</title>
           <!-- Google Fonts -->
           <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Roboto|Montserrat|Concert+One" rel="stylesheet">
           <!-- Font Awesome -->
