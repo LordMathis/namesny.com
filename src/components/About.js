@@ -10,5 +10,3 @@ export const About = () => (
 );
 
 export default About;
-
-//    <Home key={'home'} fullwidth={false} />
