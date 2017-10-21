@@ -44,7 +44,7 @@ export default class Home extends Component {
               </li>
               <li>
                 <Link to="/blog">
-                  <i className="fa fa-rss" aria-hidden="true" /> Blog
+                  <i className="fa fa-pencil-square-o" aria-hidden="true" /> Blog
                 </Link>
               </li>
               <li>
