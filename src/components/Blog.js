@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const Blog = () => (
+export const Blog = (props) => (
   <div>
     <div className="content">
-      <h1>Blog</h1>
+      <h1>{ props.data.isLoading ? 'Loading...' : 'Blog' }</h1>
     </div>
   </div>
 );
