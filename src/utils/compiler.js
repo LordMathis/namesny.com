@@ -5,7 +5,7 @@ const moment = require('moment');
 const jsonfile = require('jsonfile');
 const Step = require('step');
 const fm = require('front-matter');
-const config = require('../static/config.json');
+const config = require('../static/config/config.json');
 
 function readFile(filepath, callback) {
   fs.readFile(filepath, 'utf-8', callback);
