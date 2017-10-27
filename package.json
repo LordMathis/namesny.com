@@ -20,12 +20,17 @@
     "babel-polyfill": "^6.7.4",
     "babel-runtime": "^6.6.1",
     "express": "^4.13.4",
+    "front-matter": "^2.2.0",
     "isomorphic-fetch": "^2.2.1",
+    "jsonfile": "^4.0.0",
+    "markdown-it": "^8.4.0",
+    "moment": "^2.19.1",
     "node-sass": "^4.5.3",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.4",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "step": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.7.6",
