@@ -28,10 +28,10 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(require('express').static('public'))
 
-var api = require('./api');
+var api = require('./utils/api');
 api(app);
 
-var serverRender = require('./serverRender')
+var serverRender = require('./utils/serverRender')
 app.get("*", serverRender)
 
 app.listen(port, function(error) {

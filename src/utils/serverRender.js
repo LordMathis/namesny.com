@@ -2,7 +2,7 @@ import 'babel-polyfill'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter as Router } from 'react-router-dom'
-import { App } from './components/App'
+import { App } from '../components/App'
 
 
 
@@ -34,7 +34,6 @@ function renderFullPage(html) {
       </head>
       <body>
         <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
-        <script src="/static/vendor.js"></script>
         <script src="/static/bundle.js"></script>
       </body>
     </html>
