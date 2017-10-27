@@ -7,10 +7,6 @@ const async = require('async');
 const fm = require('front-matter');
 const config = require('../static/config/config.json');
 
-function readFile(filepath, callback) {
-  fs.readFile(filepath, 'utf-8', callback);
-}
-
 function render(file) {
   const md = new MarkdownIt();
   return md.render(file);
@@ -30,7 +26,7 @@ function fileMetadata(filepath) {
   return metadata;
 }
 
-function compile(fileData, callback) {
+function compile(filepath, data, fileData, callback) {
   const frontMatter = fm(fileData);
   const rendered = render(frontMatter.body);
   const metadata = fileMetadata(filepath);
@@ -44,7 +40,7 @@ function compile(fileData, callback) {
 
   const renderedpath = path.join(process.cwd(), config.renderPath, `${metadata.filename}.html`);
 
-  this.data.posts.push(post);
+  data.posts.push(post);
 
   fs.writeFile(renderedpath, rendered, callback);
 }
@@ -55,9 +51,11 @@ function Compiler(data) {
 
 Compiler.prototype.addFile = function (filepath) {
 
+  console.log("Foo", this.data);
+
   async.waterfall([
-    readFile,
-    compile,
+    fs.readFile.bind(fs, filepath, 'utf8'),
+    compile.bind(compile, filepath, this.data),
   ], (err) => {
     if (err) throw err;
   });
@@ -65,8 +63,8 @@ Compiler.prototype.addFile = function (filepath) {
 };
 
 Compiler.prototype.writeData = function (callback) {
+  console.log('Bar', this.data);
   const dataPath = path.join(process.cwd(), 'src/utils/data.json');
-  console.log(JSON.stringify(this.data));
   jsonfile.writeFile(dataPath, this.data, callback);
 };
 
