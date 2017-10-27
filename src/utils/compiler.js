@@ -36,7 +36,7 @@ function fileMetadata(filepath) {
   return metadata;
 }
 
-module.exports = function Compiler(data) {
+function Compiler(data) {
   this.data = data;
 }
 
@@ -59,7 +59,7 @@ Compiler.prototype.addFile = function (filepath) {
         summary: frontMatter.attributes.summary,
       };
 
-      const renderedpath = path.join(config.renderPath, `${metadata.filename}.html`);
+      const renderedpath = path.join(process.cwd(), config.renderPath, `${metadata.filename}.html`);
 
       this.data.posts.push(post);
       writeRenderedFile(renderedpath, rendered);
@@ -68,8 +68,10 @@ Compiler.prototype.addFile = function (filepath) {
 };
 
 Compiler.prototype.writeData = function () {
-  const dataPath = path.join(process.cwd(), 'server/utils/data.json');
-  jsonfile.writeFile(dataPath, data, (err) => {
+  const dataPath = path.join(process.cwd(), 'src/utils/data.json');
+  jsonfile.writeFile(dataPath, this.data, (err) => {
     if (err) throw err;
   });
 };
+
+module.exports = Compiler;
