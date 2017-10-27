@@ -17,13 +17,6 @@ function writeRenderedFile(renderedpath, result) {
   });
 }
 
-function writeData(data) {
-  const dataPath = path.join(process.cwd(), 'server/utils/data.json');
-  jsonfile.writeFile(dataPath, data, (err) => {
-    if (err) throw err;
-  });
-}
-
 function render(file) {
   const md = new MarkdownIt();
   return md.render(file);
@@ -43,33 +36,40 @@ function fileMetadata(filepath) {
   return metadata;
 }
 
-const compiler = {
-  add(filepath) {
-    Step(
-      function loadFiles() {
-        readData(this.parallel());
-        readFile(filepath, this.parallel());
-      },
-      (err, data, fileData) => {
-        if (err) throw err;
-
-        const frontMatter = fm(fileData);
-        const rendered = render(frontMatter.body);
-        const metadata = fileMetadata(filepath);
-
-        const post = {
-          published: moment().format('MMMM Do YYYY'),
-          filename: metadata.filename,
-          title: frontMatter.attributes.title,
-          summary: frontMatter.attributes.summary,
-        };
-
-        const renderedpath = path.join(config.renderPath, `${metadata.filename}.html`);
-
-        data.posts.push(post);
-        writeData(data);
-        writeRenderedFile(renderedpath, rendered);
-      }
-    );
-  },
+module.exports = function Compiler(data) {
+  this.data = data;
 }
+
+Compiler.prototype.addFile = function (filepath) {
+  Step(
+    function loadFiles() {
+      readFile(filepath, this.parallel());
+    },
+    (err, fileData) => {
+      if (err) throw err;
+
+      const frontMatter = fm(fileData);
+      const rendered = render(frontMatter.body);
+      const metadata = fileMetadata(filepath);
+
+      const post = {
+        published: moment().format('MMMM Do YYYY'),
+        filename: metadata.filename,
+        title: frontMatter.attributes.title,
+        summary: frontMatter.attributes.summary,
+      };
+
+      const renderedpath = path.join(config.renderPath, `${metadata.filename}.html`);
+
+      this.data.posts.push(post);
+      writeRenderedFile(renderedpath, rendered);
+    }
+  );
+};
+
+Compiler.prototype.writeData = function () {
+  const dataPath = path.join(process.cwd(), 'server/utils/data.json');
+  jsonfile.writeFile(dataPath, data, (err) => {
+    if (err) throw err;
+  });
+};

@@ -1,11 +1,16 @@
 const fs = require('fs');
-const compiler = require('./compiler');
+const Compiler = require('./compiler');
 const config = require('../static/config/config.json');
+const data = require('./data.json');
 
 module.exports = function() {
+
+  var compiler = Compiler(data);
+
   fs.readdir(config.contentPath, (err, files) => {
     files.forEach(file => {
-      console.log(file);
-    })
+      compiler.addFile(file);
+    });
+    compiler.writeData();
   });
 }

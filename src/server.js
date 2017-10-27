@@ -31,7 +31,7 @@ app.use(require('express').static('public'))
 var api = require('./utils/api');
 api(app);
 
-require('./utils/scanner');
+require('./utils/scanner')();
 
 var serverRender = require('./utils/serverRender')
 app.get("*", serverRender)
