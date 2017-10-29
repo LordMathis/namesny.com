@@ -40,30 +40,31 @@ function compile(filepath, data, fileData, callback) {
 
   const renderedpath = path.join(process.cwd(), config.renderPath, `${metadata.filename}.html`);
 
-  data.posts.push(post);
+  fs.writeFile(renderedpath, rendered, (err) => {
+    if (err) callback(err);
+  });
 
-  fs.writeFile(renderedpath, rendered, callback);
+  callback(null, post);
 }
 
 function Compiler(data) {
   this.data = data;
 }
 
-Compiler.prototype.addFile = function (filepath) {
-
-  console.log("Foo", this.data);
-
+Compiler.prototype.addFile = function(filepath, callback) {
   async.waterfall([
     fs.readFile.bind(fs, filepath, 'utf8'),
     compile.bind(compile, filepath, this.data),
-  ], (err) => {
+  ], (err, result) => {
     if (err) throw err;
+
+    this.data.posts.push(result);
+    callback();
   });
 
 };
 
-Compiler.prototype.writeData = function (callback) {
-  console.log('Bar', this.data);
+Compiler.prototype.writeData = function(callback) {
   const dataPath = path.join(process.cwd(), 'src/utils/data.json');
   jsonfile.writeFile(dataPath, this.data, callback);
 };

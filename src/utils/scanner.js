@@ -13,12 +13,16 @@ module.exports = function() {
     fs.readdir(config.contentPath, callback);
   }
 
+  function compileFile(file, callback) {
+    const filePath = path.join(process.cwd(), config.contentPath, file);
+    compiler.addFile(filePath, callback);
+  }
+
   function compile(files, callback) {
-    files.forEach(file => {
-      const filePath = path.join(process.cwd(), config.contentPath, file);
-      compiler.addFile(filePath);
+    async.each(files, compileFile, (err) => {
+      if (err) throw err;
+      callback();
     });
-    return callback(null);
   }
 
   function writeData(callback) {
@@ -29,7 +33,7 @@ module.exports = function() {
     readdir,
     compile,
     writeData
-  ], (err => {
+  ], (err) => {
     if(err) throw err;
-  }));
+  });
 }
