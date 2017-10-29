@@ -4,3 +4,4 @@ public
 *.log
 content
 renders
+data.json
