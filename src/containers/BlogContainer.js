@@ -16,6 +16,7 @@ export default class BlogContainer extends Component {
     axios.get('/api/blog').then((res) => {
       this.setState({
         isLoading: false,
+        posts: res.data,
       });
     })
   }
