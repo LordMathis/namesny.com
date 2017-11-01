@@ -1,11 +1,16 @@
 require('babel-register');
 
-var app = new (require('express'))()
+var app = new (require('express'))();
 var port = process.env.PORT || 3000;
 
 require('css-modules-require-hook')({
   generateScopedName: '[name]__[local]___[hash:base64:5]'
-})
+});
+
+var fs = require('fs');
+var filename = './src/utils/data.json';
+var dataStub = {"posts": []};
+fs.writeFileSync(filename, JSON.stringify(dataStub));
 
 
 // initalize webpack dev middleware if in development context
