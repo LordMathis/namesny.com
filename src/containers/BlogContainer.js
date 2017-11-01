@@ -23,7 +23,8 @@ export default class BlogContainer extends Component {
 
   render() {
     return (
-      <Blog data={this.state}/>
+      <Blog isLoading={this.state.isLoading}
+            posts={this.state.posts}/>
     )
   }
 }
