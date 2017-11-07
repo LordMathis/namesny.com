@@ -28,11 +28,19 @@ function fileMetadata(filepath) {
 
 function compile(filepath, data, fileData, callback) {
   const frontMatter = fm(fileData);
+  console.log(frontMatter);
   const rendered = render(frontMatter.body);
   const metadata = fileMetadata(filepath);
 
+  let published;
+  if (frontMatter.attributes.date) {
+    published = moment(frontMatter.attributes.date);
+  } else {
+    published = moment();
+  }
+
   const post = {
-    published: moment().format('MMMM Do YYYY'),
+    published: published.format('MMMM Do YYYY'),
     filename: metadata.filename,
     title: frontMatter.attributes.title,
     summary: frontMatter.attributes.summary,
