@@ -43,6 +43,7 @@ function compile(filepath, data, fileData, callback) {
     filename: metadata.filename,
     title: frontMatter.attributes.title,
     summary: frontMatter.attributes.summary,
+    link: config.baseURL + '/blog/post/' + metadata.filename
   };
 
   const renderedpath = path.join(process.cwd(), config.renderPath, `${metadata.filename}.html`);
