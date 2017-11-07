@@ -19,6 +19,7 @@ module.exports = function() {
   }
 
   function compile(files, callback) {
+    console.log("[Scanner] Discovered files: " + files);
     async.each(files, compileFile, (err) => {
       if (err) throw err;
       callback();

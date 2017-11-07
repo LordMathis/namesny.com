@@ -28,7 +28,6 @@ function fileMetadata(filepath) {
 
 function compile(filepath, data, fileData, callback) {
   const frontMatter = fm(fileData);
-  console.log(frontMatter);
   const rendered = render(frontMatter.body);
   const metadata = fileMetadata(filepath);
 
@@ -67,6 +66,7 @@ Compiler.prototype.addFile = function(filepath, callback) {
     if (err) throw err;
 
     this.data.posts.push(result);
+    console.log("[Compiler] File %s compiled", filepath);
     callback();
   });
 

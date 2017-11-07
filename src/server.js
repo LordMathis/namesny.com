@@ -45,6 +45,6 @@ app.listen(port, function(error) {
   if (error) {
     console.error(error)
   } else {
-    console.info("==> Listening on port %s", port)
+    console.info("[Server] Listening on port %s", port)
   }
 })
