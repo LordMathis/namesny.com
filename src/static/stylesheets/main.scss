@@ -2,6 +2,7 @@ $font-header: 'Concert One', cursive;
 $font-paragraph: 'Open Sans', sans-serif;
 $white: #fdfdfd;
 $black: #2f2f2f;
+$blue: #428bca;
 $break-medium: 768px;
 $break-large: 1200px;
 
@@ -74,6 +75,9 @@ body {
   h1 {
     text-align: center;
   }
+  a {
+    color: $blue;
+  }
   @media screen and (max-width: $break-medium) {
     width: 100%;
     float: none;
@@ -104,5 +108,53 @@ body {
     font-size: 1.4em;
     }
 
+  }
+}
+
+.post-title {
+  float: left;
+  h3 {
+    font-weight: normal
+  }
+}
+
+.post-date {
+	float: right;
+  h3 {
+    font-weight: normal
+  }
+}
+
+.post-header {
+	background-color: #F5F5F5;
+	overflow: hidden;
+	padding: 0 5px 0 5px;
+}
+
+.post-summary, .post-content{
+	clear: both;
+}
+
+.post-summary {
+	padding: 0 5px 0 5px;
+}
+
+.post-list-item {
+	margin-top: 20px;
+	border-style: solid;
+	border-width: 0 0 3px 0;
+	border-color: $black;
+}
+
+.post-list-footer {
+  text-align: center;
+	padding-bottom: 5px;
+}
+
+.blog-posts {
+  box-sizing: border-box;
+  margin: 0 auto;
+  @media screen and (min-width: $break-large) {
+    width: 80%;
   }
 }
