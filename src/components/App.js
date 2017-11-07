@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Home, About, Portfolio, Resume, NotFoundPage } from '.';
-import { BlogContainer } from '../containers';
+import { BlogContainer, PostContainer } from '../containers';
 
 export const App = () => (
   <div>
@@ -9,6 +9,7 @@ export const App = () => (
     <Switch>
       <Route exact path="/about" component={About} />
       <Route exact path="/blog" component={BlogContainer} />
+      <Route path="/blog/post/:postname" component={PostContainer} />
       <Route exact path="/portfolio" component={Portfolio} />
       <Route exact path="/resume" component={Resume} />
       <Route component={NotFoundPage} />
