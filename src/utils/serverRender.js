@@ -4,9 +4,6 @@ import { renderToString } from 'react-dom/server'
 import { StaticRouter as Router } from 'react-router-dom'
 import { App } from '../components/App'
 
-
-
-
 function serverRender(req, res) {
   let markup = '';
   let status = 200;
@@ -40,4 +37,4 @@ function renderFullPage(html) {
     `
 }
 
-module.exports = serverRender
+module.exports = serverRender;

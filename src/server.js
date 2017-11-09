@@ -31,20 +31,19 @@ if (process.env.NODE_ENV === 'development') {
   app.use(hotDevMiddleware(compiler))
 }
 
-app.use(require('express').static('public'))
-
-var api = require('./utils/api');
-api(app);
-
+app.use(require('express').static('public'));
 require('./utils/scanner')();
 
-var serverRender = require('./utils/serverRender')
-app.get("*", serverRender)
+var api = require('./utils/api');
+app.use("/api", api);
+
+var serverRender = require('./utils/serverRender');
+app.get("*", serverRender);
 
 app.listen(port, function(error) {
   if (error) {
-    console.error(error)
+    console.error(error);
   } else {
-    console.info("[Server] Listening on port %s", port)
+    console.info("[Server] Listening on port %s", port);
   }
 })
