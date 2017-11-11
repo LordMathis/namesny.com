@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Resume = () => (
   <div>
-    <div className="content">
+    <div className="content-wrapper">
       <h1>Resume</h1>
     </div>
   </div>

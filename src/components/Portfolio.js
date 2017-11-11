@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Portfolio = () => (
   <div>
-    <div className="content">
+    <div className="content-wrapper">
       <h1>Portfolio</h1>
     </div>
   </div>

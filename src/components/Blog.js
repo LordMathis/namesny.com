@@ -31,10 +31,10 @@ export default class Blog extends Component {
     )
 
     return (
-      <div className="content">
+      <div className="content-wrapper">
         <h1>Blog</h1>
 
-        <div className="blog-posts">
+        <div className="content">
           {posts}
         </div>
 

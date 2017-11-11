@@ -3,7 +3,7 @@ import React from 'react';
 
 export const About = () => (
   <div>
-    <div className="content">
+    <div className="content-wrapper">
       <h1>About</h1>
     </div>
   </div>

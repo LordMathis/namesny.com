@@ -6,7 +6,7 @@ export const NotFoundPage = (props) => {
   }
   return (
     <div>
-      <div className="content">
+      <div className="content-wrapper">
         <h1>Uhm... WHAT?</h1>
         <h2>Looks like you&apos;re lost</h2>
         <p>404 Page not found</p>
