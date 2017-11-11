@@ -1,22 +1,32 @@
 const data = require('./data.json');
 const api = require('express').Router();
+const fs = require('fs');
+const path = require('path');
 
 api.get('/blog', (req, res) => {
   res.json(data.posts);
 });
 
 api.get('/post/:postname', (req, res) => {
+  const postname = req.params.postname;
   const post = data.posts.find((el) => {
-    el.filename === req.params.postname
+    return el.filename === postname
   });
 
-  if (post) {
-    res.json(post);
-  } else {
-    res.json({
-      error: 404
-    });
-  }
+  const renderPath = path.join(process.cwd(), '/renders', postname + '.html');
+  fs.readFile(renderPath, 'utf8', (err, data) => {
+    if (err) {
+      res.json({
+        error: 404
+      });
+    } else {
+      res.json({
+        published: post.published,
+        title: post.title,
+        body: data,
+      });
+    }
+  });
 });
 
 

@@ -31,15 +31,13 @@ export default class Blog extends Component {
     )
 
     return (
-      <div>
-        <div className="content">
-          <h1>Blog</h1>
+      <div className="content">
+        <h1>Blog</h1>
 
-          <div className="blog-posts">
-            {posts}
-          </div>
-
+        <div className="blog-posts">
+          {posts}
         </div>
+
       </div>
     );
   }
