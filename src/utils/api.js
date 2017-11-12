@@ -22,6 +22,7 @@ api.get('/post/:postname', (req, res) => {
     } else {
       res.json({
         published: post.published,
+        link: post.link,
         title: post.title,
         body: data,
       });

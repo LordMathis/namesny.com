@@ -131,6 +131,10 @@ body {
 	padding: 0 5px 0 5px;
 }
 
+.post-content {
+  clear: both;
+}
+
 .post-summary, .post-content{
 	clear: both;
 }
@@ -155,6 +159,6 @@ body {
   box-sizing: border-box;
   margin: 0 auto;
   @media screen and (min-width: $break-large) {
-    width: 80%;
+    width: 90%;
   }
 }

@@ -11,9 +11,15 @@ export default class Post extends Component {
 
     return (
       <div className="content-wrapper">
-        <h1>{this.props.post.title}</h1>
-        <h4>{this.props.post.published}</h4>
-        <div className="content" dangerouslySetInnerHTML={{__html: this.props.post.body}}>
+        <a href={this.props.post.link}>
+          <h1>{this.props.post.title}</h1>
+        </a>
+        <div className="content">
+          <div className="post-date">
+            <h3>{this.props.post.published}</h3>
+          </div>
+          <div className="post-content" dangerouslySetInnerHTML={{__html: this.props.post.body}}>
+          </div>
         </div>
       </div>
     )
