@@ -13,5 +13,8 @@
     "linkedin": "https://www.linkedin.com/in/mat%C3%BA%C5%A1-n%C3%A1me%C5%A1n%C3%BD-3903b6128/"
   },
   "contentPath": "./content",
-  "renderPath": "./renders"
+  "renderPath": "./renders",
+  "files": [
+    "about.md", "resume.md"
+  ]
 }

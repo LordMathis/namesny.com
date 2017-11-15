@@ -59,14 +59,16 @@ function Compiler(data) {
   this.data = data;
 }
 
-Compiler.prototype.addFile = function(filepath, callback) {
+Compiler.prototype.addFile = function(filepath, addToData, callback) {
   async.waterfall([
     fs.readFile.bind(fs, filepath, 'utf8'),
     compile.bind(compile, filepath, this.data),
   ], (err, result) => {
     if (err) throw err;
 
-    this.data.posts.push(result);
+    if (addToData) {
+      this.data.posts.push(result);
+    }
     console.log("[Compiler] File %s compiled", filepath);
     callback();
   });

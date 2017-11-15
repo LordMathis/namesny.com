@@ -15,7 +15,12 @@ module.exports = function() {
 
   function compileFile(file, callback) {
     const filePath = path.join(process.cwd(), config.contentPath, file);
-    compiler.addFile(filePath, callback);
+
+    if (config.files.indexOf(file) !== -1) {
+      compiler.addFile(filePath, false, callback);
+    } else {
+      compiler.addFile(filePath, true, callback);
+    }
   }
 
   function compile(files, callback) {
