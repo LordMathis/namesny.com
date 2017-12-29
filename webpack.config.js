@@ -51,11 +51,19 @@ const config = {
             }]
       },
       {
-        test: /\.(png|jpg)$/, 
+        test: /\.(png|jpg)$/,
         exclude: /node_modules/,
         loader: 'url-loader'
       },
-
+      {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            attrs: [':data-src']
+          }
+        }
+      },
     ]
   },
   plugins: [

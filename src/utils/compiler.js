@@ -8,7 +8,7 @@ const fm = require('front-matter');
 const config = require('../utils/config.json');
 
 function render(file) {
-  const md = new MarkdownIt();
+  const md = new MarkdownIt({html: true});
   return md.render(file);
 }
 
