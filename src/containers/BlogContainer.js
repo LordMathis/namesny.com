@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Blog} from '../components';
+import {About, Blog} from '../components';
 
 export default class BlogContainer extends Component {
 
@@ -8,14 +8,22 @@ export default class BlogContainer extends Component {
     super();
 
     this.state = {
-      isLoading: true,
+      isLoadingBlog: true,
+      isLoadingAbout: true,
     }
   }
 
   componentDidMount() {
+    axios.get('/api/about').then((res) => {
+      this.setState({
+        isLoadingAbout: false,
+        about: res.data,
+      });
+    })
+
     axios.get('/api/blog').then((res) => {
       this.setState({
-        isLoading: false,
+        isLoadingBlog: false,
         posts: res.data,
       });
     })
@@ -23,8 +31,12 @@ export default class BlogContainer extends Component {
 
   render() {
     return (
-      <Blog isLoading={this.state.isLoading}
-            posts={this.state.posts}/>
+      <div>
+        <About isLoading={this.state.isLoadingAbout}
+          about={this.state.about}/>
+        <Blog isLoading={this.state.isLoadingBlog}
+          posts={this.state.posts}/>
+      </div>
     )
   }
 }

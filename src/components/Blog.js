@@ -5,7 +5,9 @@ export default class Blog extends Component {
   render() {
     if (this.props.isLoading) {
       return (
-        <h1>Loading</h1>
+        <div className="content-wrapper">
+          <h1>Loading</h1>
+        </div>
       );
     }
 

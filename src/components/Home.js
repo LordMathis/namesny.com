@@ -38,23 +38,8 @@ export default class Home extends Component {
           <div className="menu-links">
             <ul>
               <li>
-                <Link to="/about">
-                  <i className="fa fa-question" aria-hidden="true" /> About
-                </Link>
-              </li>
-              <li>
                 <Link to="/blog">
                   <i className="fa fa-pencil-square-o" aria-hidden="true" /> Blog
-                </Link>
-              </li>
-              <li>
-                <Link to="/portfolio">
-                  <i className="fa fa-briefcase" aria-hidden="true" /> Portfolio
-                </Link>
-              </li>
-              <li>
-                <Link to="/resume">
-                  <i className="fa fa-file-text-o" aria-hidden="true" /> Resume
                 </Link>
               </li>
             </ul>

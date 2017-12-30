@@ -7,6 +7,10 @@ api.get('/blog', (req, res) => {
   res.json(data.posts);
 });
 
+api.get('/about', (req, res) => {
+  res.json({"hello": "hello"});
+});
+
 api.get('/post/:postname', (req, res) => {
   const postname = req.params.postname;
   const post = data.posts.find((el) => {

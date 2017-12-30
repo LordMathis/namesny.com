@@ -50,9 +50,8 @@ function compile(filepath, data, fileData, callback) {
 
   fs.writeFile(renderedpath, rendered, (err) => {
     if (err) callback(err);
+    else callback(null, post);
   });
-
-  callback(null, post);
 }
 
 function Compiler(data) {

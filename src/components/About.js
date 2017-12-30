@@ -1,12 +1,20 @@
-import React from 'react';
-//  import { Home } from '.';
+import React, {Component} from 'react';
 
-export const About = () => (
-  <div>
-    <div className="content-wrapper">
-      <h1>About</h1>
-    </div>
-  </div>
-);
+export default class About extends Component {
 
-export default About;
+  render () {
+    if (this.props.isLoading) {
+      return (
+        <div className="content-wrapper">
+          <h1>Loading</h1>
+        </div>
+      );
+    }
+
+    return (
+      <div className="content-wrapper">
+        { this.props.about.hello }
+      </div>
+    )
+  }
+}
