@@ -9,7 +9,7 @@ require('css-modules-require-hook')({
 
 var fs = require('fs');
 var filename = './src/utils/data.json';
-var dataStub = {"posts": []};
+var dataStub = {"posts": [], "other": []};
 fs.writeFileSync(filename, JSON.stringify(dataStub));
 
 

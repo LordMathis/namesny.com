@@ -2,13 +2,25 @@ const data = require('./data.json');
 const api = require('express').Router();
 const fs = require('fs');
 const path = require('path');
+const config = require('./config.json');
 
 api.get('/blog', (req, res) => {
   res.json(data.posts);
 });
 
 api.get('/about', (req, res) => {
-  res.json({"hello": "hello"});
+  const renderPath = path.join(process.cwd(), '/renders', 'about.html');
+  fs.readFile(renderPath, 'utf8', (err, data) => {
+    if (err) {
+      res.json({
+        error: 404
+      });
+    } else {
+      res.json({
+        body: data,
+      });
+    }
+  });
 });
 
 api.get('/post/:postname', (req, res) => {

@@ -13,7 +13,8 @@ export default class About extends Component {
 
     return (
       <div className="content-wrapper">
-        { this.props.about.hello }
+        <div className="content" dangerouslySetInnerHTML={{__html: this.props.about.body}}>
+        </div>
       </div>
     )
   }
