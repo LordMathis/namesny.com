@@ -1,0 +1,12 @@
+@import "../static/stylesheets/variables.scss";
+
+.post-content {
+  clear: both;
+}
+
+.post-date {
+	float: right;
+  h3 {
+    font-weight: normal
+  }
+}

@@ -25,30 +25,26 @@ const config = {
         exclude: '/node_modules/'
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: [
-          'style-loader',
+          {
+            loader: "style-loader"
+          },
           {
             loader: 'css-loader',
             options: {
               modules: true,
-              importLoaders: 1,
+              importLoaders: 2,
               localIdentName: '[name]__[local]___[hash:base64:5]'
             }
           },
           {
-            loader: 'postcss-loader'
+            loader: "postcss-loader"
+          },
+          {
+            loader: "sass-loader"
           }
         ]
-      },
-      {test: /\.scss$/,
-            use: [{
-                loader: "style-loader" // creates style nodes from JS strings
-            }, {
-                loader: "css-loader" // translates CSS into CommonJS
-            }, {
-                loader: "sass-loader" // compiles Sass to CSS
-            }]
       },
       {
         test: /\.(png|jpg)$/,

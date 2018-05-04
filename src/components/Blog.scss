@@ -1,0 +1,38 @@
+@import "../static/stylesheets/variables.scss";
+
+.postTitle {
+  float: left;
+  h3 {
+    font-weight: normal
+  }
+}
+
+.postDate {
+	float: right;
+  h3 {
+    font-weight: normal
+  }
+}
+
+.postHeader {
+	background-color: #F5F5F5;
+	overflow: hidden;
+	padding: 0 5px 0 5px;
+}
+
+.postSummary {
+  clear: both;
+	padding: 0 5px 0 5px;
+}
+
+.postListItem {
+	margin-top: 20px;
+	border-style: solid;
+	border-width: 0 0 3px 0;
+	border-color: $black;
+}
+
+.postListFooter {
+  text-align: center;
+	padding-bottom: 5px;
+}

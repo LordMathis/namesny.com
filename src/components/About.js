@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import '../static/stylesheets/globals.scss';
+import './About.scss';
 
 export default class About extends Component {
 
@@ -13,6 +15,7 @@ export default class About extends Component {
 
     return (
       <div className="content-wrapper">
+        <h1>About</h1>
         <div className="content" dangerouslySetInnerHTML={{__html: this.props.about.body}}>
         </div>
       </div>

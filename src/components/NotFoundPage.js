@@ -1,4 +1,5 @@
 import React from 'react';
+import '../static/stylesheets/globals.scss';
 
 export const NotFoundPage = (props) => {
   if (props.location.pathname === '/') {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import config from '../utils/config.json';
+import '../static/stylesheets/globals.scss';
+import styles from './Home.scss';
 
 export default class Home extends Component {
 
@@ -27,15 +29,15 @@ export default class Home extends Component {
     );
 
     return (
-      <div id="cover-page" className={this.props.location.pathname === '/' ? 'cover-page-full' : 'cover-page-collapsed'}>
-        <div id="cover-page-content">
+      <div id={styles.coverPage} className={this.props.location.pathname === '/' ? styles.coverPageFull : styles.coverPageCollapsed}>
+        <div id={styles.coverPageContent}>
           <div>
-            <h1 id="cover-page-name"><Link to="/">{ config.name }</Link></h1>
+            <h1 id={styles.coverPageName}><Link to="/">{ config.name }</Link></h1>
           </div>
-          <div className="social">
+          <div className={styles.social}>
             {socialLinks}
           </div>
-          <div className="menu-links">
+          <div className={styles.menuLinks}>
             <ul>
               <li>
                 <Link to="/blog">

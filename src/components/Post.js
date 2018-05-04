@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import '../static/stylesheets/globals.scss';
+import './Post.scss';
 
 export default class Post extends Component {
   render() {

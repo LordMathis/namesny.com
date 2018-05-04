@@ -1,0 +1,75 @@
+@import "../static/stylesheets/variables.scss";
+
+#coverPage {
+  background: linear-gradient(140deg,rgba(68, 68, 68, 0.6) 20%, rgba(0, 0, 0, 0.9)), url(../static/images/background-cover.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: $white;
+  transition-property: width;
+  transition-duration: 0.75s;
+  -webkit-transition-property: width;
+  -webkit-transition-duration: 0.75s;
+}
+
+#coverPage.coverPageFull{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#coverPage.coverPageCollapsed {
+  float: left;
+  width: 320px;
+  height: 100%;
+  @media screen and (max-width: $break-medium) {
+    width: 100%;
+    float: none;
+  }
+  @media screen and (min-width: $break-large) {
+    width: 500px;
+    float: none;
+  }
+}
+
+#coverPageName {
+  font-size: 5em;
+}
+
+#coverPageName a, #coverPageName a:hover {
+    color: $white;
+    text-decoration: none;
+}
+
+.social {
+  text-align: center;
+  a {
+    color: $white;
+    display: inline-block;
+    margin: 10px;
+  }
+}
+
+.menuLinks ul{
+  list-style: none;
+  margin-left: 0;
+  padding: 10px;
+  li {
+    margin: 5px;
+    a {
+    color: $white;
+    text-decoration: none;
+    font-size: 1.4em;
+    }
+
+  }
+}
