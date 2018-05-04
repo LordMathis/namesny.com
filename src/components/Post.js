@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../static/stylesheets/globals.scss';
-import './Post.scss';
+import contentStyle from '../static/stylesheets/content.scss';
+import styles from './Post.scss';
 
 export default class Post extends Component {
   render() {
@@ -12,15 +13,15 @@ export default class Post extends Component {
     }
 
     return (
-      <div className="content-wrapper">
+      <div className={contentStyle.contentWrapper}>
         <a href={this.props.post.link}>
           <h1>{this.props.post.title}</h1>
         </a>
-        <div className="content">
-          <div className="post-date">
+        <div className={contentStyle.content}>
+          <div className={styles.postDate}>
             <h3>{this.props.post.published}</h3>
           </div>
-          <div className="post-content" dangerouslySetInnerHTML={{__html: this.props.post.body}}>
+          <div className={styles.postContent} dangerouslySetInnerHTML={{__html: this.props.post.body}}>
           </div>
         </div>
       </div>

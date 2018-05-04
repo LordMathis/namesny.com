@@ -1,0 +1,28 @@
+@import "./variables.scss";
+
+.contentWrapper {
+  margin-left: 320px;
+  overflow: auto;
+  padding: 20px;
+  h1 {
+    text-align: center;
+  }
+  a {
+    color: $blue;
+  }
+  @media screen and (max-width: $break-medium) {
+    width: 100%;
+    float: none;
+  }
+  @media screen and (min-width: $break-large) {
+    margin-left: 500px;
+  }
+}
+
+.content {
+  box-sizing: border-box;
+  margin: 0 auto;
+  @media screen and (min-width: $break-large) {
+    width: 90%;
+  }
+}

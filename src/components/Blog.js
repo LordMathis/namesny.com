@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import '../static/stylesheets/globals.scss';
 import styles from './Blog.scss';
+import contentStyle from '../static/stylesheets/content.scss';
 
 export default class Blog extends Component {
 
   render() {
     if (this.props.isLoading) {
       return (
-        <div className="content-wrapper">
+        <div className={contentStyle.contentWrapper}>
           <h1>Loading</h1>
         </div>
       );
@@ -35,10 +36,10 @@ export default class Blog extends Component {
     )
 
     return (
-      <div className="content-wrapper">
+      <div className={contentStyle.contentWrapper}>
         <h1>Blog</h1>
 
-        <div className="content">
+        <div className={contentStyle.content}>
           {posts}
         </div>
 
