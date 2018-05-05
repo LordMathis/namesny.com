@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {About, Blog} from '../components';
+import {About, Blog, Home} from '../components';
 
 export default class BlogContainer extends Component {
 
@@ -32,6 +32,7 @@ export default class BlogContainer extends Component {
   render() {
     return (
       <div>
+        <Home/>
         <About isLoading={this.state.isLoadingAbout}
           about={this.state.about}/>
         <Blog isLoading={this.state.isLoadingBlog}

@@ -29,7 +29,7 @@ export default class Home extends Component {
     );
 
     return (
-      <div id={styles.coverPage} className={this.props.location.pathname === '/' ? styles.coverPageFull : styles.coverPageCollapsed}>
+      <div id={styles.coverPage} className={styles.coverPageFull}>
         <div id={styles.coverPageContent}>
           <div>
             <h1 id={styles.coverPageName}><Link to="/">{ config.name }</Link></h1>

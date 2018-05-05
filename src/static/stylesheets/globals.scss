@@ -1,5 +1,9 @@
 @import "./variables.scss";
 
+:global(body, html) {
+    height: 100%;
+}
+
 :global(body) {
   font-family: $font-paragraph;
   color: $black;

@@ -23,6 +23,7 @@ function renderFullPage(html) {
     <!DOCTYPE html>
     <html>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Matúš Námešný</title>
           <!-- Google Fonts -->
           <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Roboto|Montserrat|Concert+One" rel="stylesheet">
