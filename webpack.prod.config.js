@@ -1,4 +1,3 @@
-
 const { resolve, join } = require('path')
 const webpack = require('webpack')
 
@@ -35,7 +34,12 @@ const config = {
               localIdentName: '[name]__[local]___[hash:base64:5]'
             }
           },
-          'sass-loader'
+          {
+            loader: "postcss-loader"
+          },
+          {
+            loader: 'sass-loader'
+          }
         ]
       },
       {
@@ -46,13 +50,6 @@ const config = {
     ]
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module) {
-         // this assumes your vendor imports exist in the node_modules directory
-         return module.context && module.context.indexOf('node_modules') !== -1
-      }
-    })
   ]
 }
 

@@ -1,4 +1,4 @@
-import 'babel-polyfill'
+//import 'babel-polyfill'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter as Router } from 'react-router-dom'
