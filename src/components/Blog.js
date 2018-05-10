@@ -7,7 +7,7 @@ import contentStyle from '../static/stylesheets/content.scss';
 export default class Blog extends Component {
 
   render() {
-    if (this.props.isLoading || true) {
+    if (this.props.isLoading) {
       return (
         <div className={contentStyle.contentWrapper}>
           <Spinner/>

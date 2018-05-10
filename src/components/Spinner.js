@@ -5,11 +5,13 @@ import styles from './Spinner.scss';
 export default class Spinner extends Component {
   render() {
     return (
-      <div class={styles.ldsEllipsis}>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div className={styles.spinnerWrapper}>
+        <div className={styles.ldsEllipsis}>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     )
   }
