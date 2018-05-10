@@ -2,6 +2,7 @@ const { resolve, join } = require('path')
 const webpack = require('webpack')
 
 const config = {
+  mode: 'development',
   devtool: 'cheap-eval-source-map',
   context: resolve(__dirname, 'src'),
   entry: {

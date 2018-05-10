@@ -2,6 +2,7 @@ const { resolve, join } = require('path')
 const webpack = require('webpack')
 
 const config = {
+  mode: 'production',
   context: resolve(__dirname, 'src'),
   entry: {
     bundle: [
@@ -30,7 +31,7 @@ const config = {
             loader: 'css-loader',
             options: {
               modules: true,
-              importLoaders: 1,
+              importLoaders: 2,
               localIdentName: '[name]__[local]___[hash:base64:5]'
             }
           },
