@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Spinner} from '.';
 import '../static/stylesheets/globals.scss';
 import styles from './About.scss';
 import contentStyle from '../static/stylesheets/content.scss';
@@ -9,7 +10,7 @@ export default class About extends Component {
     if (this.props.isLoading) {
       return (
         <div className={contentStyle.contentWrapper}>
-          <h1>Loading</h1>
+          <Spinner/>
         </div>
       );
     }
