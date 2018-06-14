@@ -6,4 +6,5 @@ export { default as NotFoundPage } from './NotFoundPage';
 export { default as Spinner } from './Spinner';
 export { default as Header } from './Header';
 export { default as Wrapper } from './Wrapper';
+export { default as Navbar } from './Navbar';
 export { default as App } from './App';
