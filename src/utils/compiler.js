@@ -52,7 +52,7 @@ function compilePost(filepath, data, fileData, callback) {
     filename: metadata.filename,
     title: frontMatter.attributes.title,
     summary: frontMatter.attributes.summary,
-    link: config.baseURL + '/blog/post/' + metadata.filename
+    link: config.baseURL + '/post/' + metadata.filename
   };
 
   const renderedpath = path.join(process.cwd(), config.renderPath, `${metadata.filename}.html`);
@@ -67,7 +67,7 @@ function compilePost(filepath, data, fileData, callback) {
  * Compiles other types of files such as resumes, about me and so on.
  */
 function compileOther(filepath, data, fileData, callback) {
-  
+
   const frontMatter = fm(fileData);
   const rendered = render(frontMatter.body);
   const metadata = fileMetadata(filepath);
