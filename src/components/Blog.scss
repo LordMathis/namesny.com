@@ -1,38 +1,29 @@
 @import "../static/stylesheets/variables.scss";
 
-.postTitle {
+.post {
+  display: inline-block;
   float: left;
-  h3 {
-    font-weight: normal
+  span {
+    margin-right: 30px;
+  }
+  a {
+    color: $blue;
+    text-decoration: none;
+    text-transform: capitalize;
+    font-family: $font-header;
+    font-size: 1.2em;
   }
 }
 
-.postDate {
-	float: right;
-  h3 {
-    font-weight: normal
-  }
+.postsWrapper {
+  margin-top: 20px;
 }
 
 .postHeader {
-	background-color: #F5F5F5;
 	overflow: hidden;
 	padding: 0 5px 0 5px;
 }
 
-.postSummary {
-  clear: both;
-	padding: 0 5px 0 5px;
-}
-
 .postListItem {
-	margin-top: 20px;
-	border-style: solid;
-	border-width: 0 0 3px 0;
-	border-color: $black;
-}
-
-.postListFooter {
-  text-align: center;
-	padding-bottom: 5px;
+	margin: 8px;
 }

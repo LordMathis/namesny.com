@@ -4,9 +4,12 @@
   display: inline-block;
   overflow: auto;
   padding: 20px;
-  max-width: 960px;
   a {
     color: $blue;
+  }
+  width: 100%;
+  @media (min-width: 992px) {
+    width: 960px;
   }
 }
 

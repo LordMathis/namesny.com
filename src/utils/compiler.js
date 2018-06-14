@@ -48,7 +48,7 @@ function compilePost(filepath, data, fileData, callback) {
   }
 
   const post = {
-    published: published.format('MMMM Do YYYY'),
+    published: published.format('MMMM DD, YYYY'),
     filename: metadata.filename,
     title: frontMatter.attributes.title,
     summary: frontMatter.attributes.summary,
