@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Spinner} from '.';
+import {Spinner, Header} from '.';
 import '../static/stylesheets/globals.scss';
 import styles from './Blog.scss';
 import contentStyle from '../static/stylesheets/content.scss';
@@ -38,7 +38,7 @@ export default class Blog extends Component {
 
     return (
       <div className={contentStyle.contentWrapper}>
-        <h1>Blog</h1>
+        <Header header={"Blog"} />
 
         <div className={contentStyle.content}>
           {posts}

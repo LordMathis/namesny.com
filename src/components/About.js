@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Spinner} from '.';
+import {Spinner, Header} from '.';
 import '../static/stylesheets/globals.scss';
 import styles from './About.scss';
 import contentStyle from '../static/stylesheets/content.scss';
@@ -17,7 +17,7 @@ export default class About extends Component {
 
     return (
       <div className={contentStyle.contentWrapper}>
-        <h1>About</h1>
+        <Header header={"About"} />
         <div className={contentStyle.content} dangerouslySetInnerHTML={{__html: this.props.about.body}}>
         </div>
       </div>

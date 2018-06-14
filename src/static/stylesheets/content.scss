@@ -1,11 +1,10 @@
 @import "./variables.scss";
 
 .contentWrapper {
+  display: inline-block;
   overflow: auto;
   padding: 20px;
-  h1 {
-    text-align: center;
-  }
+  max-width: 960px;
   a {
     color: $blue;
   }
@@ -13,4 +12,5 @@
 
 .content {
   box-sizing: border-box;
+  text-align: left;
 }
