@@ -9,7 +9,7 @@ export default class Blog extends Component {
   render() {
     if (this.props.isLoading) {
       return (
-        <div className={contentStyle.contentWrapper}>
+        <div className={contentStyle.contentWrapper} id="blog">
           <Spinner/>
         </div>
       );
@@ -27,7 +27,7 @@ export default class Blog extends Component {
     )
 
     return (
-      <div className={contentStyle.contentWrapper}>
+      <div className={contentStyle.contentWrapper} id="blog">
         <Header header={"Blog"} />
 
         <div className={contentStyle.content}>

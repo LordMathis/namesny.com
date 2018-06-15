@@ -40,9 +40,14 @@ export default class Home extends Component {
           <div className={styles.menuLinks}>
             <ul>
               <li>
-                <Link to="/blog">
+                <a href="#about">
+                  <i className="fa fa-search" aria-hidden="true" /> About
+                </a>
+              </li>
+              <li>
+                <a href="#blog">
                   <i className="fa fa-pencil-square-o" aria-hidden="true" /> Blog
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
