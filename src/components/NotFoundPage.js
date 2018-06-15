@@ -1,17 +1,18 @@
 import React from 'react';
+import {Navbar, Header} from '.';
 import '../static/stylesheets/globals.scss';
 import contentStyle from '../static/stylesheets/content.scss';
 
 export const NotFoundPage = (props) => {
-  if (props.location.pathname === '/') {
-    return null;
-  }
   return (
     <div>
+      <Navbar />
       <div className={contentStyle.contentWrapper}>
-        <h1>Uhm... WHAT?</h1>
-        <h2>Looks like you&apos;re lost</h2>
-        <p>404 Page not found</p>
+        <Header header={"Uhm... WHAT?"} />
+        <div className={contentStyle.content}>
+          <p>Looks like you&apos;re lost</p>
+          <p>404 Page not found</p>
+        </div>
       </div>
     </div>
   );

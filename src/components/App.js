@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Home, NotFoundPage } from '.';
+import { Home, NotFoundWrapper } from '.';
 import { MainContainer, PostContainer } from '../containers';
 
 export const App = () => (
@@ -8,7 +8,7 @@ export const App = () => (
     <Switch>
       <Route exact path="/" component={MainContainer} />
       <Route path="/post/:postname" component={PostContainer} />
-      <Route component={NotFoundPage} />
+      <Route component={NotFoundWrapper} />
     </Switch>
   </div>
 );
