@@ -1,0 +1,29 @@
+@import "../static/stylesheets/variables.scss";
+
+.post {
+  display: inline-block;
+  float: left;
+  span {
+    margin-right: 30px;
+  }
+  a {
+    color: $blue;
+    text-decoration: none;
+    text-transform: capitalize;
+    font-family: $font-header;
+    font-size: 1.2em;
+  }
+}
+
+.postsWrapper {
+  margin-top: 20px;
+}
+
+.postHeader {
+	overflow: hidden;
+	padding: 0 5px 0 5px;
+}
+
+.postListItem {
+	margin: 8px;
+}
