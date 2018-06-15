@@ -51,8 +51,7 @@ function compilePost(filepath, data, fileData, callback) {
     published: published.format('MMMM DD, YYYY'),
     filename: metadata.filename,
     title: frontMatter.attributes.title,
-    summary: frontMatter.attributes.summary,
-    link: config.baseURL + '/post/' + metadata.filename
+    link: '/post/' + metadata.filename
   };
 
   const renderedpath = path.join(process.cwd(), config.renderPath, `${metadata.filename}.html`);
