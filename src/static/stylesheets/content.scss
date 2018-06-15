@@ -3,6 +3,7 @@
 .contentWrapper {
   display: inline-block;
   overflow: auto;
+  box-sizing: border-box;
   padding: 20px;
   a {
     color: $blue;
