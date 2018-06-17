@@ -16,14 +16,14 @@ export default class Blog extends Component {
     }
 
     let posts = this.props.posts.map((post) =>
-      <div className={styles.postListItem} key={post.title}>
-        <div className={styles.postHeader}>
-          <div className={styles.post}>
-            <span>{post.published}</span>
-            <a href={post.link}>{post.title}</a>
-          </div>
-        </div>
-      </div>
+      <tr className={styles.postListItem} key={post.title}>
+        <td>
+          <span className={styles.postDate}>{post.published}</span>
+        </td>
+        <td>
+          <a href={post.link} className={styles.postTitle}>{post.title}</a>
+        </td>
+      </tr>
     )
 
     return (
@@ -31,9 +31,11 @@ export default class Blog extends Component {
         <Header header={"Blog"} />
 
         <div className={contentStyle.content}>
-          <div className={styles.postsWrapper}>
-            {posts}
-          </div>
+          <table>
+            <tbody className={styles.postsWrapper}>
+              {posts}
+            </tbody>
+          </table>
         </div>
 
       </div>
