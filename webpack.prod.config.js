@@ -1,5 +1,6 @@
 const { resolve, join } = require('path')
 const webpack = require('webpack')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 const config = {
   mode: 'production',
@@ -26,7 +27,7 @@ const config = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -51,6 +52,7 @@ const config = {
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin({})
   ]
 }
 
