@@ -1,6 +1,8 @@
 const { resolve, join } = require('path')
 const webpack = require('webpack')
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 
 const config = {
   mode: 'production',
@@ -47,8 +49,21 @@ const config = {
       {
         test: /\.(png|jpg)$/,
         exclude: /node_modules/,
-        loader: 'url-loader'
+        loader: 'url-loader',
+        options: {
+          limit: 8192
+        }
       },
+    ]
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({})
     ]
   },
   plugins: [
