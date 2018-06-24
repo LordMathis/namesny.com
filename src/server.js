@@ -1,4 +1,5 @@
 require('babel-register');
+var path = require('path');
 
 var app = new (require('express'))();
 var port = process.env.PORT || 3000;
@@ -38,11 +39,13 @@ if (process.env.NODE_ENV === 'development') {
   app.use(hotDevMiddleware(compiler))
 }
 
-app.use(require('express').static('public'));
 require('./utils/scanner')();
 
 var api = require('./utils/api');
 app.use("/api", api);
+
+var expressStaticGzip = require("express-static-gzip");
+app.use("/static", expressStaticGzip(path.join(process.cwd(), '/public/static')));
 
 var serverRender = require('./utils/serverRender');
 app.get("*", serverRender);

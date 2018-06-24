@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+const CompressionPlugin = require("compression-webpack-plugin")
 
 const config = {
   mode: 'production',
@@ -67,7 +68,8 @@ const config = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({})
+    new MiniCssExtractPlugin({}),
+    new CompressionPlugin({})
   ]
 }
 
