@@ -44,8 +44,8 @@ require('./utils/scanner')();
 var api = require('./utils/api');
 app.use("/api", api);
 
-var expressStaticGzip = require("express-static-gzip");
-app.use("/static", expressStaticGzip(path.join(process.cwd(), '/public/static')));
+var staticFiles = require('./utils/staticFiles');
+app.use("/static", staticFiles);
 
 var serverRender = require('./utils/serverRender');
 app.get("*", serverRender);
