@@ -5,11 +5,13 @@ const path = require('path');
 const config = require('./config.json');
 
 api.get('/blog', (req, res) => {
+  res.set('Cache-Control', 'no-cache');
   res.json(data.posts);
 });
 
 api.get('/about', (req, res) => {
   const renderPath = path.join(process.cwd(), '/renders', 'about.html');
+  res.set('Cache-Control', 'max-age=86400');
   fs.readFile(renderPath, 'utf8', (err, data) => {
     if (err) {
       res.json({
@@ -24,6 +26,7 @@ api.get('/about', (req, res) => {
 });
 
 api.get('/post/:postname', (req, res) => {
+  res.set('Cache-Control', 'no-cache');
   const postname = req.params.postname;
   const post = data.posts.find((el) => {
     return el.filename === postname
