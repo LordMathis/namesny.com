@@ -17,7 +17,7 @@ export default class About extends Component {
 
     return (
       <div className={contentStyle.contentWrapper} id="about">
-        <Header header={"About"} />
+        <Header header={"About Me"} />
         <div className={contentStyle.content} dangerouslySetInnerHTML={{__html: this.props.about.body}}>
         </div>
       </div>

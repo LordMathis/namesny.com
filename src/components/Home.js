@@ -41,7 +41,7 @@ export default class Home extends Component {
             <ul>
               <li>
                 <a href="#about">
-                  <i className="fa fa-search" aria-hidden="true" /> About
+                  <i className="fa fa-search" aria-hidden="true" /> About Me
                 </a>
               </li>
               <li>
