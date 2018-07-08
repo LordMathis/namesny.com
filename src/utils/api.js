@@ -6,6 +6,9 @@ const config = require('./config.json');
 
 api.get('/blog', (req, res) => {
   res.set('Cache-Control', 'no-cache');
+  data.posts.sort((a,b) => {
+    return new Date(b.published) - new Date(a.published);
+  })
   res.json(data.posts);
 });
 
