@@ -1,31 +1,34 @@
 const staticFiles = require('express').Router();
 const path = require('path');
+import manifest from '../../public/static/manifest.json'
 
-staticFiles.get('/bundle.js', (req, res) => {
+staticFiles.get('/*.js', (req, res) => {
+  const filename = req.url.split("/").pop();
   if (req.acceptsEncodings('gzip')) {
     res.set({
       'Content-Encoding': 'gzip',
       'Content-Type': 'text/javascript',
-      'Cache-Control': 'max-age=86400'
+      'Cache-Control': 'max-age=31536000'
     });
-    res.sendFile(path.join(process.cwd(), '/public/static/bundle.js.gz'));
+    res.sendFile(path.join(process.cwd(), '/public/', manifest[`${filename}.gz`]));
   } else {
-    res.set('Cache-Control', 'max-age=86400');
-    res.sendFile(path.join(process.cwd(), '/public/static/bundle.js'));
+    res.set('Cache-Control', 'max-age=31536000');
+    res.sendFile(path.join(process.cwd(), '/public/', manifest['bundle.js']));
   }
 });
 
-staticFiles.get('/bundle.css', (req, res) => {
+staticFiles.get('/*.css', (req, res) => {
+  const filename = req.url.split("/").pop();
   if (req.acceptsEncodings('gzip')) {
     res.set({
       'Content-Encoding': 'gzip',
       'Content-Type': 'text/css',
-      'Cache-Control': 'max-age=86400'
+      'Cache-Control': 'max-age=31536000'
     });
-    res.sendFile(path.join(process.cwd(), '/public/static/bundle.css.gz'));
+    res.sendFile(path.join(process.cwd(), '/public/',  manifest[`${filename}.gz`]));
   } else {
-    res.set('Cache-Control', 'max-age=86400');
-    res.sendFile(path.join(process.cwd(), '/public/static/bundle.css'));
+    res.set('Cache-Control', 'max-age=31536000');
+    res.sendFile(path.join(process.cwd(), '/public/', manifest['bundle.css']));
   }
 });
 

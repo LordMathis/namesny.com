@@ -1,12 +1,13 @@
 const { resolve, join } = require('path')
 const webpack = require('webpack')
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 const config = {
   mode: 'development',
   devtool: 'cheap-eval-source-map',
   context: resolve(__dirname, 'src'),
   entry: {
-    home: [
+    bundle: [
       'webpack-hot-middleware/client',
       './app-client.js'
     ]
@@ -66,7 +67,8 @@ const config = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.NamedModulesPlugin()
+    new webpack.NamedModulesPlugin(),
+    new ManifestPlugin({'writeToFileEmit': true})
   ]
 }
 module.exports = config

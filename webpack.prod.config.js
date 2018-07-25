@@ -4,6 +4,8 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 const CompressionPlugin = require("compression-webpack-plugin")
+const ManifestPlugin = require('webpack-manifest-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const config = {
   mode: 'production',
@@ -15,7 +17,7 @@ const config = {
   },
   output: {
     path: resolve(__dirname, 'public/static'),
-    filename: '[name].js',
+    filename: '[name].[contenthash].js',
     publicPath: '/static/'
   },
   module: {
@@ -68,8 +70,10 @@ const config = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({}),
-    new CompressionPlugin({})
+    new CleanWebpackPlugin(['dist', 'public/static'], {}),
+    new MiniCssExtractPlugin({filename: '[name].[contenthash].css'}),
+    new CompressionPlugin({}),
+    new ManifestPlugin(),
   ]
 }
 
