@@ -4,4 +4,5 @@ public
 *.log
 content
 renders
+drafts
 data.json
