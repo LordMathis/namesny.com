@@ -13,7 +13,7 @@
     "react"
   ],
   "author": "Matúš Námešný",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "async": "^2.5.0",
     "axios": "^0.17.0",
