@@ -1,7 +1,6 @@
 const { resolve, join } = require('path')
 const webpack = require('webpack')
 const ManifestPlugin = require('webpack-manifest-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const config = {
   mode: 'development',
@@ -70,7 +69,6 @@ const config = {
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.NamedModulesPlugin(),
     new ManifestPlugin({'writeToFileEmit': true}),
-    new CleanWebpackPlugin(['public/static'], {}),
   ]
 }
 module.exports = config
