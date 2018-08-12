@@ -40,6 +40,11 @@ function compilePost(filepath, data, fileData, callback) {
   const rendered = render(frontMatter.body);
   const metadata = fileMetadata(filepath);
 
+  if (frontMatter.attributes.draft) {
+    callback(null, null);
+    return;
+  }
+
   let published;
   if (frontMatter.attributes.date) {
     published = moment(frontMatter.attributes.date);
@@ -99,9 +104,13 @@ Compiler.prototype.addFile = function(filepath, isPost, callback) {
     ], (err, result) => {
       if (err) throw err;
 
-      this.data.posts.push(result);
-      console.log("[Compiler] File %s compiled", filepath);
-      callback();
+      if (result == null) {
+        callback();
+      } else {
+        this.data.posts.push(result);
+        console.log("[Compiler] File %s compiled", filepath);
+        callback();
+      }
     });
   } else {
     async.waterfall([

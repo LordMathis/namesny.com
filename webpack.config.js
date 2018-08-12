@@ -68,7 +68,7 @@ const config = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.NamedModulesPlugin(),
-    new ManifestPlugin({'writeToFileEmit': true})
+    new ManifestPlugin({'writeToFileEmit': true}),
   ]
 }
 module.exports = config
