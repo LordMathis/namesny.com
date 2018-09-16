@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import config from '../utils/config.json';
+import config from '../../config.json';
 import '../static/stylesheets/globals.scss';
 import styles from './Navbar.scss';
 

@@ -2,7 +2,7 @@ const data = require('./data.json');
 const api = require('express').Router();
 const fs = require('fs');
 const path = require('path');
-const config = require('./config.json');
+const config = require('../../config.json');
 
 api.get('/blog', (req, res) => {
   res.set('Cache-Control', 'no-cache');

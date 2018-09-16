@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import config from '../utils/config.json';
+import config from '../../config.json';
 import '../static/stylesheets/globals.scss';
 import styles from './Home.scss';
 

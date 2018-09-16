@@ -5,7 +5,7 @@ const moment = require('moment');
 const jsonfile = require('jsonfile');
 const async = require('async');
 const fm = require('front-matter');
-const config = require('../utils/config.json');
+const config = require('../../config.json');
 
 /**
  * Renders file using MarkdownIt

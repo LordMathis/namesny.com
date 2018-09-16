@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const async = require('async');
 const Compiler = require('./compiler');
-const config = require('./config.json');
+const config = require('../../config.json');
 const data = require('./data.json');
 
 module.exports = function() {
