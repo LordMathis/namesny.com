@@ -5,7 +5,7 @@ import {App} from './components';
 
 const AppClient = () => (
   <Router>
-    <App />
+    <App data={window.__INITIAL_DATA__}/>
   </Router>
 )
 

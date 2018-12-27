@@ -1,56 +1,18 @@
-const data = require('./data.json');
-const api = require('express').Router();
-const fs = require('fs');
-const path = require('path');
-const config = require('../../config.json');
+import data from './data.json'
 
-api.get('/blog', (req, res) => {
-  res.set('Cache-Control', 'no-cache');
-  data.posts.sort((a,b) => {
-    return new Date(b.published) - new Date(a.published);
-  })
-  res.json(data.posts);
-});
+export function getData(path = ''){
+  if (path === ''){
+    return data
+  } else {
+    fileName = '../../content/' + path
+    return readFile(fileName)
+  }
+}
 
-api.get('/about', (req, res) => {
-  const renderPath = path.join(process.cwd(), '/renders', 'about.html');
-  res.set('Cache-Control', 'max-age=86400');
-  fs.readFile(renderPath, 'utf8', (err, data) => {
-    if (err) {
-      res.json({
-        error: 404
-      });
-    } else {
-      res.json({
-        body: data,
-      });
-    }
+function readFile(fileName, type) {
+  return new Promise(function(resolve, reject){
+    fs.readFile(fileName, (err, data) => {
+        err ? reject(err) : resolve(data);
+    });
   });
-});
-
-api.get('/post/:postname', (req, res) => {
-  res.set('Cache-Control', 'no-cache');
-  const postname = req.params.postname;
-  const post = data.posts.find((el) => {
-    return el.filename === postname
-  });
-
-  const renderPath = path.join(process.cwd(), '/renders', postname + '.html');
-  fs.readFile(renderPath, 'utf8', (err, data) => {
-    if (err) {
-      res.json({
-        error: 404
-      });
-    } else {
-      res.json({
-        published: post.published,
-        link: post.link,
-        title: post.title,
-        body: data,
-      });
-    }
-  });
-});
-
-
-module.exports = api;
+}

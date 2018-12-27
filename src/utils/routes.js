@@ -17,9 +17,6 @@ const routes = [
     getData: (path = '') => getData(
       path.split('/').pop()
     )
-  },
-  {
-    component: NotFoundWrapper,
   }
 ]
 

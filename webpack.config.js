@@ -1,74 +1,102 @@
 const { resolve, join } = require('path')
 const webpack = require('webpack')
-const ManifestPlugin = require('webpack-manifest-plugin');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+const CompressionPlugin = require("compression-webpack-plugin")
+const ManifestPlugin = require('webpack-manifest-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const nodeExternals = require('webpack-node-externals')
 
-const config = {
-  mode: 'development',
-  devtool: 'cheap-eval-source-map',
+const commonConfig = {
+  rules: [
+    {
+      test: /\.js$/,
+      use: [
+        'babel-loader'
+      ],
+      exclude: '/node_modules/'
+    },
+    {
+      test: /\.scss$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            importLoaders: 2,
+            localIdentName: '[name]__[local]___[hash:base64:5]'
+          }
+        },
+        {
+          loader: "postcss-loader"
+        },
+        {
+          loader: 'sass-loader'
+        }
+      ]
+    },
+    {
+      test: /\.(png|jpg)$/,
+      exclude: /node_modules/,
+      loader: 'url-loader',
+      options: {
+        limit: 8192
+      }
+    },
+  ]
+}
+
+const browserConfig = {
+  mode: 'production',
   context: resolve(__dirname, 'src'),
   entry: {
     bundle: [
-      'webpack-hot-middleware/client',
       './app-client.js'
     ]
   },
   output: {
-    path: resolve(__dirname,'public/static'),
-    filename: 'bundle.js',
+    path: resolve(__dirname, 'public/static'),
+    filename: '[name].[contenthash].js',
     publicPath: '/static/'
   },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        use: [
-          'babel-loader'
-        ],
-        exclude: '/node_modules/'
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 2,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
-            }
-          },
-          {
-            loader: "postcss-loader"
-          },
-          {
-            loader: "sass-loader"
-          }
-        ]
-      },
-      {
-        test: /\.(png|jpg)$/,
-        exclude: /node_modules/,
-        loader: 'url-loader'
-      },
-      {
-        test: /\.(html)$/,
-        use: {
-          loader: 'html-loader',
-          options: {
-            attrs: [':data-src']
-          }
-        }
-      },
+  module: commonConfig,
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({})
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.NamedModulesPlugin(),
-    new ManifestPlugin({'writeToFileEmit': true}),
+    new webpack.DefinePlugin({__isBrowser__: "true"}),
+    new CleanWebpackPlugin(['dist', 'public/static'], {}),
+    new MiniCssExtractPlugin({filename: '[name].[contenthash].css'}),
+    new CompressionPlugin({}),
+    new ManifestPlugin(),
   ]
 }
-module.exports = config
+
+const serverConfig = {
+  entry: './src/server.js',
+  target: 'node',
+  externals: [nodeExternals()],
+  output: {
+    path: __dirname,
+    filename: 'server.js',
+    publicPath: '/'
+  },
+  module: commonConfig,
+  plugins: [
+    new webpack.DefinePlugin({
+      __isBrowser__: "false"
+    }),
+    new MiniCssExtractPlugin({filename: '[name].[contenthash].css'}),
+  ]
+}
+
+module.exports = [browserConfig, serverConfig]

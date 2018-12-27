@@ -10,6 +10,17 @@ function serverRender(req, res) {
 
   const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
 
+  const promise = activeRoute.fetchInitialData
+  ? activeRoute.fetchInitialData(req.path)
+  : Promise.resolve()
+
+  promise.then((data) => {
+    const markup = renderToString(
+      <Router location={req.url} context={context}>
+        <App />
+      </Router>,
+    );
+  })
 
   let markup = '';
   let status = 200;
