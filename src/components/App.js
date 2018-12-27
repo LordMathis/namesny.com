@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Home, NotFoundWrapper } from '.';
+import { NotFoundWrapper } from '.';
 import { MainContainer, PostContainer } from '../containers';
 
 export const App = () => (

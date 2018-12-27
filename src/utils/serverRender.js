@@ -4,8 +4,13 @@ import { renderToString } from 'react-dom/server'
 import { StaticRouter as Router } from 'react-router-dom'
 import { App } from '../components/App'
 import manifest from '../../public/static/manifest.json'
+import routes from './routes'
 
 function serverRender(req, res) {
+
+  const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
+
+
   let markup = '';
   let status = 200;
 
