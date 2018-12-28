@@ -74,10 +74,10 @@ const browserConfig = {
   },
   plugins: [
     new webpack.DefinePlugin({__isBrowser__: "true"}),
-    new CleanWebpackPlugin(['dist', 'public/static'], {}),
+    new CleanWebpackPlugin(['public/static'], {}),
     new MiniCssExtractPlugin({filename: '[name].[contenthash].css'}),
-    new CompressionPlugin({}),
-    new ManifestPlugin(),
+    // new CompressionPlugin({}),
+    // new ManifestPlugin(),
   ]
 }
 
