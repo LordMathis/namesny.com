@@ -1,6 +1,6 @@
 import { MainContainer, PostContainer } from '../containers'
 import { NotFoundWrapper } from '../components';
-import getData from './api'
+import { getData } from './api'
 
 const routes = [
   {

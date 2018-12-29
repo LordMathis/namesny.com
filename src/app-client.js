@@ -5,13 +5,11 @@ import {App} from './components';
 
 const AppClient = () => (
   <Router>
-    <App data={window.__INITIAL_DATA__}/>
+    <App />
   </Router>
 )
 
-window.onload = () => {
-  hydrate(
-    <AppClient />,
-    document.getElementById('root')
-  );
-};
+hydrate(
+  <AppClient />,
+  document.getElementById('root')
+);

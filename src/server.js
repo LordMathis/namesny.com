@@ -1,28 +1,27 @@
-require('babel-register');
-var path = require('path');
+import express from 'express'
+import fs from 'fs'
+import {serverRender} from './utils/serverRender'
 
-var app = new (require('express'))();
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
+const app = express()
 
-const sass = require('node-sass');
+// const sass = require('node-sass');
+//
+// require('css-modules-require-hook')({
+//   generateScopedName: '[name]__[local]___[hash:base64:5]',
+//   extensions: ['.scss', '.css'],
+//   preprocessCss: (data, filename) => sass.renderSync({
+//       data,
+//       file: filename,
+//   }).css
+// });
 
-require('css-modules-require-hook')({
-  generateScopedName: '[name]__[local]___[hash:base64:5]',
-  extensions: ['.scss', '.css'],
-  preprocessCss: (data, filename) => sass.renderSync({
-      data,
-      file: filename,
-  }).css
-});
+// const filename = './src/utils/data.json';
+// const dataStub = {"posts": [], "other": []};
+// fs.writeFileSync(filename, JSON.stringify(dataStub));
 
-var fs = require('fs');
-var filename = './src/utils/data.json';
-var dataStub = {"posts": [], "other": []};
-fs.writeFileSync(filename, JSON.stringify(dataStub));
+// require('./utils/scanner')();
 
-require('./utils/scanner')();
-
-var serverRender = require('./utils/serverRender');
 app.get("*", serverRender);
 
 app.listen(port, function(error) {

@@ -12,25 +12,6 @@ export default class PostContainer extends Component {
     };
   }
 
-  componentDidMount() {
-    const url = '/api/post/' + this.props.match.params.postname;
-
-    axios.get(url).then((res) => {
-      if (res.data.error) {
-        this.setState({
-          error: true,
-        });
-      }
-      else {
-        this.setState({
-          error: false,
-          isLoading: false,
-          post: res.data,
-        });
-      }
-    })
-  }
-
   render() {
 
     if (this.state.error) {

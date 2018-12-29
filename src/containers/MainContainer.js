@@ -13,22 +13,6 @@ export default class BlogContainer extends Component {
     }
   }
 
-  componentDidMount() {
-    axios.get('/api/about').then((res) => {
-      this.setState({
-        isLoadingAbout: false,
-        about: res.data,
-      });
-    })
-
-    axios.get('/api/blog').then((res) => {
-      this.setState({
-        isLoadingBlog: false,
-        posts: res.data,
-      });
-    })
-  }
-
   render() {
     return (
       <div>

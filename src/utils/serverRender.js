@@ -1,11 +1,11 @@
 //import 'babel-polyfill'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { StaticRouter as Router } from 'react-router-dom'
+import { StaticRouter as Router, matchPath } from 'react-router-dom'
 import { App } from '../components/App'
 import routes from './routes'
 
-function serverRender(req, res) {
+export function serverRender(req, res, next) {
 
   const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
 
@@ -15,26 +15,17 @@ function serverRender(req, res) {
 
   promise.then((data) => {
     const markup = renderToString(
-      <Router location={req.url} context={context}>
+      <Router location={req.url} context={{}}>
         <App />
       </Router>,
     );
-  })
 
-  let markup = '';
-  let status = 200;
+    res.status(200).send(renderFullPage(markup));
 
-  const context = {}
-  markup = renderToString(
-    <Router location={req.url} context={context}>
-      <App />
-    </Router>,
-  );
-
-  return res.status(status).send(renderFullPage(markup, manifest));
+  }).catch(next)
 }
 
-function renderFullPage(html, manifest) {
+function renderFullPage(html) {
   return `
     <!DOCTYPE html>
     <html>
@@ -49,11 +40,9 @@ function renderFullPage(html, manifest) {
           <link href="bundle.css" rel="stylesheet">
       </head>
       <body>
-        <div id="root">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
+        <div id="root">${html}</div>
         <script src="bundle.js" async></script>
       </body>
     </html>
     `
 }
-
-module.exports = serverRender;
