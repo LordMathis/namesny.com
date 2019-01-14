@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {About, Blog, Home, Wrapper} from '../components';
 
-export default class BlogContainer extends Component {
+export default class MainContainer extends Component {
 
   constructor() {
     super();
