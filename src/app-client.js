@@ -3,13 +3,9 @@ import {hydrate} from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {App} from './components';
 
-const AppClient = () => (
+hydrate(
   <Router>
     <App />
-  </Router>
-)
-
-hydrate(
-  <AppClient />,
+  </Router>,
   document.getElementById('root')
 );

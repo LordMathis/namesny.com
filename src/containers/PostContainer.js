@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import {Post, Wrapper, NotFoundPage} from '../components';
 
 export default class PostContainer extends Component {

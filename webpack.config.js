@@ -18,9 +18,11 @@ const browserConfig = {
   },
   output: {
     path: resolve(__dirname, 'public/static'),
-    filename: '[name].[contenthash].js',
+    filename: '[name].js',
+    // filename: '[name].[contenthash].js',
     publicPath: '/static/'
   },
+  devtool: "eval-source-map",
   module: {
     rules: [
       {
@@ -33,13 +35,13 @@ const browserConfig = {
       {
         test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          //MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
               modules: true,
-              importLoaders: 2,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
+              importLoaders: 2
+              // localIdentName: '[name]__[local]___[hash:base64:5]'
             }
           },
           {
@@ -63,9 +65,9 @@ const browserConfig = {
   plugins: [
     new webpack.DefinePlugin({__isBrowser__: "true"}),
     new CleanWebpackPlugin(['public/static', 'build'], {}),
-    new MiniCssExtractPlugin({filename: '[name].[contenthash].css'}),
+    //new MiniCssExtractPlugin(),
     // new CompressionPlugin({}),
-    // new ManifestPlugin(),
+    new ManifestPlugin(),
   ]
 }
 
@@ -94,6 +96,7 @@ const serverConfig = {
             loader: 'css-loader',
             options: {
               modules: true,
+              exportOnlyLocals: true,
               importLoaders: 2,
               localIdentName: '[name]__[local]___[hash:base64:5]'
             }
