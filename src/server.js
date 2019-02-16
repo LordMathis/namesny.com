@@ -1,7 +1,6 @@
 import express from 'express'
 import fs from 'fs'
 import {serverRender} from './utils/serverRender'
-import csshook from 'css-modules-require-hook/preset'
 const port = process.env.PORT || 3000;
 const app = express()
 
@@ -12,6 +11,10 @@ const app = express()
 // require('./utils/scanner')();
 
 app.use('/static', express.static('public/static'))
+
+app.get('/favicon.ico', (req, res) => {
+  res.status(404).send('Not Found !!!');
+})
 
 app.get("*", serverRender);
 

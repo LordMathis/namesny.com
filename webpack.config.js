@@ -10,10 +10,9 @@ const nodeExternals = require('webpack-node-externals')
 
 const browserConfig = {
   mode: 'production',
-  context: resolve(__dirname, 'src'),
   entry: {
     bundle: [
-      './app-client.js'
+      './src/app-client.js'
     ]
   },
   output: {
@@ -22,7 +21,7 @@ const browserConfig = {
     // filename: '[name].[contenthash].js',
     publicPath: '/static/'
   },
-  devtool: "eval-source-map",
+  // devtool: 'eval-source-map',
   module: {
     rules: [
       {
@@ -35,13 +34,13 @@ const browserConfig = {
       {
         test: /\.scss$/,
         use: [
-          //MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
               modules: true,
-              importLoaders: 2
-              // localIdentName: '[name]__[local]___[hash:base64:5]'
+              importLoaders: 2,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
             }
           },
           {
@@ -65,7 +64,7 @@ const browserConfig = {
   plugins: [
     new webpack.DefinePlugin({__isBrowser__: "true"}),
     new CleanWebpackPlugin(['public/static', 'build'], {}),
-    //new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin(),
     // new CompressionPlugin({}),
     new ManifestPlugin(),
   ]
@@ -92,6 +91,7 @@ const serverConfig = {
       {
         test: /\.scss$/,
         use: [
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -102,7 +102,7 @@ const serverConfig = {
             }
           },
           {
-            loader: "postcss-loader"
+            loader: 'postcss-loader'
           },
           {
             loader: 'sass-loader'
@@ -114,7 +114,7 @@ const serverConfig = {
         exclude: /node_modules/,
         loader: 'url-loader',
         options: {
-          limit: 8192
+          limit: 10000
         }
       },
     ]
@@ -123,6 +123,7 @@ const serverConfig = {
     new webpack.DefinePlugin({
       __isBrowser__: "false"
     }),
+    new MiniCssExtractPlugin(),
   ]
 }
 
