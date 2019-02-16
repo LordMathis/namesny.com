@@ -1,10 +1,14 @@
-import React, {Component} from 'react';
-import {Spinner, Header} from '.';
-import '../static/stylesheets/globals.scss';
-import styles from './About.scss';
-import contentStyle from '../static/stylesheets/content.scss';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { Spinner, Header } from '.'
+import '../static/stylesheets/globals.scss'
+import contentStyle from '../static/stylesheets/content.scss'
 
 export default class About extends Component {
+  static propTypes = {
+    isLoading: PropTypes.bool.isRequired,
+    about: PropTypes.object.isRequired
+  }
 
   render () {
     if (this.props.isLoading) {
@@ -12,13 +16,13 @@ export default class About extends Component {
         <div className={contentStyle.contentWrapper} id="about">
           <Spinner/>
         </div>
-      );
+      )
     }
 
     return (
       <div className={contentStyle.contentWrapper} id="about">
-        <Header header={"About Me"} />
-        <div className={contentStyle.content} dangerouslySetInnerHTML={{__html: this.props.about.body}}>
+        <Header header={'About Me'} />
+        <div className={contentStyle.content} dangerouslySetInnerHTML={{ __html: this.props.about.body }}>
         </div>
       </div>
     )

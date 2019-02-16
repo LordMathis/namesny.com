@@ -1,20 +1,24 @@
-import React, {Component} from 'react';
-import {About, Blog, Home, Wrapper} from '../components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { About, Blog, Home, Wrapper } from '../components'
 
 export default class MainContainer extends Component {
+  static propTypes = {
+    data: PropTypes.object.isRequired
+  }
 
-  constructor() {
-    super();
+  constructor () {
+    super()
 
     this.state = {
       isLoadingBlog: true,
-      isLoadingAbout: true,
+      isLoadingAbout: true
     }
-    
-    console.log(this.props.data);
+
+    console.log(this.props.data)
   }
 
-  render() {
+  render () {
     return (
       <div>
         <Home/>

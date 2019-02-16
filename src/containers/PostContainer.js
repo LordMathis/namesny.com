@@ -1,20 +1,24 @@
-import React, {Component} from 'react';
-import {Post, Wrapper, NotFoundPage} from '../components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Post, Wrapper, NotFoundPage } from '../components'
 
 export default class PostContainer extends Component {
-  constructor() {
-    super();
+  static propTypes = {
+    data: PropTypes.object.isRequired
+  }
+
+  constructor () {
+    super()
 
     this.state = {
       isLoading: true,
-      error: false,
-    };
-    
-    console.log(this.props.data);
+      error: false
+    }
+
+    console.log(this.props.data)
   }
 
-  render() {
-
+  render () {
     if (this.state.error) {
       return (
         <NotFoundPage />
@@ -24,8 +28,8 @@ export default class PostContainer extends Component {
     return (
       <Wrapper>
         <Post isLoading={this.state.isLoading}
-              post={this.state.post} />
+          post={this.state.post} />
       </Wrapper>
-    );
+    )
   }
 }

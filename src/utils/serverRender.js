@@ -1,37 +1,34 @@
-//import 'babel-polyfill'
+// import 'babel-polyfill'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter as Router, matchPath } from 'react-router-dom'
 import { App } from '../components'
 import routes from './routes'
+import serialize from 'serialize-javascript'
 
-export function serverRender(req, res, next) {
-
+export function serverRender (req, res, next) {
   const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
 
   const promise = activeRoute.getData
-  ? activeRoute.getData(req.path)
-  : Promise.resolve()
+    ? activeRoute.getData(req.path)
+    : Promise.resolve()
 
   promise.then((data) => {
-    
-    console.log(data);
-    
+    console.log(data)
+
     const markup = renderToString(
       <Router location={req.url} context={{}}>
         <App data={data}/>
-      </Router>,
-    );
+      </Router>
+    )
 
-    res.status(200).send(renderFullPage(markup, data));
-
+    res.status(200).send(renderFullPage(markup, data))
   }).catch(next)
-
 }
 
-function renderFullPage(html, data) {
+function renderFullPage (html, data) {
   return `
-    <!DOCTYPE html>
+    <!DOCTYPE html>  
     <html>
       <head>
         <title>Matúš Námešný</title>

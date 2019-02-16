@@ -1,14 +1,14 @@
 import { NotFoundWrapper } from '.'
 import React, { Component } from 'react'
 import routes from '../utils/routes'
-import { Route, Link, Redirect, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 export default class App extends Component {
-  render() {
+  render () {
     return (
       <div>
         <Switch>
-         {routes.map(({ path, exact, component: C, ...rest }) => (
+          {routes.map(({ path, exact, component: C, ...rest }) => (
             <Route
               key={path}
               path={path}

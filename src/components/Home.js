@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import config from '../../config.json';
-import '../static/stylesheets/globals.scss';
-import styles from './Home.scss';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import config from '../../config.json'
+import '../static/stylesheets/globals.scss'
+import styles from './Home.scss'
 
 export default class Home extends Component {
-
-  render() {
-    let key = 0;
-    const objKeys = Object.keys(config.social);
+  render () {
+    let key = 0
+    const objKeys = Object.keys(config.social)
 
     const socialLinks = objKeys.map((val) => {
       const link = (
@@ -16,17 +15,17 @@ export default class Home extends Component {
           <i className={`fa fa-${val} fa-3x`} aria-hidden="true" />
           <span className="sr-only">{val}</span>
         </a>
-      );
-      key += 1;
-      return link;
-    });
+      )
+      key += 1
+      return link
+    })
 
     socialLinks.push(
       <a key={key} href={`mailto:${config.email}`}>
         <i className="fa fa-envelope-o fa-3x" aria-hidden="true" />
         <span className="sr-only">e-mail</span>
-      </a>,
-    );
+      </a>
+    )
 
     return (
       <div id={styles.coverPage} className={styles.coverPageFull}>
@@ -53,6 +52,6 @@ export default class Home extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
