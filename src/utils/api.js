@@ -3,7 +3,7 @@ import data from './data.json'
 
 export function getData (path = '') {
   if (path === '') {
-    return data
+    return Promise.resolve(data)
   } else {
     const fileName = '../../content/' + path
     return readFile(fileName)
