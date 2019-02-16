@@ -1,9 +1,9 @@
-const { resolve, join } = require('path')
+const { resolve } = require('path')
 const webpack = require('webpack')
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
-const CompressionPlugin = require("compression-webpack-plugin")
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+// const CompressionPlugin = require('compression-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
@@ -44,7 +44,7 @@ const browserConfig = {
             }
           },
           {
-            loader: "postcss-loader"
+            loader: 'postcss-loader'
           },
           {
             loader: 'sass-loader'
@@ -58,16 +58,17 @@ const browserConfig = {
         options: {
           limit: 8192
         }
-      },
+      }
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({__isBrowser__: "true"}),
+    new webpack.DefinePlugin({ __isBrowser__: 'true' }),
     new CleanWebpackPlugin(['public/static', 'build'], {}),
     new MiniCssExtractPlugin(),
     // new CompressionPlugin({}),
-    new ManifestPlugin(),
-  ]
+    new ManifestPlugin()
+  ],
+  node: { fs: 'empty' }
 }
 
 const serverConfig = {
@@ -116,14 +117,14 @@ const serverConfig = {
         options: {
           limit: 10000
         }
-      },
+      }
     ]
   },
   plugins: [
     new webpack.DefinePlugin({
-      __isBrowser__: "false"
+      __isBrowser__: 'false'
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin()
   ]
 }
 

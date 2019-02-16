@@ -5,7 +5,7 @@ import {App} from './components';
 
 hydrate(
   <Router>
-    <App />
+    <App data={window.__INITIAL_DATA__}/>
   </Router>,
   document.getElementById('root')
 );

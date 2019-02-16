@@ -10,6 +10,8 @@ export default class MainContainer extends Component {
       isLoadingBlog: true,
       isLoadingAbout: true,
     }
+    
+    console.log(this.props.data);
   }
 
   render() {

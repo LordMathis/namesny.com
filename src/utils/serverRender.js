@@ -9,24 +9,27 @@ export function serverRender(req, res, next) {
 
   const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
 
-  const promise = activeRoute.fetchInitialData
-  ? activeRoute.fetchInitialData(req.path)
+  const promise = activeRoute.getData
+  ? activeRoute.getData(req.path)
   : Promise.resolve()
 
   promise.then((data) => {
+    
+    console.log(data);
+    
     const markup = renderToString(
       <Router location={req.url} context={{}}>
-        <App />
+        <App data={data}/>
       </Router>,
     );
 
-    res.status(200).send(renderFullPage(markup));
+    res.status(200).send(renderFullPage(markup, data));
 
   }).catch(next)
 
 }
 
-function renderFullPage(html) {
+function renderFullPage(html, data) {
   return `
     <!DOCTYPE html>
     <html>
@@ -42,6 +45,7 @@ function renderFullPage(html) {
       <body>
         <div id="root">${html}</div>
         <script src="static/bundle.js" async></script>
+        <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
       </body>
     </html>
     `

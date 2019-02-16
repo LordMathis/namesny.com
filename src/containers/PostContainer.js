@@ -9,6 +9,8 @@ export default class PostContainer extends Component {
       isLoading: true,
       error: false,
     };
+    
+    console.log(this.props.data);
   }
 
   render() {
