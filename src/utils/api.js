@@ -1,12 +1,13 @@
 import fs from 'fs'
 import jsonfile from 'jsonfile'
+import path from 'path'
 import config from '../../config.json'
 
 export function getData (reqPath = '') {
   if (reqPath === '') {
     return readData(config.dataPath)
   } else {
-    const fileName = '../../renders/' + reqPath + '.html'
+    const fileName = path.join(process.cwd(), 'renders/', reqPath + '.html')
     return readFile(fileName)
   }
 };
