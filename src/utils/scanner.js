@@ -3,9 +3,10 @@ const path = require('path')
 const async = require('async')
 const Compiler = require('./compiler')
 const config = require('../../config.json')
-const data = require('./data.json')
+const jsonfile = require('jsonfile')
 
 module.exports = function () {
+  const data = jsonfile.readFileSync(config.dataPath)
   var compiler = new Compiler(data)
 
   /**
@@ -31,7 +32,13 @@ module.exports = function () {
    */
   function compileFile (file, callback) {
     const filePath = path.join(process.cwd(), config.contentPath, file)
-    compiler.addFile(filePath, false, callback)
+
+    // config.files contains list of file names which are not considered blog posts
+    if (config.files.indexOf(file) === -1) {
+      compiler.addFile(filePath, true, callback)
+    } else {
+      compiler.addFile(filePath, false, callback)
+    }
   }
 
   /**

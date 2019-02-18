@@ -1,11 +1,12 @@
 import fs from 'fs'
-import data from './data.json'
+import jsonfile from 'jsonfile'
+import config from '../../config.json'
 
-export function getData (path = '') {
-  if (path === '') {
-    return Promise.resolve(data)
+export function getData (reqPath = '') {
+  if (reqPath === '') {
+    return readData(config.dataPath)
   } else {
-    const fileName = '../../content/' + path
+    const fileName = '../../renders/' + reqPath + '.html'
     return readFile(fileName)
   }
 };
@@ -13,6 +14,14 @@ export function getData (path = '') {
 function readFile (fileName, type) {
   return new Promise(function (resolve, reject) {
     fs.readFile(fileName, (err, data) => {
+      err ? reject(err) : resolve(data)
+    })
+  })
+}
+
+function readData (dataPath) {
+  return new Promise(function (resolve, reject) {
+    jsonfile.readFile(dataPath, (err, data) => {
       err ? reject(err) : resolve(data)
     })
   })

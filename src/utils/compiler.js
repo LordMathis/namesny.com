@@ -128,8 +128,8 @@ Compiler.prototype.addFile = function (filepath, isPost, callback) {
  * Writes updated data to the data file
  */
 Compiler.prototype.writeData = function (callback) {
-  const dataPath = path.join(process.cwd(), 'src/utils/data.json')
-  jsonfile.writeFile(dataPath, this.data, callback)
+  // console.log(this.data)
+  jsonfile.writeFile(config.dataPath, this.data, callback)
 }
 
 module.exports = Compiler

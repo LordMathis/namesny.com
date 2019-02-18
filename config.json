@@ -10,6 +10,7 @@
   },
   "contentPath": "./content",
   "renderPath": "./renders",
+  "dataPath": "./src/utils/data.json",
   "files": [
     "about.md", "resume.md"
   ]

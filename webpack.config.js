@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
+const CreateFileWebpack = require('create-file-webpack')
 
 const browserConfig = {
   mode: 'production',
@@ -21,7 +22,7 @@ const browserConfig = {
     // filename: '[name].[contenthash].js',
     publicPath: '/static/'
   },
-  // devtool: 'eval-source-map',
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {
@@ -124,7 +125,15 @@ const serverConfig = {
     new webpack.DefinePlugin({
       __isBrowser__: 'false'
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new CreateFileWebpack({
+      path: './src/utils/',
+      fileName: 'data.json',
+      content: JSON.stringify({
+        'posts': [],
+        'other': []
+      })
+    })
   ]
 }
 

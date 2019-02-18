@@ -4,18 +4,26 @@ import { About, Blog, Home, Wrapper } from '../components'
 
 export default class MainContainer extends Component {
   static propTypes = {
-    data: PropTypes.object.isRequired
+    staticContext: PropTypes.object
   }
 
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
-    this.state = {
-      isLoadingBlog: true,
-      isLoadingAbout: true
+    let data
+    if (__isBrowser__) {
+      data = window.__INITIAL_DATA__
+      delete window.__INITIAL_DATA__
+    } else {
+      data = props.staticContext.data
     }
 
-    console.log(this.props.data)
+    this.state = {
+      isLoadingBlog: !data.posts,
+      isLoadingAbout: !data.about,
+      about: data.about,
+      posts: data.posts
+    }
   }
 
   render () {

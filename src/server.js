@@ -1,14 +1,9 @@
 import express from 'express'
-import fs from 'fs'
 import { serverRender } from './utils/serverRender'
+require('./utils/scanner')()
+
 const port = process.env.PORT || 3000
 const app = express()
-
-const filename = './src/utils/data.json'
-const dataStub = { 'posts': [], 'other': [] }
-fs.writeFileSync(filename, JSON.stringify(dataStub))
-
-require('./utils/scanner')()
 
 app.use('/static', express.static('public/static'))
 

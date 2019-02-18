@@ -1,4 +1,3 @@
-// import 'babel-polyfill'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter as Router, matchPath } from 'react-router-dom'
@@ -14,11 +13,9 @@ export function serverRender (req, res, next) {
     : Promise.resolve()
 
   promise.then((data) => {
-    console.log(data)
-
     const markup = renderToString(
-      <Router location={req.url} context={{}}>
-        <App data={data}/>
+      <Router location={req.url} context={{ data }}>
+        <App/>
       </Router>
     )
 
@@ -38,11 +35,12 @@ function renderFullPage (html, data) {
           <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" rel="preload" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
           <!-- Stylesheet -->
           <link href="static/bundle.css" rel="stylesheet" rel="preload">
+          <!-- Initial Data -->
+          <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
       </head>
       <body>
         <div id="root">${html}</div>
         <script src="static/bundle.js" async></script>
-        <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
       </body>
     </html>
     `
