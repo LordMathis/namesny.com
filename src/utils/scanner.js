@@ -1,62 +1,96 @@
-const fs = require('fs')
-const path = require('path')
-const async = require('async')
-const Compiler = require('./compiler')
-const config = require('../../config.json')
-const jsonfile = require('jsonfile')
+import fs from 'fs'
+import async from 'async'
+import path from 'path'
+import config from '../../config.json'
+import fm from 'front-matter'
+import moment from 'moment'
+import jsonfile from 'jsonfile'
 
-module.exports = function () {
-  const data = jsonfile.readFileSync(config.dataPath)
-  var compiler = new Compiler(data)
-
-  /**
-   * Reads the directory and returns it's content
-   */
-  function readdir (callback) {
+class Scanner {
+  readdir (callback) {
     fs.readdir(config.contentPath, callback)
   }
 
-  /**
-   * Calls compile on each file in the directory
-   */
-  function compile (files, callback) {
+  processAll (files, callback) {
     console.log('[Scanner] Discovered files: ' + files)
-    async.each(files, compileFile, (err) => {
+    async.each(files, this.processFile, (err) => {
       if (err) throw err
       callback()
     })
   }
 
-  /**
-   * Helper function which calls compile in the Compiler module
-   */
-  function compileFile (file, callback) {
+  processFile (file, callback) {
     const filePath = path.join(process.cwd(), config.contentPath, file)
+    const metadata = this.fileMetadata(filePath)
 
-    // config.files contains list of file names which are not considered blog posts
-    if (config.files.indexOf(file) === -1) {
-      compiler.addFile(filePath, true, callback)
-    } else {
-      compiler.addFile(filePath, false, callback)
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) throw err
+
+      if (config.files.indexOf(file) === -1) {
+        const frontMatter = fm(data)
+
+        if (frontMatter.attributes.draft) {
+          callback(null, null)
+          return
+        }
+
+        let published
+        if (frontMatter.attributes.date) {
+          published = moment(frontMatter.attributes.date)
+        } else {
+          published = moment()
+        }
+
+        const post = {
+          published: published.format('MMMM DD, YYYY'),
+          filename: metadata.filename,
+          title: frontMatter.attributes.title,
+          link: '/post/' + metadata.filename
+        }
+
+        this.data.posts.push(post)
+      } else {
+        this.data.push({
+          [metadata.filename]: data
+        })
+      }
+    })
+  }
+
+  init (callback) {
+    jsonfile.readFile(config.dataPath, (err, data) => {
+      if (err) throw err
+
+      this.data = data
+    }).bind(this)
+  }
+
+  writeData (callback) {
+    jsonfile.writeFile(config.dataPath, this.data, callback)
+  }
+
+  fileMetadata (filepath) {
+    const paths = filepath.split('/')
+    const basename = path.basename(filepath)
+
+    const metadata = {
+      basename,
+      filename: basename.substr(0, basename.lastIndexOf('.')),
+      parrent: paths[paths.length - 2],
+      dirname: path.dirname(filepath)
     }
+
+    return metadata
   }
 
-  /**
-   * Writes updated data into the data file
-   */
-  function writeData (callback) {
-    compiler.writeData(callback)
+  scan () {
+    async.waterfall([
+      this.init,
+      this.readdir,
+      this.processAll,
+      this.writeData
+    ], (err) => {
+      if (err) throw err
+    })
   }
-
-  /**
-   * Main function. Scans the directory for files and compiles them into html
-   * using the Compiler module
-   */
-  async.waterfall([
-    readdir,
-    compile,
-    writeData
-  ], (err) => {
-    if (err) throw err
-  })
 }

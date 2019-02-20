@@ -8,13 +8,13 @@ export function getData (reqPath = '') {
     return readData(config.dataPath)
   } else {
     const fileName = path.join(process.cwd(), 'renders/', reqPath + '.html')
-    return readFile(fileName)
+    return readFile(fileName, 'utf8')
   }
 };
 
-function readFile (fileName, type) {
+function readFile (fileName, options) {
   return new Promise(function (resolve, reject) {
-    fs.readFile(fileName, (err, data) => {
+    fs.readFile(fileName, options, (err, data) => {
       err ? reject(err) : resolve(data)
     })
   })

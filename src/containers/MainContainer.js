@@ -18,6 +18,8 @@ export default class MainContainer extends Component {
       data = props.staticContext.data
     }
 
+    console.log(data)
+
     this.state = {
       isLoadingBlog: !data.posts,
       isLoadingAbout: !data.about,

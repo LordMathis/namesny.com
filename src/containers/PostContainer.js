@@ -4,15 +4,24 @@ import { Post, Wrapper, NotFoundPage } from '../components'
 
 export default class PostContainer extends Component {
   static propTypes = {
-    data: PropTypes.object.isRequired
+    staticContext: PropTypes.object.isRequired
   }
 
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+
+    let post
+    if (__isBrowser__) {
+      post = window.__INITIAL_DATA__
+      delete window.__INITIAL_DATA__
+    } else {
+      post = props.staticContext.data
+    }
 
     this.state = {
-      isLoading: true,
-      error: false
+      isLoading: !post,
+      error: false,
+      post: post
     }
   }
 
