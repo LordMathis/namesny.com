@@ -6,7 +6,11 @@ import fm from 'front-matter'
 import moment from 'moment'
 import jsonfile from 'jsonfile'
 
-class Scanner {
+export class Scanner {
+  constructor () {
+    this.data = {}
+  }
+
   readdir (callback) {
     fs.readdir(config.contentPath, callback)
   }
@@ -62,10 +66,12 @@ class Scanner {
       if (err) throw err
 
       this.data = data
-    }).bind(this)
+      callback()
+    })
   }
 
   writeData (callback) {
+    console.log(this.data)
     jsonfile.writeFile(config.dataPath, this.data, callback)
   }
 
@@ -85,10 +91,10 @@ class Scanner {
 
   scan () {
     async.waterfall([
-      this.init,
-      this.readdir,
-      this.processAll,
-      this.writeData
+      this.init.bind(this),
+      this.readdir.bind(this),
+      this.processAll.bind(this),
+      this.writeData.bind(this)
     ], (err) => {
       if (err) throw err
     })

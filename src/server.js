@@ -1,11 +1,12 @@
 import express from 'express'
 import { serverRender } from './utils/serverRender'
-import Scanner from './scanner'
+import { Scanner } from './utils/scanner'
 
 const port = process.env.PORT || 3000
 const app = express()
 
-Scanner.scan()
+const scanner = new Scanner()
+scanner.scan()
 
 app.use('/static', express.static('public/static'))
 
