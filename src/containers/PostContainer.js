@@ -11,6 +11,7 @@ export default class PostContainer extends Component {
     super(props)
 
     let post
+    // eslint-disable-next-line no-undef
     if (__isBrowser__) {
       post = window.__INITIAL_DATA__
       delete window.__INITIAL_DATA__

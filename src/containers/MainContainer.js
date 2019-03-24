@@ -11,6 +11,7 @@ export default class MainContainer extends Component {
     super(props)
 
     let data
+    // eslint-disable-next-line no-undef
     if (__isBrowser__) {
       data = window.__INITIAL_DATA__
       delete window.__INITIAL_DATA__
