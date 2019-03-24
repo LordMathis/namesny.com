@@ -1,5 +1,4 @@
 import fs from 'fs'
-import async from 'async'
 import path from 'path'
 import config from '../../config.json'
 import fm from 'front-matter'
@@ -11,68 +10,87 @@ export class Scanner {
     this.data = {}
   }
 
-  readdir (callback) {
-    fs.readdir(config.contentPath, callback)
-  }
-
-  processAll (files, callback) {
-    console.log('[Scanner] Discovered files: ' + files)
-    async.each(files, this.processFile, (err) => {
-      if (err) throw err
-      callback()
+  readdir (dirname) {
+    return new Promise((resolve, reject) => {
+      fs.readdir(dirname, function (err, filenames) {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(filenames)
+        }
+      })
     })
   }
 
-  processFile (file, callback) {
+  readfile (filename) {
+    const filePath = path.join(process.cwd(), config.contentPath, filename)
+    return new Promise((resolve, reject) => {
+      fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve([filename, data])
+        }
+      })
+    })
+  }
+
+  processFile (file, data) {
     const filePath = path.join(process.cwd(), config.contentPath, file)
     const metadata = this.fileMetadata(filePath)
 
-    fs.readFile(filePath, 'utf8', (err, data) => {
-      if (err) throw err
+    if (config.files.indexOf(file) === -1) {
+      const frontMatter = fm(data)
 
-      if (config.files.indexOf(file) === -1) {
-        const frontMatter = fm(data)
-
-        if (frontMatter.attributes.draft) {
-          callback(null, null)
-          return
-        }
-
-        let published
-        if (frontMatter.attributes.date) {
-          published = moment(frontMatter.attributes.date)
-        } else {
-          published = moment()
-        }
-
-        const post = {
-          published: published.format('MMMM DD, YYYY'),
-          filename: metadata.filename,
-          title: frontMatter.attributes.title,
-          link: '/post/' + metadata.filename
-        }
-
-        this.data.posts.push(post)
-      } else {
-        this.data.push({
-          [metadata.filename]: data
-        })
+      if (frontMatter.attributes.draft) {
+        return
       }
-    })
+
+      let published
+      if (frontMatter.attributes.date) {
+        published = moment(frontMatter.attributes.date)
+      } else {
+        published = moment()
+      }
+
+      const post = {
+        published: published.format('MMMM DD, YYYY'),
+        filename: metadata.filename,
+        title: frontMatter.attributes.title,
+        link: '/post/' + metadata.filename
+      }
+
+      this.data.posts.push(post)
+    } else {
+      this.data.push({
+        [metadata.filename]: data
+      })
+    }
   }
 
-  init (callback) {
-    jsonfile.readFile(config.dataPath, (err, data) => {
-      if (err) throw err
-
-      this.data = data
-      callback()
+  init () {
+    return new Promise((resolve, reject) => {
+      jsonfile.readFile(config.dataPath, (err, data) => {
+        if (err) {
+          reject(err)
+        } else {
+          this.data = data
+          resolve(data)
+        }
+      })
     })
   }
 
   writeData (callback) {
-    console.log(this.data)
-    jsonfile.writeFile(config.dataPath, this.data, callback)
+    return new Promise((resolve, reject) => {
+      jsonfile.writeFile(config.dataPath, this.data, (err, data) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(this.data)
+        }
+      })
+    })
   }
 
   fileMetadata (filepath) {
@@ -90,13 +108,22 @@ export class Scanner {
   }
 
   scan () {
-    async.waterfall([
-      this.init.bind(this),
-      this.readdir.bind(this),
-      this.processAll.bind(this),
-      this.writeData.bind(this)
-    ], (err) => {
-      if (err) throw err
-    })
+    this.init()
+      .then(
+        () => this.readdir(config.contentPath)
+      ).then(
+        (files) => { return Promise.all(files.map(this.readfile)) }
+      ).then(
+        (files) => {
+          files.forEach(
+            (item) => { this.processFile(item[0], item[1]) }
+          )
+          return this.writeData()
+        }
+      ).then(
+        console.log('[Scanner] Scan complete')
+      ).catch(
+        (err) => console.log(err)
+      )
   }
 }
