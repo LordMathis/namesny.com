@@ -20,7 +20,10 @@ export default class Blog extends Component {
       )
     }
 
-    let posts = this.props.posts.map((post) =>
+    let posts = this.props.posts.sort((a, b) => {
+      return a.data - b.date
+    })
+    let postsHTML = posts.map((post) =>
       <tr className={styles.postListItem} key={post.title}>
         <td>
           <span className={styles.postDate}>{post.published}</span>
@@ -38,7 +41,7 @@ export default class Blog extends Component {
         <div className={contentStyle.content}>
           <table>
             <tbody className={styles.postsWrapper}>
-              {posts}
+              {postsHTML}
             </tbody>
           </table>
         </div>
