@@ -131,7 +131,7 @@ const serverConfig = {
       fileName: 'data.json',
       content: JSON.stringify({
         'posts': [],
-        'other': []
+        'other': {}
       })
     })
   ]

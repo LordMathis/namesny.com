@@ -7,7 +7,7 @@ export function getData (reqPath = '') {
   if (reqPath === '') {
     return readData(config.dataPath)
   } else {
-    const fileName = path.join(process.cwd(), 'renders/', reqPath + '.html')
+    const fileName = path.join(process.cwd(), config.contentPath, reqPath + '.md')
     return readFile(fileName, 'utf8')
   }
 };

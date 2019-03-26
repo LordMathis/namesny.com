@@ -19,7 +19,7 @@
     "express": "^4.13.4",
     "front-matter": "^2.2.0",
     "jsonfile": "^4.0.0",
-    "markdown-it": "^8.4.0",
+    "markdown-it": "^8.4.2",
     "moment": "^2.19.1",
     "node-sass": "^4.9.0",
     "prop-types": "^15.7.2",

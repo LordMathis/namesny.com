@@ -62,9 +62,7 @@ export class Scanner {
 
       this.data.posts.push(post)
     } else {
-      this.data.other.push({
-        [metadata.filename]: data
-      })
+      this.data.other[metadata.filename] = data
     }
   }
 
