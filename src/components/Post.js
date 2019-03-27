@@ -6,6 +6,7 @@ import contentStyle from '../static/stylesheets/content.scss'
 import styles from './Post.scss'
 import MarkdownIt from 'markdown-it'
 import fm from 'front-matter'
+import moment from 'moment'
 
 export default class Post extends Component {
   static propTypes = {
@@ -17,7 +18,7 @@ export default class Post extends Component {
     const md = MarkdownIt()
     const content = fm(this.props.post)
     const title = content.attributes.title
-    const date = content.attributes.date
+    const date = moment(content.attributes.date, 'YYYY-MM-DD')
     const body = md.render(content.body)
 
     if (this.props.isLoading) {
@@ -35,7 +36,7 @@ export default class Post extends Component {
           <Header header={title} />
           <div className={contentStyle.content}>
             <div className={styles.postDate}>
-              <h3>{date}</h3>
+              <h3>{date.format('MMMM D, YYYY')}</h3>
             </div>
             <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: body }}>
             </div>

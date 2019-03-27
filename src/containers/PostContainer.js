@@ -19,8 +19,6 @@ export default class PostContainer extends Component {
       post = props.staticContext.data
     }
 
-    console.log(post)
-
     this.state = {
       isLoading: !post,
       error: false,

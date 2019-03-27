@@ -21,7 +21,7 @@ export default class Blog extends Component {
     }
 
     let posts = this.props.posts.sort((a, b) => {
-      return a.data - b.date
+      return new Date(b.published) - new Date(a.published)
     })
     let postsHTML = posts.map((post) =>
       <tr className={styles.postListItem} key={post.title}>
