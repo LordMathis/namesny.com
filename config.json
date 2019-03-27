@@ -4,13 +4,13 @@
   "name": "Matúš Námešný",
   "email": "matus@namesny.com",
   "social": {
-    "twitter": "https://twitter.com/matus_n",
     "github": "https://github.com/LordMathis",
     "codepen": "https://codepen.io/LordMathis/",
     "linkedin": "https://www.linkedin.com/in/mat%C3%BA%C5%A1-n%C3%A1me%C5%A1n%C3%BD-3903b6128/"
   },
   "contentPath": "./content",
   "renderPath": "./renders",
+  "dataPath": "./src/utils/data.json",
   "files": [
     "about.md", "resume.md"
   ]

@@ -1,24 +1,32 @@
-import React, {Component} from 'react';
-import {Spinner, Header} from '.';
-import '../static/stylesheets/globals.scss';
-import styles from './About.scss';
-import contentStyle from '../static/stylesheets/content.scss';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { Spinner, Header } from '.'
+import '../static/stylesheets/globals.scss'
+import contentStyle from '../static/stylesheets/content.scss'
+import MarkdownIt from 'markdown-it'
 
 export default class About extends Component {
+  static propTypes = {
+    isLoading: PropTypes.bool.isRequired,
+    about: PropTypes.string.isRequired
+  }
 
   render () {
+    const md = MarkdownIt()
+    const result = md.render(this.props.about)
+
     if (this.props.isLoading) {
       return (
         <div className={contentStyle.contentWrapper} id="about">
           <Spinner/>
         </div>
-      );
+      )
     }
 
     return (
       <div className={contentStyle.contentWrapper} id="about">
-        <Header header={"About Me"} />
-        <div className={contentStyle.content} dangerouslySetInnerHTML={{__html: this.props.about.body}}>
+        <Header header={'About Me'} />
+        <div className={contentStyle.content} dangerouslySetInnerHTML={{ __html: result }}>
         </div>
       </div>
     )

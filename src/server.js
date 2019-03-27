@@ -1,59 +1,26 @@
-require('babel-register');
-var path = require('path');
+import express from 'express'
+import expressStaticGzip from 'express-static-gzip'
+import { serverRender } from './utils/serverRender'
+import { Scanner } from './utils/scanner'
 
-var app = new (require('express'))();
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
+const app = express()
 
-const sass = require('node-sass');
+const scanner = new Scanner()
+scanner.scan()
 
-require('css-modules-require-hook')({
-  generateScopedName: '[name]__[local]___[hash:base64:5]',
-  extensions: ['.scss', '.css'],
-  preprocessCss: (data, filename) => sass.renderSync({
-      data,
-      file: filename,
-  }).css
-});
+app.use('/static', expressStaticGzip('public/static'))
 
-var fs = require('fs');
-var filename = './src/utils/data.json';
-var dataStub = {"posts": [], "other": []};
-fs.writeFileSync(filename, JSON.stringify(dataStub));
+app.get('/favicon.ico', (req, res) => {
+  res.status(404).send('Not Found !!!')
+})
 
+app.get('*', serverRender)
 
-// initalize webpack dev middleware if in development context
-if (process.env.NODE_ENV === 'development') {
-  var webpack = require('webpack')
-  var config = require('../webpack.config')
-
-  var devMiddleware = require('webpack-dev-middleware')
-  var hotDevMiddleware = require('webpack-hot-middleware')
-  var compiler = webpack(config)
-  var devMiddlewareConfig = {
-    noInfo: true,
-    stats: {colors: true},
-    publicPath: config.output.publicPath
-  }
-
-  app.use(devMiddleware(compiler, devMiddlewareConfig))
-  app.use(hotDevMiddleware(compiler))
-}
-
-require('./utils/scanner')();
-
-var api = require('./utils/api');
-app.use("/api", api);
-
-var staticFiles = require('./utils/staticFiles');
-app.use("/static", staticFiles);
-
-var serverRender = require('./utils/serverRender');
-app.get("*", serverRender);
-
-app.listen(port, function(error) {
+app.listen(port, function (error) {
   if (error) {
-    console.error(error);
+    console.error(error)
   } else {
-    console.info("[Server] Listening on port %s", port);
+    console.info('[Server] Listening on port %s', port)
   }
 })

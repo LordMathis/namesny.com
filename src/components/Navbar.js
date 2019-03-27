@@ -1,14 +1,12 @@
-import React, {Component} from 'react';
-import config from '../../config.json';
-import '../static/stylesheets/globals.scss';
-import styles from './Navbar.scss';
+import React, { Component } from 'react'
+import config from '../../config.json'
+import '../static/stylesheets/globals.scss'
+import styles from './Navbar.scss'
 
 export default class Navbar extends Component {
-
   render () {
-
-    let key = 0;
-    const objKeys = Object.keys(config.social);
+    let key = 0
+    const objKeys = Object.keys(config.social)
 
     const socialLinks = objKeys.map((val) => {
       const link = (
@@ -16,17 +14,18 @@ export default class Navbar extends Component {
           <i className={`fa fa-${val}`} aria-hidden="true" />
           <span className="sr-only">{val}</span>
         </a>
-      );
-      key += 1;
-      return link;
-    });
+      )
+
+      key += 1
+      return link
+    })
 
     socialLinks.push(
       <a key={key} href={`mailto:${config.email}`}>
         <i className="fa fa-envelope-o" aria-hidden="true" />
         <span className="sr-only">e-mail</span>
-      </a>,
-    );
+      </a>
+    )
 
     return (
       <div className={styles.navbar}>

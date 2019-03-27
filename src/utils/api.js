@@ -1,56 +1,29 @@
-const data = require('./data.json');
-const api = require('express').Router();
-const fs = require('fs');
-const path = require('path');
-const config = require('../../config.json');
+import fs from 'fs'
+import jsonfile from 'jsonfile'
+import path from 'path'
+import config from '../../config.json'
 
-api.get('/blog', (req, res) => {
-  res.set('Cache-Control', 'no-cache');
-  data.posts.sort((a,b) => {
-    return new Date(b.published) - new Date(a.published);
+export function getData (reqPath = '') {
+  if (reqPath === '') {
+    return readData(config.dataPath)
+  } else {
+    const fileName = path.join(process.cwd(), config.contentPath, reqPath + '.md')
+    return readFile(fileName, 'utf8')
+  }
+};
+
+function readFile (fileName, options) {
+  return new Promise(function (resolve, reject) {
+    fs.readFile(fileName, options, (err, data) => {
+      err ? reject(err) : resolve(data)
+    })
   })
-  res.json(data.posts);
-});
+}
 
-api.get('/about', (req, res) => {
-  const renderPath = path.join(process.cwd(), '/renders', 'about.html');
-  res.set('Cache-Control', 'max-age=86400');
-  fs.readFile(renderPath, 'utf8', (err, data) => {
-    if (err) {
-      res.json({
-        error: 404
-      });
-    } else {
-      res.json({
-        body: data,
-      });
-    }
-  });
-});
-
-api.get('/post/:postname', (req, res) => {
-  res.set('Cache-Control', 'no-cache');
-  const postname = req.params.postname;
-  const post = data.posts.find((el) => {
-    return el.filename === postname
-  });
-
-  const renderPath = path.join(process.cwd(), '/renders', postname + '.html');
-  fs.readFile(renderPath, 'utf8', (err, data) => {
-    if (err) {
-      res.json({
-        error: 404
-      });
-    } else {
-      res.json({
-        published: post.published,
-        link: post.link,
-        title: post.title,
-        body: data,
-      });
-    }
-  });
-});
-
-
-module.exports = api;
+function readData (dataPath) {
+  return new Promise(function (resolve, reject) {
+    jsonfile.readFile(dataPath, (err, data) => {
+      err ? reject(err) : resolve(data)
+    })
+  })
+}

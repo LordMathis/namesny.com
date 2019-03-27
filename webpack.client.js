@@ -1,18 +1,17 @@
-const { resolve, join } = require('path')
+const { resolve } = require('path')
 const webpack = require('webpack')
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
-const CompressionPlugin = require("compression-webpack-plugin")
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
-const config = {
+const browserConfig = {
   mode: 'production',
-  context: resolve(__dirname, 'src'),
   entry: {
     bundle: [
-      './app-client.js'
+      './src/app-client.js'
     ]
   },
   output: {
@@ -42,7 +41,7 @@ const config = {
             }
           },
           {
-            loader: "postcss-loader"
+            loader: 'postcss-loader'
           },
           {
             loader: 'sass-loader'
@@ -56,25 +55,23 @@ const config = {
         options: {
           limit: 8192
         }
-      },
+      }
     ]
   },
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true // set to true if you want JS source maps
-      }),
+      new UglifyJsPlugin(),
       new OptimizeCSSAssetsPlugin({})
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['dist', 'public/static'], {}),
-    new MiniCssExtractPlugin({filename: '[name].[contenthash].css'}),
-    new CompressionPlugin({}),
     new ManifestPlugin(),
-  ]
+    new webpack.DefinePlugin({ __isBrowser__: 'true' }),
+    new CleanWebpackPlugin(['public/static', 'build'], {}),
+    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
+    new CompressionPlugin({})
+  ],
+  node: { fs: 'empty' }
 }
 
-module.exports = config
+module.exports = browserConfig

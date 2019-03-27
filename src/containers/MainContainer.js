@@ -1,35 +1,33 @@
-import React, {Component} from 'react';
-import axios from 'axios';
-import {About, Blog, Home, Wrapper} from '../components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { About, Blog, Home, Wrapper } from '../components'
 
-export default class BlogContainer extends Component {
+export default class MainContainer extends Component {
+  static propTypes = {
+    staticContext: PropTypes.object
+  }
 
-  constructor() {
-    super();
+  constructor (props) {
+    super(props)
+
+    let data
+    // eslint-disable-next-line no-undef
+    if (__isBrowser__) {
+      data = window.__INITIAL_DATA__
+      delete window.__INITIAL_DATA__
+    } else {
+      data = props.staticContext.data
+    }
 
     this.state = {
-      isLoadingBlog: true,
-      isLoadingAbout: true,
+      isLoadingBlog: !data.posts,
+      isLoadingAbout: !data.other.about,
+      about: data.other.about,
+      posts: data.posts
     }
   }
 
-  componentDidMount() {
-    axios.get('/api/about').then((res) => {
-      this.setState({
-        isLoadingAbout: false,
-        about: res.data,
-      });
-    })
-
-    axios.get('/api/blog').then((res) => {
-      this.setState({
-        isLoadingBlog: false,
-        posts: res.data,
-      });
-    })
-  }
-
-  render() {
+  render () {
     return (
       <div>
         <Home/>

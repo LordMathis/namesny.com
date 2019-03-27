@@ -1,17 +1,11 @@
-import React from 'react';
-import {render} from 'react-dom';
-import {BrowserRouter as Router} from 'react-router-dom';
-import {App} from './components';
+import React from 'react'
+import { hydrate } from 'react-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { App } from './components'
 
-const AppClient = () => (
+hydrate(
   <Router>
-    <App />
-  </Router>
+    <App data={window.__INITIAL_DATA__}/>
+  </Router>,
+  document.getElementById('root')
 )
-
-window.onload = () => {
-  render(
-    <AppClient />,
-    document.getElementById('root')
-  );
-};

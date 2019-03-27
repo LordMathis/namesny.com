@@ -1,38 +1,32 @@
-import React, {Component} from 'react';
-import axios from 'axios';
-import {Post, Wrapper, NotFoundPage} from '../components';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Post, Wrapper, NotFoundPage } from '../components'
 
 export default class PostContainer extends Component {
-  constructor() {
-    super();
+  static propTypes = {
+    staticContext: PropTypes.object.isRequired
+  }
+
+  constructor (props) {
+    super(props)
+
+    let post
+    // eslint-disable-next-line no-undef
+    if (__isBrowser__) {
+      post = window.__INITIAL_DATA__
+      delete window.__INITIAL_DATA__
+    } else {
+      post = props.staticContext.data
+    }
 
     this.state = {
-      isLoading: true,
+      isLoading: !post,
       error: false,
-    };
+      post: post
+    }
   }
 
-  componentDidMount() {
-    const url = '/api/post/' + this.props.match.params.postname;
-
-    axios.get(url).then((res) => {
-      if (res.data.error) {
-        this.setState({
-          error: true,
-        });
-      }
-      else {
-        this.setState({
-          error: false,
-          isLoading: false,
-          post: res.data,
-        });
-      }
-    })
-  }
-
-  render() {
-
+  render () {
     if (this.state.error) {
       return (
         <NotFoundPage />
@@ -42,8 +36,8 @@ export default class PostContainer extends Component {
     return (
       <Wrapper>
         <Post isLoading={this.state.isLoading}
-              post={this.state.post} />
+          post={this.state.post} />
       </Wrapper>
-    );
+    )
   }
 }
