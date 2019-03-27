@@ -4,6 +4,7 @@ import { StaticRouter as Router, matchPath } from 'react-router-dom'
 import { App } from '../components'
 import routes from './routes'
 import serialize from 'serialize-javascript'
+import manifest from '../../public/static/manifest.json'
 
 export function serverRender (req, res, next) {
   const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
@@ -34,13 +35,13 @@ function renderFullPage (html, data) {
           <!-- Font Awesome -->
           <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" rel="preload" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
           <!-- Stylesheet -->
-          <link href="/static/bundle.css" rel="stylesheet" rel="preload">
+          <link href=${manifest['bundle.css']} rel="stylesheet" rel="preload">
           <!-- Initial Data -->
           <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
       </head>
       <body>
         <div id="root">${html}</div>
-        <script src="/static/bundle.js" async></script>
+        <script src=${manifest['bundle.js']} async></script>
       </body>
     </html>
     `

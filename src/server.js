@@ -1,4 +1,5 @@
 import express from 'express'
+import expressStaticGzip from 'express-static-gzip'
 import { serverRender } from './utils/serverRender'
 import { Scanner } from './utils/scanner'
 
@@ -8,7 +9,7 @@ const app = express()
 const scanner = new Scanner()
 scanner.scan()
 
-app.use('/static', express.static('public/static'))
+app.use('/static', expressStaticGzip('public/static'))
 
 app.get('/favicon.ico', (req, res) => {
   res.status(404).send('Not Found !!!')
