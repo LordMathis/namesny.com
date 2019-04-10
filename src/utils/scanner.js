@@ -7,7 +7,10 @@ import jsonfile from 'jsonfile'
 
 export class Scanner {
   constructor () {
-    this.data = {}
+    this.data = {
+      'posts': [],
+      'other': {}
+    }
   }
 
   readdir (dirname) {
@@ -66,18 +69,18 @@ export class Scanner {
     }
   }
 
-  init () {
-    return new Promise((resolve, reject) => {
-      jsonfile.readFile(config.dataPath, (err, data) => {
-        if (err) {
-          reject(err)
-        } else {
-          this.data = data
-          resolve(data)
-        }
-      })
-    })
-  }
+  // init () {
+  //   return new Promise((resolve, reject) => {
+  //     jsonfile.readFile(config.dataPath, (err, data) => {
+  //       if (err) {
+  //         reject(err)
+  //       } else {
+  //         this.data = data
+  //         resolve(data)
+  //       }
+  //     })
+  //   })
+  // }
 
   writeData (callback) {
     return new Promise((resolve, reject) => {
@@ -106,10 +109,8 @@ export class Scanner {
   }
 
   scan () {
-    this.init()
+    this.readdir(config.contentPath)
       .then(
-        () => this.readdir(config.contentPath)
-      ).then(
         (files) => { return Promise.all(files.map(this.readfile)) }
       ).then(
         (files) => {
