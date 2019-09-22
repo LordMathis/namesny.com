@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const browserConfig = {
   mode: 'production',
@@ -35,9 +35,10 @@ const browserConfig = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              importLoaders: 2,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]'
+              },
+              importLoaders: 2
             }
           },
           {
@@ -67,7 +68,7 @@ const browserConfig = {
   plugins: [
     new ManifestPlugin(),
     new webpack.DefinePlugin({ __isBrowser__: 'true' }),
-    new CleanWebpackPlugin(['public/static', 'build'], {}),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
     new CompressionPlugin({})
   ],

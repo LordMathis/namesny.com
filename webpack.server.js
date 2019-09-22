@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CreateFileWebpack = require('create-file-webpack')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const serverConfig = {
   entry: './src/server.js',
@@ -25,14 +26,14 @@ const serverConfig = {
       {
         test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              exportOnlyLocals: true,
-              importLoaders: 2,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]'
+              },
+              onlyLocals: true,
+              importLoaders: 2
             }
           },
           {
@@ -58,6 +59,7 @@ const serverConfig = {
       __isBrowser__: 'false'
     }),
     new MiniCssExtractPlugin(),
+    new CleanWebpackPlugin(),
     new CreateFileWebpack({
       path: './src/utils/',
       fileName: 'data.json',
