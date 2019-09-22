@@ -11,7 +11,7 @@
   "contentPath": "./content",
   "renderPath": "./renders",
   "dataPath": "./src/utils/data.json",
-  "files": [
+  "non-content-files": [
     "about.md", "resume.md"
   ]
 }
