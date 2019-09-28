@@ -1,0 +1,17 @@
+{
+    "title": "John Doe - Portfolio",
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "social": {
+      "github": "github_url",
+      "twitter": "twitter_url",
+      "linkedin": "linkedin_url"
+    },
+    "contentPath": "./content",
+    "renderPath": "./renders",
+    "dataPath": "./src/utils/data.json",
+    "non-content-files": [
+      "about.md", "resume.md"
+    ]
+  }
+  
