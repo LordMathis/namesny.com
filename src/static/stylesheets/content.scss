@@ -12,6 +12,8 @@
   @media (min-width: $break-large) {
     width: 960px;
   }
+  min-height: 100vh;
+  height: 100vh;
 }
 
 .content {

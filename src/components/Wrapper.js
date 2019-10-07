@@ -8,12 +8,17 @@ export default class Wrapper extends Component {
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
-    ]).isRequired
+    ]).isRequired,
+    flex: PropTypes.bool
+  }
+
+  static defaultProps = {
+    flex: false
   }
 
   render () {
     return (
-      <div className={styles.centerContent}>
+      <div className={` ${styles.centerContent} ${this.props.flex ? styles.flexWrap : ''}` }>
         {this.props.children}
       </div>
     )

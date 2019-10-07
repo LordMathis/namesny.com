@@ -31,7 +31,7 @@ export default class MainContainer extends Component {
     return (
       <div>
         <Home/>
-        <Wrapper>
+        <Wrapper flex={true}>
           <About isLoading={this.state.isLoadingAbout}
             about={this.state.about}/>
           <Blog isLoading={this.state.isLoadingBlog}
