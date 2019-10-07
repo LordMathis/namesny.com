@@ -40,13 +40,14 @@ export default class Home extends Component {
             <ul>
               <li>
                 <a href="#about">
-                  <i className="fa fa-search" aria-hidden="true" /> About Me
+                  About
                 </a>
               </li>
               <li>
-                <a href="#blog">
-                  <i className="fa fa-pencil-square-o" aria-hidden="true" /> Blog
-                </a>
+                <span>/ <a href="#blog">Blog</a></span>
+              </li>
+              <li>
+                <span>/ <a href="#contact">Contact</a></span>
               </li>
             </ul>
           </div>

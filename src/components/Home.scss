@@ -1,7 +1,8 @@
 @import "../static/stylesheets/variables.scss";
 
 #coverPage {
-  background: linear-gradient(140deg,rgba(10, 108, 245, 0.6) 20%, rgba(0, 0, 0, 0.9)), url(../static/images/background-cover-converted.jpg) no-repeat center center fixed;
+  background: url(../static/images/benjamin-child-6msS8vT5pzw-unsplash.jpg) no-repeat center center fixed;
+
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -25,6 +26,8 @@
 
 #coverPageName a, #coverPageName a:hover {
     color: $white;
+    text-shadow: $black 0px 0px 2px;
+    -webkit-font-smoothing: antialiased;
     text-decoration: none;
 }
 
@@ -32,22 +35,40 @@
   text-align: center;
   a {
     color: $white;
+    text-shadow: $black 0px 0px 2px;
+    -webkit-font-smoothing: antialiased;
     display: inline-block;
     margin: 10px;
   }
 }
 
-.menuLinks ul{
-  list-style: none;
-  margin-left: 0;
-  padding: 10px;
-  li {
-    margin: 5px;
-    a {
-    color: $white;
-    text-decoration: none;
-    font-size: 1.4em;
-    }
+.menuLinks {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-shadow: $black 0px 0px 2px;
+  -webkit-font-smoothing: antialiased;
 
+  ul{
+    list-style: none;
+    margin-left: 0;
+    padding: 10px;
+
+    li {
+      margin: 5px;
+      display: inline;
+
+      a {
+        color: $white;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 1.4em;
+      }
+
+      a:hover {
+        border-bottom: solid 2px $blue;
+      }
+    }
   }
 }
