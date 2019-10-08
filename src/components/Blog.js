@@ -35,7 +35,7 @@ export default class Blog extends Component {
     )
 
     return (
-      <div className={contentStyle.contentWrapper} id="blog">
+      <div className={contentStyle.contentWrapper, styles.blog} id="blog">
         <Header header={'Blog'} />
 
         <div className={contentStyle.content}>

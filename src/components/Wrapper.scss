@@ -5,5 +5,7 @@
 }
 
 .flexWrap {
-  display: flex;
+  @media only screen and (min-width: 1024px) {
+    display: flex;
+  }
 }

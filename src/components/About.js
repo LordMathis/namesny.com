@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Spinner, Header } from '.'
 import '../static/stylesheets/globals.scss'
 import contentStyle from '../static/stylesheets/content.scss'
+import style from './About.scss'
 import MarkdownIt from 'markdown-it'
 
 export default class About extends Component {
@@ -24,7 +25,7 @@ export default class About extends Component {
     }
 
     return (
-      <div className={contentStyle.contentWrapper} id="about">
+      <div className={contentStyle.contentWrapper, style.about} >
         <Header header={'About Me'} />
         <div className={contentStyle.content} dangerouslySetInnerHTML={{ __html: result }}>
         </div>
