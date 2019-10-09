@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import config from '../../config.json'
-import '../static/stylesheets/globals.scss'
+import config from '../../config/config.json'
+import '../stylesheets/globals.scss'
 import styles from './Navbar.scss'
 
 export default class Navbar extends Component {

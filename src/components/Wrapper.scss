@@ -1,11 +1,11 @@
-@import "../static/stylesheets/variables.scss";
+@import "../../config/variables.scss";
 
 .centerContent {
   text-align: center;
 }
 
 .flexWrap {
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: $break-large) {
     display: flex;
   }
 }

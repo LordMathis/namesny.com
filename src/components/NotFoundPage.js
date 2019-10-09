@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navbar, Header } from '.'
-import '../static/stylesheets/globals.scss'
-import contentStyle from '../static/stylesheets/content.scss'
+import '../stylesheets/globals.scss'
+import contentStyle from '../stylesheets/content.scss'
 
 export const NotFoundPage = (props) => {
   return (

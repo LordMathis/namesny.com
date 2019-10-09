@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { Spinner, Header } from '.'
-import '../static/stylesheets/globals.scss'
+import '../stylesheets/globals.scss'
 import styles from './Blog.scss'
-import contentStyle from '../static/stylesheets/content.scss'
+import contentStyle from '../stylesheets/content.scss'
 
 export default class Blog extends Component {
   static propTypes = {

@@ -1,7 +1,7 @@
-@import "../static/stylesheets/variables.scss";
+@import "../../config/variables.scss";
 
 .navbar {
-  background-color: #1B4367;
+  background-color: $navbar;
   color: $white;
   background-position: center;
   background-repeat: no-repeat;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import config from '../../config.json'
-import '../static/stylesheets/globals.scss'
+import config from '../../config/config.json'
+import '../stylesheets/globals.scss'
 import styles from './Home.scss'
 
 export default class Home extends Component {

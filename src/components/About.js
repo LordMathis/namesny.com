@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { Spinner, Header } from '.'
-import '../static/stylesheets/globals.scss'
-import contentStyle from '../static/stylesheets/content.scss'
+import '../stylesheets/globals.scss'
+import contentStyle from '../stylesheets/content.scss'
 import style from './About.scss'
 import MarkdownIt from 'markdown-it'
 

@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import config from '../../config.json'
+import config from '../../config/config.json'
 import fm from 'front-matter'
 import moment from 'moment'
 import jsonfile from 'jsonfile'

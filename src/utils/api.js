@@ -1,7 +1,7 @@
 import fs from 'fs'
 import jsonfile from 'jsonfile'
 import path from 'path'
-import config from '../../config.json'
+import config from '../../config/config.json'
 
 export function getData (reqPath = '') {
   if (reqPath === '') {

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import '../static/stylesheets/globals.scss'
+import '../stylesheets/globals.scss'
 import styles from './Wrapper.scss'
 
 export default class Wrapper extends Component {
