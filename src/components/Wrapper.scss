@@ -7,5 +7,7 @@
 .flexWrap {
   @media only screen and (min-width: $break-large) {
     display: flex;
+    width: 80%;
+    margin: 0 auto;
   }
 }
