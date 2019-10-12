@@ -5,6 +5,7 @@
   overflow: auto;
   box-sizing: border-box;
   padding: 20px;
+  margin: 20px;
   a {
     color: $blue;
   }
@@ -12,8 +13,7 @@
   @media (min-width: $break-large) {
     width: 960px;
   }
-  min-height: 100vh;
-  height: 100vh;
+  background-color: $white;
 }
 
 .content {

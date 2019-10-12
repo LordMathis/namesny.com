@@ -29,6 +29,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-head": "^3.1.1",
     "react-router-dom": "^5.0.1",
     "serialize-javascript": "^2.1.0"
   },

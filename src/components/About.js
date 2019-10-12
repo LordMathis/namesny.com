@@ -27,7 +27,7 @@ export default class About extends Component {
     const classes = `${contentStyle.contentWrapper} ${style.about}`
 
     return (
-      <div className={classes} >
+      <div className={`${contentStyle.contentWrapper} ${style.about}`} >
         <Header header={'About Me'} />
         <div className={contentStyle.content} dangerouslySetInnerHTML={{ __html: result }}>
         </div>

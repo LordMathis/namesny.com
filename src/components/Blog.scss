@@ -1,7 +1,7 @@
 @import "../../config/variables.scss";
 
 .postDate {
-  margin-right: 50px;
+  float: right;
 }
 
 .postTitle {
@@ -10,17 +10,19 @@
   text-transform: capitalize;
   font-family: $font-header;
   font-size: 1.2em;
+  float: left;
 }
 
-.postsWrapper {
+.postHeader {
+  overflow: hidden;
+}
+
+.postsList {
   margin-top: 20px;
 }
 
 .postListItem {
-	margin: 8px;
-  td {
-    vertical-align: top;
-  }
+  border-bottom: 5px solid $body;
 }
 
 .blog {

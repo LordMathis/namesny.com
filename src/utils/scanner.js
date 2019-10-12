@@ -56,10 +56,13 @@ export class Scanner {
         published = moment()
       }
 
+      const summary = frontMatter.body.split('\n\n', 1)[0]
+
       const post = {
         published: published.format('MMMM DD, YYYY'),
         filename: metadata.filename,
         title: frontMatter.attributes.title,
+        summary: summary,
         link: '/post/' + metadata.filename
       }
 

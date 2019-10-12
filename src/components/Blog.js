@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { Spinner, Header } from '.'
 import '../stylesheets/globals.scss'
+import MarkdownIt from 'markdown-it'
 import styles from './Blog.scss'
 import contentStyle from '../stylesheets/content.scss'
 
@@ -12,6 +13,8 @@ export default class Blog extends Component {
   }
 
   render () {
+    const md = MarkdownIt()
+
     if (this.props.isLoading) {
       return (
         <div className={contentStyle.contentWrapper} id="blog">
@@ -23,15 +26,15 @@ export default class Blog extends Component {
     let posts = this.props.posts.sort((a, b) => {
       return new Date(b.published) - new Date(a.published)
     })
-    let postsHTML = posts.map((post) =>
-      <tr className={styles.postListItem} key={post.title}>
-        <td>
-          <span className={styles.postDate}>{post.published}</span>
-        </td>
-        <td>
+    let postsHTML = posts.map((post) => 
+      <div className={styles.postListItem}>
+        <div className={styles.postHeader}>
           <a href={post.link} className={styles.postTitle}>{post.title}</a>
-        </td>
-      </tr>
+          <span className={styles.postDate}>{post.published}</span>
+        </div>
+        <div dangerouslySetInnerHTML={{ __html: md.render(post.summary) }}>
+        </div>
+      </div>
     )
 
     const classes = `${contentStyle.contentWrapper} ${styles.blog}`
@@ -40,12 +43,8 @@ export default class Blog extends Component {
       <div className={classes} id="blog">
         <Header header={'Blog'} />
 
-        <div className={contentStyle.content}>
-          <table>
-            <tbody className={styles.postsWrapper}>
-              {postsHTML}
-            </tbody>
-          </table>
+        <div className={`${contentStyle.content} ${styles.postsList}`}>
+          {postsHTML}
         </div>
 
       </div>
