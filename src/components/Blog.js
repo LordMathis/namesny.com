@@ -22,7 +22,7 @@ export default class Blog extends Component {
         </div>
       )
     }
-
+    
     let posts = this.props.posts.sort((a, b) => {
       return new Date(b.published) - new Date(a.published)
     })

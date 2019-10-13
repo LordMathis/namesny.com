@@ -72,19 +72,6 @@ export class Scanner {
     }
   }
 
-  // init () {
-  //   return new Promise((resolve, reject) => {
-  //     jsonfile.readFile(config.dataPath, (err, data) => {
-  //       if (err) {
-  //         reject(err)
-  //       } else {
-  //         this.data = data
-  //         resolve(data)
-  //       }
-  //     })
-  //   })
-  // }
-
   writeData (callback) {
     return new Promise((resolve, reject) => {
       jsonfile.writeFile(config.dataPath, this.data, (err, data) => {
@@ -114,9 +101,14 @@ export class Scanner {
   scan () {
     this.readdir(config.contentPath)
       .then(
-        (files) => { return Promise.all(files.map(this.readfile)) }
-      ).then(
         (files) => {
+          const filtered = files.filter(
+            (file) => fs.statSync(path.join(process.cwd(), config.contentPath, file)).isFile()
+          )          
+          return Promise.all(filtered.map(this.readfile))
+        }
+      ).then(
+        (files) => {          
           files.forEach(
             (item) => { this.processFile(item[0], item[1]) }
           )
