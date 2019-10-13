@@ -103,7 +103,10 @@ export class Scanner {
       .then(
         (files) => {
           const filtered = files.filter(
-            (file) => fs.statSync(path.join(process.cwd(), config.contentPath, file)).isFile()
+            (file) => (
+              fs.statSync(path.join(process.cwd(), config.contentPath, file)).isFile() &&
+              path.extname(file) == '.md'
+            )
           )          
           return Promise.all(filtered.map(this.readfile))
         }
