@@ -6,6 +6,7 @@ import routes from './routes'
 import serialize from 'serialize-javascript'
 import manifest from '../../public/static/manifest.json'
 import config from '../../config/config.json'
+import head from '../../config/head.json'
 
 export function serverRender (req, res, next) {
   const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
@@ -39,6 +40,7 @@ function renderFullPage (html, data) {
           <link href=${manifest['bundle.css']} rel="stylesheet" rel="preload">
           <!-- Initial Data -->
           <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
+          ${head.scripts.join('\n')}
       </head>
       <body>
         <div id="root">${html}</div>
