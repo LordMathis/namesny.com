@@ -5,6 +5,7 @@ import { App } from '../components'
 import routes from './routes'
 import serialize from 'serialize-javascript'
 import manifest from '../../public/static/manifest.json'
+import config from '../../config/config.json'
 
 export function serverRender (req, res, next) {
   const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
@@ -21,15 +22,15 @@ export function serverRender (req, res, next) {
     )
 
     res.status(200).send(renderFullPage(markup, data))
-  }).catch(next)
+  }).catch(next)  
 }
 
-function renderFullPage (html, data) {
+function renderFullPage (html, data) {  
   return `
     <!DOCTYPE html>  
     <html>
       <head>
-        <title>Matúš Námešný</title>
+        <title>${config.title}</title>
           <!-- Google Fonts -->
           <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:700&amp;subset=latin-ext" rel="stylesheet" rel="preload">
           <!-- Font Awesome -->
