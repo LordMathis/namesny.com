@@ -7,6 +7,7 @@
       "twitter": "twitter_url",
       "linkedin": "linkedin_url"
     },
+    "baseUrl": "example.com",
     "contentPath": "./content",
     "renderPath": "./renders",
     "dataPath": "./src/utils/data.json",
