@@ -1,4 +1,5 @@
 {
     "scripts": [
+        "<!-- freshlytics snippet -->\n\n<script>\n  (function() {\n    var COLLECT_URL = \"https:\/\/freshlytics.namesny.com\/api\/collect\";\n    var PROJECT_ID = \"5L23TOXUJX\";\n    var GLOBAL_VAR_NAME = \"__freshlytics__\";\n\n    window[GLOBAL_VAR_NAME] = {};\n\n    window[GLOBAL_VAR_NAME].sendPageView = function() {\n      var path = location.pathname;\n      var referrer = document.referrer;\n\n      var url =\n        COLLECT_URL +\n        \"?project_id=\" +\n        PROJECT_ID +\n        \"&path=\" +\n        encodeURIComponent(path) +\n        \"&referrer=\" +\n        encodeURIComponent(referrer);\n\n      var xhr = new XMLHttpRequest();\n      xhr.open(\"GET\", url);\n      xhr.send();\n    };\n\n    window[GLOBAL_VAR_NAME].sendPageView();\n  })();\n<\/script>"
     ]
 }
