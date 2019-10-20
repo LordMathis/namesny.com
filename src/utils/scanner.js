@@ -38,6 +38,11 @@ export class Scanner {
     })
   }
 
+  processImage (filename) {
+    const filePath = path.join(process.cwd(), config.contentPath, filename)
+    fs.copyFileSync(filePath, path.join(process.cwd(), 'public/static', filename))
+  }
+
   processFile (file, data) {
     const filePath = path.join(process.cwd(), config.contentPath, file)
     const metadata = this.fileMetadata(filePath)
@@ -104,11 +109,22 @@ export class Scanner {
         (files) => {
           const filtered = files.filter(
             (file) => (
-              fs.statSync(path.join(process.cwd(), config.contentPath, file)).isFile() &&
+              fs.statSync(path.join(process.cwd(), config.contentPath, file)).isFile()
+            )
+          )
+          const images = filtered.filter(
+            (file) => (
+              path.extname(file) == '.jpg' || path.extname(file) == '.png' || path.extname(file) == '.gif'
+            )
+          )
+          images.map(this.processImage)
+          const posts = filtered.filter(
+            (file) => (
               path.extname(file) == '.md'
             )
-          )          
-          return Promise.all(filtered.map(this.readfile))
+          )
+                 
+          return Promise.all(posts.map(this.readfile))
         }
       ).then(
         (files) => {          

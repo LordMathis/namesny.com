@@ -1,7 +1,7 @@
 @import "../../config/variables.scss";
 
 #coverPage {
-  background: url(../../config/background.jpg) no-repeat center center fixed;
+  background: url('/static/background.jpg') no-repeat center center fixed;
 
   -webkit-background-size: cover;
   -moz-background-size: cover;
