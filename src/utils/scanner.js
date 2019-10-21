@@ -4,6 +4,7 @@ import config from '../../config/config.json'
 import fm from 'front-matter'
 import moment from 'moment'
 import jsonfile from 'jsonfile'
+import zlib from 'zlib'
 
 export class Scanner {
   constructor () {
@@ -38,9 +39,37 @@ export class Scanner {
     })
   }
 
-  processImage (filename) {
-    const filePath = path.join(process.cwd(), config.contentPath, filename)
-    fs.copyFileSync(filePath, path.join(process.cwd(), 'public/static', filename))
+  copyImage (filename) {
+    return new Promise((resolve, reject) => {
+      const inputPath = path.join(process.cwd(), config.contentPath, filename)
+      const outputPath = path.join(process.cwd(), 'public/static', filename)
+      fs.copyFile(inputPath, outputPath, (err) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(filename)
+        }
+      })
+    })
+  }
+
+  gzipImage (filename) {
+    return new Promise((resolve, reject) => {
+      const inputPath = path.join(process.cwd(), 'public/static', filename)
+      const outputPath = path.join(process.cwd(), 'public/static', `${filename}.gz`)
+  
+      const fileContents = fs.createReadStream(inputPath);
+      const writeStream = fs.createWriteStream(outputPath);
+      const zip = zlib.createGzip();
+      fileContents.pipe(zip).pipe(writeStream).on('finish', (err) => {
+        if (err) {
+          reject(err)
+        }
+        else {
+          resolve()
+        }
+      })
+    })
   }
 
   processFile (file, data) {
@@ -112,12 +141,15 @@ export class Scanner {
               fs.statSync(path.join(process.cwd(), config.contentPath, file)).isFile()
             )
           )
+
           const images = filtered.filter(
             (file) => (
               path.extname(file) == '.jpg' || path.extname(file) == '.png' || path.extname(file) == '.gif'
             )
           )
-          images.map(this.processImage)
+          Promise.all(images.map(this.copyImage))
+            .then((files) => files.map(this.gzipImage))
+
           const posts = filtered.filter(
             (file) => (
               path.extname(file) == '.md'
