@@ -2,7 +2,7 @@ import express from 'express'
 import helmet from 'helmet'
 import expressStaticGzip from 'express-static-gzip'
 import config from '../config/config.json'
-import { serverRender } from './utils/serverRender'
+import { ServerRenderer } from './utils/serverRender'
 import { Scanner } from './utils/scanner'
 
 const port = process.env.PORT || 3000
@@ -29,7 +29,8 @@ app.get('/favicon.ico', (req, res) => {
   res.status(404).send('Not Found !!!')
 })
 
-app.get('*', serverRender)
+const serverRenderer = new ServerRenderer()
+app.get('*', serverRenderer.render)
 
 app.listen(port, function (error) {
   if (error) {

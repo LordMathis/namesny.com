@@ -8,22 +8,29 @@ import manifest from '../../public/static/manifest.json'
 import config from '../../config/config.json'
 import head from '../../config/head.json'
 
-export function serverRender (req, res, next) {
-  const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
+export class ServerRenderer {
 
-  const promise = activeRoute.getData
-    ? activeRoute.getData(req.path)
-    : Promise.resolve()
+  constructor () {
+    console.log('ServerRenderer')   
+  }
 
-  promise.then((data) => {
-    const markup = renderToString(
-      <Router location={req.url} context={{ data }}>
-        <App/>
-      </Router>
-    )
-
-    res.status(200).send(renderFullPage(markup, data))
-  }).catch(next)  
+  render (req, res, next) {
+    const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
+  
+    const promise = activeRoute.getData
+      ? activeRoute.getData(req.path)
+      : Promise.resolve()
+  
+    promise.then((data) => {
+      const markup = renderToString(
+        <Router location={req.url} context={{ data }}>
+          <App/>
+        </Router>
+      )
+  
+      res.status(200).send(renderFullPage(markup, data))
+    }).catch(next)  
+  }
 }
 
 function renderFullPage (html, data) {  
