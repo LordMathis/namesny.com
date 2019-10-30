@@ -6,17 +6,18 @@ import routes from './routes'
 import serialize from 'serialize-javascript'
 import manifest from '../../public/static/manifest.json'
 import config from '../../config/config.json'
-import head from '../../config/head.json'
 
 export class ServerRenderer {
 
-  constructor () {
-    console.log('ServerRenderer')   
+  constructor (head) {
+    this.head = head    
   }
 
   render (req, res, next) {
+
     const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
-  
+    const head = this.head  
+    
     const promise = activeRoute.getData
       ? activeRoute.getData(req.path)
       : Promise.resolve()
@@ -28,12 +29,12 @@ export class ServerRenderer {
         </Router>
       )
   
-      res.status(200).send(renderFullPage(markup, data))
+      res.status(200).send(renderFullPage(markup, head, data))
     }).catch(next)  
   }
 }
 
-function renderFullPage (html, data) {  
+function renderFullPage (html, head, data) {  
   return `
     <!DOCTYPE html>  
     <html>

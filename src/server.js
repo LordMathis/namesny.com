@@ -2,6 +2,8 @@ import express from 'express'
 import helmet from 'helmet'
 import expressStaticGzip from 'express-static-gzip'
 import config from '../config/config.json'
+import path from 'path'
+import jsonfile from 'jsonfile'
 import { ServerRenderer } from './utils/serverRender'
 import { Scanner } from './utils/scanner'
 
@@ -29,8 +31,15 @@ app.get('/favicon.ico', (req, res) => {
   res.status(404).send('Not Found !!!')
 })
 
-const serverRenderer = new ServerRenderer()
-app.get('*', serverRenderer.render)
+let head = jsonfile.readFileSync(path.join(process.cwd(), 'config/head.json'))
+if (head == null) {
+  head = {
+    "scripts": []
+  }
+}
+
+const serverRenderer = new ServerRenderer(head)
+app.get('*', serverRenderer.render.bind(serverRenderer))
 
 app.listen(port, function (error) {
   if (error) {
