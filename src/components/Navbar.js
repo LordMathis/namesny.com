@@ -1,16 +1,21 @@
 import React, { Component } from 'react'
-import config from '../../config/config.json'
+import PropTypes from 'prop-types'
 import '../stylesheets/globals.scss'
 import styles from './Navbar.scss'
 
 export default class Navbar extends Component {
+
+  static propTypes = {
+    config: PropTypes.object.isRequired
+  }
+
   render () {
     let key = 0
-    const objKeys = Object.keys(config.social)
+    const objKeys = Object.keys(this.props.config.social)
 
     const socialLinks = objKeys.map((val) => {
       const link = (
-        <a key={key} href={config.social[val]}>
+        <a key={key} href={this.props.config.social[val]}>
           <i className={`fa fa-${val}`} aria-hidden="true" />
           <span className="sr-only">{val}</span>
         </a>
@@ -21,7 +26,7 @@ export default class Navbar extends Component {
     })
 
     socialLinks.push(
-      <a key={key} href={`mailto:${config.email}`}>
+      <a key={key} href={`mailto:${this.props.config.email}`}>
         <i className="fa fa-envelope-o" aria-hidden="true" />
         <span className="sr-only">e-mail</span>
       </a>
@@ -33,7 +38,7 @@ export default class Navbar extends Component {
           <ul>
             <li>
               <a href='/'>
-                <span className={styles.nameLink}>{config.name} |</span>
+                <span className={styles.nameLink}>{this.props.config.name} |</span>
               </a>
             </li>
             <li>

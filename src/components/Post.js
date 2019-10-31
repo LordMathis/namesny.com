@@ -11,7 +11,8 @@ import moment from 'moment'
 export default class Post extends Component {
   static propTypes = {
     isLoading: PropTypes.bool.isRequired,
-    post: PropTypes.object.isRequired
+    post: PropTypes.object.isRequired,
+    config: PropTypes.object.isRequired
   }
 
   render () {
@@ -31,7 +32,7 @@ export default class Post extends Component {
 
     return (
       <div>
-        <Navbar />
+        <Navbar config={this.props.config} />
         <div className={contentStyle.contentWrapper}>
           <Header header={title} />
           <div className={contentStyle.content}>

@@ -10,19 +10,20 @@ export default class PostContainer extends Component {
   constructor (props) {
     super(props)
 
-    let post
+    let data
     // eslint-disable-next-line no-undef
     if (__isBrowser__) {
-      post = window.__INITIAL_DATA__
+      data = window.__INITIAL_DATA__      
       delete window.__INITIAL_DATA__
     } else {
-      post = props.staticContext.data
+      data = props.staticContext.data
     }
 
     this.state = {
       isLoading: !post,
       error: false,
-      post: post
+      post: data[0],
+      config: data[1]
     }
   }
 
@@ -36,7 +37,7 @@ export default class PostContainer extends Component {
     return (
       <Wrapper>
         <Post isLoading={this.state.isLoading}
-          post={this.state.post} />
+          post={this.state.post} config={this.state.config} />
       </Wrapper>
     )
   }

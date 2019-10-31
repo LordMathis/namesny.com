@@ -3,7 +3,7 @@ import { Navbar, Header } from '.'
 import '../stylesheets/globals.scss'
 import contentStyle from '../stylesheets/content.scss'
 
-export const NotFoundPage = (props) => {
+export const NotFoundPage = () => {
   return (
     <div>
       <Navbar />

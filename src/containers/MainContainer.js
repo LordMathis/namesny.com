@@ -22,15 +22,16 @@ export default class MainContainer extends Component {
     this.state = {
       isLoadingBlog: !data.posts,
       isLoadingAbout: !data.other.about,
-      about: data.other.about,
-      posts: data.posts
+      about: data[0].other.about,
+      posts: data[0].posts,
+      config: data[1]
     }
   }
 
   render () {
     return (
       <div>
-        <Home/>
+        <Home config={this.state.config} />
         <Wrapper flex={true}>
           <About isLoading={this.state.isLoadingAbout}
             about={this.state.about}/>
