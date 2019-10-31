@@ -20,7 +20,7 @@ export default class PostContainer extends Component {
     }
 
     this.state = {
-      isLoading: !post,
+      isLoading: !data,
       error: false,
       post: data[0],
       config: data[1]

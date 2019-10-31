@@ -20,8 +20,8 @@ export default class MainContainer extends Component {
     }
 
     this.state = {
-      isLoadingBlog: !data.posts,
-      isLoadingAbout: !data.other.about,
+      isLoadingBlog: !data[0].posts,
+      isLoadingAbout: !data[0].other.about,
       about: data[0].other.about,
       posts: data[0].posts,
       config: data[1]
