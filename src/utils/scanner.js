@@ -27,7 +27,7 @@ export class Scanner {
   }
 
   readfile (filename) {
-    const filePath = path.join(process.cwd(), config.contentPath, filename)
+    const filePath = path.join(process.cwd(), 'content', filename)
     return new Promise((resolve, reject) => {
       fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
@@ -41,7 +41,7 @@ export class Scanner {
 
   copyImage (filename) {
     return new Promise((resolve, reject) => {
-      const inputPath = path.join(process.cwd(), config.contentPath, filename)
+      const inputPath = path.join(process.cwd(), 'content', filename)
       const outputPath = path.join(process.cwd(), 'public/static', filename)
       fs.copyFile(inputPath, outputPath, (err) => {
         if (err) {
@@ -57,7 +57,7 @@ export class Scanner {
     return new Promise((resolve, reject) => {
       const inputPath = path.join(process.cwd(), 'public/static', filename)
       const outputPath = path.join(process.cwd(), 'public/static', `${filename}.gz`)
-  
+
       const fileContents = fs.createReadStream(inputPath);
       const writeStream = fs.createWriteStream(outputPath);
       const zip = zlib.createGzip();
@@ -73,9 +73,9 @@ export class Scanner {
   }
 
   processFile (file, data) {
-    const filePath = path.join(process.cwd(), config.contentPath, file)
+    const filePath = path.join(process.cwd(), 'content', file)
     const metadata = this.fileMetadata(filePath)
-
+    
     if (config['non-content-files'].indexOf(file) === -1) {
       const frontMatter = fm(data)
 
@@ -108,7 +108,7 @@ export class Scanner {
 
   writeData (callback) {
     return new Promise((resolve, reject) => {
-      jsonfile.writeFile(config.dataPath, this.data, (err, data) => {
+      jsonfile.writeFile(path.join(process.cwd(), 'data.json'), this.data, (err, data) => {
         if (err) {
           reject(err)
         } else {
@@ -133,12 +133,12 @@ export class Scanner {
   }
 
   scan () {
-    this.readdir(config.contentPath)
+    this.readdir(path.join(process.cwd(), 'content'))
       .then(
         (files) => {
           const filtered = files.filter(
             (file) => (
-              fs.statSync(path.join(process.cwd(), config.contentPath, file)).isFile()
+              fs.statSync(path.join(process.cwd(), 'content', file)).isFile()
             )
           )
 

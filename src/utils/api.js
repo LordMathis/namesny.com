@@ -1,14 +1,19 @@
 import fs from 'fs'
 import jsonfile from 'jsonfile'
 import path from 'path'
-import config from '../../config/config.json'
 
 export function getData (reqPath = '') {
   if (reqPath === '') {
-    return readData(config.dataPath)
+    return Promise.all([
+      readJson(path.join(process.cwd(), 'data.json')),
+      readJson(path.join(process.cwd(), 'config/config.json'))
+    ])
   } else {
-    const fileName = path.join(process.cwd(), config.contentPath, reqPath + '.md')
-    return readFile(fileName, 'utf8')
+    const fileName = path.join(process.cwd(), 'content', reqPath + '.md')
+    return Promise.all([
+      readFile(fileName, 'utf8'),
+      readJson(path.join(process.cwd(), 'config/config.json'))
+    ])
   }
 };
 
@@ -20,7 +25,7 @@ function readFile (fileName, options) {
   })
 }
 
-function readData (dataPath) {
+function readJson (dataPath) {
   return new Promise(function (resolve, reject) {
     jsonfile.readFile(dataPath, (err, data) => {
       err ? reject(err) : resolve(data)

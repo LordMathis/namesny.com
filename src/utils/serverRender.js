@@ -5,7 +5,6 @@ import { App } from '../components'
 import routes from './routes'
 import serialize from 'serialize-javascript'
 import manifest from '../../public/static/manifest.json'
-import config from '../../config/config.json'
 
 export class ServerRenderer {
 
@@ -23,6 +22,7 @@ export class ServerRenderer {
       : Promise.resolve()
   
     promise.then((data) => {
+      console.log(data)      
       const markup = renderToString(
         <Router location={req.url} context={{ data }}>
           <App/>
@@ -39,7 +39,7 @@ function renderFullPage (html, head, data) {
     <!DOCTYPE html>  
     <html>
       <head>
-        <title>${config.title}</title>
+        <title>${data[1].title}</title>
           <!-- Google Fonts -->
           <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:700&amp;subset=latin-ext" rel="stylesheet" rel="preload">
           <!-- Font Awesome -->
