@@ -3,6 +3,7 @@ WORKDIR /app
 COPY . ./
 RUN yarn
 RUN yarn build
-VOLUME /app
+VOLUME /app/config
+VOLUME /app/content
 EXPOSE 3000
 CMD [ "yarn", "start" ]
