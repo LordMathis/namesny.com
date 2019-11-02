@@ -2,6 +2,7 @@ import express from 'express'
 import helmet from 'helmet'
 import expressStaticGzip from 'express-static-gzip'
 import path from 'path'
+import morgan from 'morgan'
 import jsonfile from 'jsonfile'
 import { ServerRenderer } from './utils/serverRender'
 import { Scanner } from './utils/scanner'
@@ -16,6 +17,8 @@ if (config == null) {
 
 const scanner = new Scanner(config)
 scanner.scan()
+
+app.use(morgan('common'))
 
 app.use(helmet.contentSecurityPolicy({
   directives: {
