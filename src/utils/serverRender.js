@@ -8,38 +8,41 @@ import manifest from '../../public/static/manifest.json'
 
 export class ServerRenderer {
 
-  constructor (head) {
-    this.head = head    
+  constructor (head, config) {
+    this.head = head
+    this.config = config
   }
 
   render (req, res, next) {
 
     const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
     const head = this.head  
+    const config = this.config
     
     const promise = activeRoute.getData
       ? activeRoute.getData(req.path)
       : Promise.resolve()
   
     promise.then((data) => {
-      console.log(data)      
+      const context = [data, config]     
       const markup = renderToString(
-        <Router location={req.url} context={{ data }}>
+        <Router location={req.url} context={{ context }}>
           <App/>
         </Router>
       )
   
-      res.status(200).send(renderFullPage(markup, head, data))
+      res.status(200).send(renderFullPage(markup, head, data, config))
     }).catch(next)  
   }
 }
 
-function renderFullPage (html, head, data) {  
+function renderFullPage (html, head, data, config) { 
+  const initialData = [data, config]
   return `
     <!DOCTYPE html>  
     <html>
       <head>
-        <title>${data[1].title}</title>
+        <title>${config.title}</title>
           <!-- Google Fonts -->
           <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:700&amp;subset=latin-ext" rel="stylesheet" rel="preload">
           <!-- Font Awesome -->
@@ -47,7 +50,7 @@ function renderFullPage (html, head, data) {
           <!-- Stylesheet -->
           <link href=${manifest['bundle.css']} rel="stylesheet" rel="preload">
           <!-- Initial Data -->
-          <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
+          <script>window.__INITIAL_DATA__ = ${serialize(initialData)}</script>
           ${head.scripts.join('\n')}
       </head>
       <body>

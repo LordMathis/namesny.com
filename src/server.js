@@ -1,7 +1,6 @@
 import express from 'express'
 import helmet from 'helmet'
 import expressStaticGzip from 'express-static-gzip'
-import config from '../config/config.json'
 import path from 'path'
 import jsonfile from 'jsonfile'
 import { ServerRenderer } from './utils/serverRender'
@@ -10,7 +9,12 @@ import { Scanner } from './utils/scanner'
 const port = process.env.PORT || 3000
 const app = express()
 
-const scanner = new Scanner()
+let config = jsonfile.readFileSync(path.join(process.cwd(), 'config/config.json'))
+if (config == null) {
+  throw new Error('Config file not found!')
+}
+
+const scanner = new Scanner(config)
 scanner.scan()
 
 app.use(helmet.contentSecurityPolicy({
@@ -38,7 +42,7 @@ if (head == null) {
   }
 }
 
-const serverRenderer = new ServerRenderer(head)
+const serverRenderer = new ServerRenderer(head, config)
 app.get('*', serverRenderer.render.bind(serverRenderer))
 
 app.listen(port, function (error) {

@@ -1,17 +1,17 @@
 import fs from 'fs'
 import path from 'path'
-import config from '../../config/config.json'
 import fm from 'front-matter'
 import moment from 'moment'
 import jsonfile from 'jsonfile'
 import zlib from 'zlib'
 
 export class Scanner {
-  constructor () {
+  constructor (config) {
     this.data = {
       'posts': [],
       'other': {}
     }
+    this.config = config
   }
 
   readdir (dirname) {
@@ -76,7 +76,7 @@ export class Scanner {
     const filePath = path.join(process.cwd(), 'content', file)
     const metadata = this.fileMetadata(filePath)
     
-    if (config['non-content-files'].indexOf(file) === -1) {
+    if (this.config['non-content-files'].indexOf(file) === -1) {
       const frontMatter = fm(data)
 
       if (frontMatter.attributes.draft) {

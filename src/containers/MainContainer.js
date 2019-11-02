@@ -16,16 +16,16 @@ export default class MainContainer extends Component {
       data = window.__INITIAL_DATA__
       delete window.__INITIAL_DATA__
     } else {
-      data = props.staticContext.data
+      data = props.staticContext.context
     }
-
+    
     this.state = {
       isLoadingBlog: !data[0].posts,
       isLoadingAbout: !data[0].other.about,
       about: data[0].other.about,
       posts: data[0].posts,
       config: data[1]
-    }
+    }    
   }
 
   render () {

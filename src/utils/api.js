@@ -4,16 +4,10 @@ import path from 'path'
 
 export function getData (reqPath = '') {
   if (reqPath === '') {
-    return Promise.all([
-      readJson(path.join(process.cwd(), 'data.json')),
-      readJson(path.join(process.cwd(), 'config/config.json'))
-    ])
+    return readJson(path.join(process.cwd(), 'data.json'))
   } else {
     const fileName = path.join(process.cwd(), 'content', reqPath + '.md')
-    return Promise.all([
-      readFile(fileName, 'utf8'),
-      readJson(path.join(process.cwd(), 'config/config.json'))
-    ])
+    return readFile(fileName, 'utf8')
   }
 };
 

@@ -16,7 +16,7 @@ export default class PostContainer extends Component {
       data = window.__INITIAL_DATA__      
       delete window.__INITIAL_DATA__
     } else {
-      data = props.staticContext.data
+      data = props.staticContext.context
     }
 
     this.state = {
