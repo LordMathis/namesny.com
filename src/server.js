@@ -9,6 +9,7 @@ import { Scanner } from './utils/scanner'
 
 const port = process.env.PORT || 3000
 const app = express()
+app.set('trust proxy', true)
 
 let config = jsonfile.readFileSync(path.join(process.cwd(), 'config/config.json'))
 if (config == null) {
