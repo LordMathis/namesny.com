@@ -15,8 +15,8 @@ export default class Home extends Component {
 
     const socialLinks = objKeys.map((val) => {
       const link = (
-        <li>
-          <a key={key} href={this.props.config.social[val]} role="link">
+        <li key={key}>
+          <a href={this.props.config.social[val]} role="link">
             <i className={`fa fa-${val} fa-3x`} aria-hidden="true" />
             <span className="sr-only">{val}</span>
           </a>
@@ -27,8 +27,8 @@ export default class Home extends Component {
     })
 
     socialLinks.push(
-      <li>
-        <a key={key} href={`mailto:${this.props.config.email}`} role="link">
+      <li key={key}>
+        <a href={`mailto:${this.props.config.email}`} role="link">
           <i className="fa fa-envelope-o fa-3x" aria-hidden="true" />
           <span className="sr-only">e-mail</span>
         </a>
