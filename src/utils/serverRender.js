@@ -40,7 +40,7 @@ function renderFullPage (html, head, data, config) {
   const initialData = [data, config]
   return `
     <!DOCTYPE html>  
-    <html>
+    <html lang="en">
       <head>
         <title>${config.title}</title>
           <!-- Google Fonts -->

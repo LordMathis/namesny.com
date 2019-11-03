@@ -34,12 +34,12 @@ export default class Post extends Component {
       <div>
         <Navbar config={this.props.config} />
         <div className={contentStyle.contentWrapper}>
-          <Header header={title} />
+          <Header header={title} role="heading" aria-level="2" />
           <div className={contentStyle.content}>
             <div className={styles.postDate}>
               <h3>{date.format('MMMM D, YYYY')}</h3>
             </div>
-            <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: body }}>
+            <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: body }} role="article">
             </div>
           </div>
         </div>

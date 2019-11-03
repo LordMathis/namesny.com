@@ -33,12 +33,18 @@
 
 .social {
   text-align: center;
-  a {
-    color: $white;
-    text-shadow: $black 0px 0px 2px;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    margin: 10px;
+  ul {
+    list-style: none;
+    li {
+      display: inline;
+      a {
+        color: $white;
+        text-shadow: $black 0px 0px 2px;
+        -webkit-font-smoothing: antialiased;
+        display: inline-block;
+        margin: 10px;
+      }
+    }
   }
 }
 

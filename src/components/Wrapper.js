@@ -18,7 +18,7 @@ export default class Wrapper extends Component {
 
   render () {
     return (
-      <div className={` ${styles.centerContent} ${this.props.flex ? styles.flexWrap : ''}` }>
+      <div className={` ${styles.centerContent} ${this.props.flex ? styles.flexWrap : ''}` } role='main'>
         {this.props.children}
       </div>
     )

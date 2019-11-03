@@ -33,7 +33,7 @@ export default class Navbar extends Component {
     )
 
     return (
-      <div className={styles.navbar}>
+      <div className={styles.navbar} role="navigation">
         <div className={styles.links}>
           <ul>
             <li>

@@ -27,8 +27,8 @@ export default class Blog extends Component {
       return new Date(b.published) - new Date(a.published)
     })
     let postsHTML = posts.map((post) => 
-      <div className={styles.postListItem}>
-        <div className={styles.postHeader}>
+      <div className={styles.postListItem} role="listitem">
+        <div className={styles.postHeader} >
           <a href={post.link} className={styles.postTitle}>{post.title}</a>
           <span className={styles.postDate}>{post.published}</span>
         </div>
@@ -40,10 +40,10 @@ export default class Blog extends Component {
     const classes = `${contentStyle.contentWrapper} ${styles.blog}`
 
     return (
-      <div className={classes} id="blog">
-        <Header header={'Blog'} />
+      <div className={classes} id="blog" role="region" aria-label="Blog posts">
+        <Header header={'Blog'} role="heading" aria-level="2"/>
 
-        <div className={`${contentStyle.content} ${styles.postsList}`}>
+        <div className={`${contentStyle.content} ${styles.postsList}`} role="list">
           {postsHTML}
         </div>
 
