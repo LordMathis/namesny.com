@@ -15,24 +15,34 @@ export class ServerRenderer {
 
   render (req, res, next) {
 
-    const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
+    const activeRoute = routes.find((route) => matchPath(req.url, route)) || false
     const head = this.head  
     const config = this.config
-    
-    const promise = activeRoute.getData
-      ? activeRoute.getData(req.path)
-      : Promise.resolve()
-  
-    promise.then((data) => {
-      const context = [data, config]     
+
+    if (!activeRoute) {
+      const context = [{}, config]
       const markup = renderToString(
         <Router location={req.url} context={{ context }}>
           <App/>
         </Router>
       )
-  
-      res.status(200).send(renderFullPage(markup, head, data, config))
-    }).catch(next)  
+      res.status(404).send(renderFullPage(markup, head, {}, config))
+    } else {
+      const promise = activeRoute.getData
+        ? activeRoute.getData(req.path)
+        : Promise.resolve()
+    
+      promise.then((data) => {
+        const context = [data, config]     
+        const markup = renderToString(
+          <Router location={req.url} context={{ context }}>
+            <App/>
+          </Router>
+        )
+    
+        res.status(200).send(renderFullPage(markup, head, data, config))
+      }).catch(next)  
+    }
   }
 }
 

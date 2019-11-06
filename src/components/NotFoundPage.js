@@ -3,10 +3,10 @@ import { Navbar, Header } from '.'
 import '../stylesheets/globals.scss'
 import contentStyle from '../stylesheets/content.scss'
 
-export const NotFoundPage = () => {
+export const NotFoundPage = (props) => {
   return (
     <div>
-      <Navbar />
+      <Navbar config={props.config}/>
       <div className={contentStyle.contentWrapper}>
         <Header header={'Uhm... WHAT?'} />
         <div className={contentStyle.content}>
