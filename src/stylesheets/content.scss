@@ -3,19 +3,17 @@
 .contentWrapper {
   display: inline-block;
   overflow: auto;
-  box-sizing: border-box;
-  padding: 20px;
-  margin: 20px;
   a {
     color: $blue;
   }
   @media (min-width: $break-large) {
     width: 960px;
   }
-  background-color: $white;
 }
 
 .content {
   box-sizing: border-box;
+  background-color: $white;
+  padding: 20px;
   text-align: left;
 }

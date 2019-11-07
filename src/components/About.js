@@ -24,12 +24,10 @@ export default class About extends Component {
       )
     }
 
-    const classes = `${contentStyle.contentWrapper} ${style.about}`
-
     return (
-      <div className={`${contentStyle.contentWrapper} ${style.about}`} role="region" aria-label="About me">
+      <div className={contentStyle.content} role="region" aria-label="About me">
         <Header header={'About Me'} role="heading" aria-level="2"/>
-        <div className={contentStyle.content} dangerouslySetInnerHTML={{ __html: result }} role="article">
+        <div dangerouslySetInnerHTML={{ __html: result }} role="article">
         </div>
       </div>
     )

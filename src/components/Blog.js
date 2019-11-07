@@ -37,13 +37,11 @@ export default class Blog extends Component {
       </div>
     )
 
-    const classes = `${contentStyle.contentWrapper} ${styles.blog}`
-
     return (
-      <div className={classes} id="blog" role="region" aria-label="Blog posts">
+      <div className={`${contentStyle.content}`} id="blog" role="region" aria-label="Blog posts">
         <Header header={'Blog'} role="heading" aria-level="2"/>
 
-        <div className={`${contentStyle.content} ${styles.postsList}`} role="list">
+        <div className={`${styles.postsList}`} role="list">
           {postsHTML}
         </div>
 
