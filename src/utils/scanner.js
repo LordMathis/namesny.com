@@ -7,11 +7,16 @@ import zlib from 'zlib'
 
 export class Scanner {
   constructor (config) {
+    this.config = config
+    this.initData()
+
+  }
+
+  initData () {
     this.data = {
       'posts': [],
       'other': {}
     }
-    this.config = config
   }
 
   readdir (dirname) {
@@ -106,13 +111,14 @@ export class Scanner {
     }
   }
 
-  writeData (callback) {
+  writeData () {
     return new Promise((resolve, reject) => {
-      jsonfile.writeFile(path.join(process.cwd(), 'data.json'), this.data, (err, data) => {
+      jsonfile.writeFile(path.join(process.cwd(), 'data.json'), this.data, (err) => {
         if (err) {
           reject(err)
         } else {
-          resolve(this.data)
+          this.initData()
+          resolve()
         }
       })
     })

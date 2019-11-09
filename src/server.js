@@ -3,6 +3,7 @@ import helmet from 'helmet'
 import expressStaticGzip from 'express-static-gzip'
 import path from 'path'
 import morgan from 'morgan'
+import chokidar from 'chokidar'
 import jsonfile from 'jsonfile'
 import { ServerRenderer } from './utils/serverRender'
 import { Scanner } from './utils/scanner'
@@ -17,7 +18,29 @@ if (config == null) {
 }
 
 const scanner = new Scanner(config)
-scanner.scan()
+
+const watcher = chokidar.watch(path.join(process.cwd(), 'content'), {
+  ignored: /(^|[\/\\])\../, // ignore dotfiles
+  persistent: true,
+  ignoreInitial: true
+});
+
+watcher
+  .on('ready', () => {
+    scanner.scan()
+  })
+  .on('add', path => {
+    console.log(`[Watcher] File ${path} has been added`)
+    scanner.scan()
+  })
+  .on('change', path => {
+    console.log(`[Watcher] File ${path} has been changed`)
+    scanner.scan()
+  })
+  .on('unlink', path => {
+    console.log(`[Watcher] File ${path} has been removed`)
+    scanner.scan()
+  })
 
 app.use(morgan('common'))
 
