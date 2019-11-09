@@ -1,13 +1,9 @@
 @import "./variables.scss";
 
 .contentWrapper {
-  display: inline-block;
   overflow: auto;
   a {
     color: $blue;
-  }
-  @media (min-width: $break-large) {
-    width: 960px;
   }
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Post, Wrapper, NotFoundPage } from '../components'
+import { Post, NotFoundPage } from '../components'
 
 export default class PostContainer extends Component {
   static propTypes = {
@@ -35,10 +35,10 @@ export default class PostContainer extends Component {
     }
 
     return (
-      <Wrapper>
-        <Post isLoading={this.state.isLoading}
-          post={this.state.post} config={this.state.config} />
-      </Wrapper>
+      <Post
+        isLoading={this.state.isLoading}
+        post={this.state.post}
+        config={this.state.config} />
     )
   }
 }

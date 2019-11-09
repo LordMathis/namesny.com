@@ -7,6 +7,7 @@ import styles from './Post.scss'
 import MarkdownIt from 'markdown-it'
 import fm from 'front-matter'
 import moment from 'moment'
+import Wrapper from './Wrapper'
 
 export default class Post extends Component {
   static propTypes = {
@@ -33,16 +34,16 @@ export default class Post extends Component {
     return (
       <div>
         <Navbar config={this.props.config} />
-        <div className={contentStyle.contentWrapper}>
-          <Header header={title} role="heading" aria-level="2" />
-          <div className={contentStyle.content}>
+        <Wrapper>
+          <div className={`${contentStyle.content} ${styles.column}`}>
+            <Header header={title} role="heading" aria-level="2" />
             <div className={styles.postDate}>
               <h3>{date.format('MMMM D, YYYY')}</h3>
             </div>
             <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: body }} role="article">
             </div>
           </div>
-        </div>
+        </Wrapper>
       </div>
     )
   }
