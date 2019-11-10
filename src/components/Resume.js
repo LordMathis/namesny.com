@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { Spinner, Header } from '.'
+import { Spinner, Navbar, Wrapper, Header } from '.'
 import '../stylesheets/globals.scss'
 import contentStyle from '../stylesheets/content.scss'
 import style from './Resume.scss'
 import MarkdownIt from 'markdown-it'
+import fm from 'front-matter'
 
 export default class About extends Component {
   static propTypes = {
@@ -14,7 +15,9 @@ export default class About extends Component {
 
   render () {
     const md = MarkdownIt()
-    const result = md.render(this.props.about)
+    const content = fm(this.props.resume)
+    const title = content.attributes.title
+    const body = md.render(content.body)
 
     if (this.props.isLoading) {
       return (
@@ -25,12 +28,12 @@ export default class About extends Component {
     }
 
     return (
-      <div>
+        <div>
         <Navbar config={this.props.config} />
         <Wrapper>
           <div className={`${contentStyle.content} ${style.column}`}>
             <Header header={title} role="heading" aria-level="2" />
-            <div className={style.content} dangerouslySetInnerHTML={{ __html: result }} role="article">
+            <div className={style.content} dangerouslySetInnerHTML={{ __html: body }} role="article">
             </div>
           </div>
         </Wrapper>

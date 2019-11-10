@@ -1,4 +1,4 @@
-import { MainContainer, PostContainer } from '../containers'
+import { MainContainer, ContentContainer } from '../containers'
 import { getData } from './api'
 
 const routes = [
@@ -12,7 +12,14 @@ const routes = [
   },
   {
     path: '/post/:postname',
-    component: PostContainer,
+    component: ContentContainer,
+    getData: (path = '') => getData(
+      path.split('/').pop()
+    )
+  },
+  {
+    path: '/resume',
+    component: ContentContainer,
     getData: (path = '') => getData(
       path.split('/').pop()
     )

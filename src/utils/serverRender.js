@@ -33,7 +33,7 @@ export class ServerRenderer {
         : Promise.resolve()
     
       promise.then((data) => {
-        const context = [data, config]     
+        const context = [data, config]
         const markup = renderToString(
           <Router location={req.url} context={{ context }}>
             <App/>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Post, NotFoundPage } from '../components'
+import { Post, Resume } from '../components'
 
-export default class PostContainer extends Component {
+export default class ContentContainer extends Component {
   static propTypes = {
     staticContext: PropTypes.object.isRequired
   }
@@ -21,24 +21,27 @@ export default class PostContainer extends Component {
 
     this.state = {
       isLoading: !data,
-      error: false,
-      post: data[0],
+      type: data[0]['type'],
+      content: data[0]['data'],
       config: data[1]
-    }
+    }    
   }
 
   render () {
-    if (this.state.error) {
+    if (this.state.type == 'resume') {
       return (
-        <NotFoundPage />
+        <Resume
+          isLoading={this.state.isLoading}
+          resume={this.state.content}
+          config={this.state.config} />
+      )
+    } else {
+      return (
+        <Post
+          isLoading={this.state.isLoading}
+          post={this.state.content}
+          config={this.state.config} />
       )
     }
-
-    return (
-      <Post
-        isLoading={this.state.isLoading}
-        post={this.state.post}
-        config={this.state.config} />
-    )
   }
 }
