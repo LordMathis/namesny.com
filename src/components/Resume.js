@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { Spinner, Navbar, Wrapper, Header } from '.'
+import { Spinner, Navbar, Wrapper, Header, Footer } from '.'
 import '../stylesheets/globals.scss'
 import contentStyle from '../stylesheets/content.scss'
 import style from './Resume.scss'
@@ -37,6 +37,7 @@ export default class About extends Component {
             </div>
           </div>
         </Wrapper>
+        <Footer config={this.props.config} />
       </div>
     )
   }

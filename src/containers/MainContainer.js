@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { About, Blog, Home, Wrapper, Column } from '../components'
+import { About, Blog, Home, Wrapper, Column, Footer } from '../components'
 
 export default class MainContainer extends Component {
   static propTypes = {
@@ -42,6 +42,7 @@ export default class MainContainer extends Component {
               posts={this.state.posts}/>
           </Column>
         </Wrapper>
+        <Footer config={this.state.config} />
       </div>
     )
   }

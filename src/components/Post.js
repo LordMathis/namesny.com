@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Spinner, Header, Navbar } from '.'
+import { Spinner, Header, Navbar, Wrapper, Footer } from '.'
 import '../stylesheets/globals.scss'
 import contentStyle from '../stylesheets/content.scss'
 import styles from './Post.scss'
 import MarkdownIt from 'markdown-it'
 import fm from 'front-matter'
 import moment from 'moment'
-import Wrapper from './Wrapper'
 
 export default class Post extends Component {
   static propTypes = {
@@ -44,6 +43,7 @@ export default class Post extends Component {
             </div>
           </div>
         </Wrapper>
+        <Footer config={this.props.config}/>
       </div>
     )
   }
