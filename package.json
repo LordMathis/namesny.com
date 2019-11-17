@@ -24,7 +24,6 @@
     "front-matter": "^3.0.2",
     "helmet": "^3.21.1",
     "jsonfile": "^5.0.0",
-    "lodash": "^4.17.13",
     "markdown-it": "^10.0.0",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
@@ -32,6 +31,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-jss": "^10.0.0",
     "react-router-dom": "^5.0.1",
     "serialize-javascript": "^2.1.0"
   },

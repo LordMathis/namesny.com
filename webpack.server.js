@@ -61,7 +61,7 @@ const serverConfig = {
     new MiniCssExtractPlugin(),
     new CleanWebpackPlugin(),
     new CreateFileWebpack({
-      path: './src/utils/',
+      path: './',
       fileName: 'data.json',
       content: JSON.stringify({
         'posts': [],

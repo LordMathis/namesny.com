@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import '../stylesheets/globals.scss'
-import contentStyle from '../stylesheets/content.scss'
 import style from './Footer.scss'
 
 export default class Footer extends Component {
