@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000
 const app = express()
 app.set('trust proxy', true)
 
-let config = jsonfile.readFileSync(path.join(process.cwd(), 'config/config.json'))
+const config = jsonfile.readFileSync(path.join(process.cwd(), 'config/config.json'))
 if (config == null) {
   throw new Error('Config file not found!')
 }
@@ -20,26 +20,22 @@ if (config == null) {
 const scanner = new Scanner(config)
 
 const watcher = chokidar.watch(path.join(process.cwd(), 'content'), {
-  ignored: /(^|[\/\\])\../, // ignore dotfiles
-  persistent: true,
-  ignoreInitial: true
-});
+  ignored: /(^|[/\\])\../, // ignore dotfiles
+  persistent: true
+})
 
 watcher
-  .on('ready', () => {
-    scanner.scan()
+  .on('add', filepath => {
+    console.log(`[Watcher] File ${filepath} has been added`)
+    scanner.addFile(filepath)
   })
-  .on('add', path => {
-    console.log(`[Watcher] File ${path} has been added`)
-    scanner.scan()
+  .on('change', filepath => {
+    console.log(`[Watcher] File ${filepath} has been changed`)
+    scanner.updateFile(filepath)
   })
-  .on('change', path => {
-    console.log(`[Watcher] File ${path} has been changed`)
-    scanner.scan()
-  })
-  .on('unlink', path => {
-    console.log(`[Watcher] File ${path} has been removed`)
-    scanner.scan()
+  .on('unlink', filepath => {
+    console.log(`[Watcher] File ${filepath} has been removed`)
+    scanner.deleteFile(filepath)
   })
 
 app.use(morgan('common'))
@@ -65,7 +61,7 @@ app.get('/favicon.ico', (req, res) => {
 let head = jsonfile.readFileSync(path.join(process.cwd(), 'config/head.json'))
 if (head == null) {
   head = {
-    "scripts": []
+    scripts: []
   }
 }
 

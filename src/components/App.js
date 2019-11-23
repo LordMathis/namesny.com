@@ -1,4 +1,4 @@
-import { NotFoundWrapper } from '../containers'
+import { NotFoundContainer } from '../containers'
 import React, { Component } from 'react'
 import routes from '../utils/routes'
 import { Route, Switch } from 'react-router-dom'
@@ -18,7 +18,7 @@ export default class App extends Component {
               )}
             />
           ))}
-          <Route render={(props) => <NotFoundWrapper {...props} />} />
+          <Route render={(props) => <NotFoundContainer {...props} />} />
         </Switch>
       </div>
     )

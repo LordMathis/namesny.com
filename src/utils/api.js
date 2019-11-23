@@ -18,8 +18,8 @@ function readFile (fileName, type, options) {
   return new Promise(function (resolve, reject) {
     fs.readFile(fileName, options, (err, data) => {
       err ? reject(err) : resolve({
-        'type': type,
-        'data': data
+        type: type,
+        data: data
       })
     })
   })

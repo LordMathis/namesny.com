@@ -7,16 +7,14 @@ import serialize from 'serialize-javascript'
 import manifest from '../../public/static/manifest.json'
 
 export class ServerRenderer {
-
   constructor (head, config) {
     this.head = head
     this.config = config
   }
 
   render (req, res, next) {
-
     const activeRoute = routes.find((route) => matchPath(req.url, route)) || false
-    const head = this.head  
+    const head = this.head
     const config = this.config
 
     if (!activeRoute) {
@@ -31,7 +29,7 @@ export class ServerRenderer {
       const promise = activeRoute.getData
         ? activeRoute.getData(req.path)
         : Promise.resolve()
-    
+
       promise.then((data) => {
         const context = [data, config]
         const markup = renderToString(
@@ -39,14 +37,14 @@ export class ServerRenderer {
             <App/>
           </Router>
         )
-    
+
         res.status(200).send(renderFullPage(markup, head, data, config))
-      }).catch(next)  
+      }).catch(next)
     }
   }
 }
 
-function renderFullPage (html, head, data, config) { 
+function renderFullPage (html, head, data, config) {
   const initialData = [data, config]
   return `
     <!DOCTYPE html>  
