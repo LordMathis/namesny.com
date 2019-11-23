@@ -10,7 +10,8 @@ import fm from 'front-matter'
 export default class About extends Component {
   static propTypes = {
     isLoading: PropTypes.bool.isRequired,
-    resume: PropTypes.string.isRequired
+    resume: PropTypes.string.isRequired,
+    config: PropTypes.object.isRequired
   }
 
   render () {
@@ -28,7 +29,7 @@ export default class About extends Component {
     }
 
     return (
-        <div>
+      <div>
         <Navbar config={this.props.config} />
         <Wrapper>
           <div className={`${contentStyle.content} ${style.column}`}>

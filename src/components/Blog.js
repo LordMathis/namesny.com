@@ -22,12 +22,12 @@ export default class Blog extends Component {
         </div>
       )
     }
-    
-    let posts = this.props.posts.sort((a, b) => {
+
+    const posts = this.props.posts.sort((a, b) => {
       return new Date(b.published) - new Date(a.published)
     })
-    let postsHTML = posts.map((post) => 
-      <div className={styles.postListItem} role="listitem">
+    const postsHTML = posts.map((post) =>
+      <div key={post.title} className={styles.postListItem} role="listitem">
         <div className={styles.postHeader} >
           <a href={post.link} className={styles.postTitle}>{post.title}</a>
           <span className={styles.postDate}>{post.published}</span>

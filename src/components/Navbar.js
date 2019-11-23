@@ -5,7 +5,6 @@ import '../stylesheets/globals.scss'
 import styles from './Navbar.scss'
 
 export default class Navbar extends Component {
-
   static propTypes = {
     config: PropTypes.object.isRequired
   }

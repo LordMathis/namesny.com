@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import { Wrapper, NotFoundPage } from '.'
+import { Wrapper, NotFoundPage } from '../components'
 import PropTypes from 'prop-types'
 import '../stylesheets/globals.scss'
 
-export default class NotFoundWrapper extends Component {
+export default class NotFoundContainer extends Component {
   static propTypes = {
-    config: PropTypes.object.isRequired
+    staticContext: PropTypes.object.isRequired
   }
 
   constructor (props) {
     super(props)
-
     let data
 
+    // eslint-disable-next-line no-undef
     if (__isBrowser__) {
       data = window.__INITIAL_DATA__
       delete window.__INITIAL_DATA__
@@ -22,7 +22,7 @@ export default class NotFoundWrapper extends Component {
 
     this.state = {
       config: data[1]
-    }    
+    }
   }
 
   render () {

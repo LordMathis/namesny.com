@@ -21,7 +21,7 @@ export default class SocialLinks extends Component {
       const link = (
         <li key={key}>
           <a href={this.props.config.social[val]} role="link">
-            <i className={`fa fa-${val} ${this.props.home ? 'fa-3x': ''}`} aria-hidden="true" />
+            <i className={`fa fa-${val} ${this.props.home ? 'fa-3x' : ''}`} aria-hidden="true" />
             <span className="sr-only">{val}</span>
           </a>
         </li>
@@ -33,7 +33,7 @@ export default class SocialLinks extends Component {
     socialLinks.push(
       <li key={key}>
         <a href={`mailto:${this.props.config.email}`} role="link">
-          <i className={`fa fa-envelope-o ${this.props.home ? 'fa-3x': ''}`} aria-hidden="true" />
+          <i className={`fa fa-envelope-o ${this.props.home ? 'fa-3x' : ''}`} aria-hidden="true" />
           <span className="sr-only">e-mail</span>
         </a>
       </li>
@@ -42,11 +42,11 @@ export default class SocialLinks extends Component {
     const className = this.props.home ? styles['social-home'] : styles['social-navbar']
 
     return (
-        <div className={className} role="list">
-            <ul>
-            {socialLinks}
-            </ul>
-        </div>
+      <div className={className} role="list">
+        <ul>
+          {socialLinks}
+        </ul>
+      </div>
     )
   }
 }

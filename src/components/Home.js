@@ -10,7 +10,7 @@ export default class Home extends Component {
     config: PropTypes.object.isRequired
   }
 
-  render () {  
+  render () {
     return (
       <div id={styles.coverPage} className={styles.coverPageFull} role="region" aria-label="Home page">
         <div id={styles.coverPageContent}>

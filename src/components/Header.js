@@ -1,8 +1,12 @@
-import React, {Component} from 'react';
-import '../stylesheets/globals.scss';
-import styles from './Header.scss';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import '../stylesheets/globals.scss'
+import styles from './Header.scss'
 
 export default class Header extends Component {
+  static propTypes = {
+    header: PropTypes.string.isRequired
+  }
 
   render () {
     return (

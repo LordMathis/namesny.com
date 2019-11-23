@@ -21,14 +21,14 @@ export default class ContentContainer extends Component {
 
     this.state = {
       isLoading: !data,
-      type: data[0]['type'],
-      content: data[0]['data'],
+      type: data[0].type,
+      content: data[0].data,
       config: data[1]
-    }    
+    }
   }
 
   render () {
-    if (this.state.type == 'resume') {
+    if (this.state.type === 'resume') {
       return (
         <Resume
           isLoading={this.state.isLoading}

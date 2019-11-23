@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { Spinner, Header } from '.'
 import '../stylesheets/globals.scss'
 import contentStyle from '../stylesheets/content.scss'
-import style from './About.scss'
 import MarkdownIt from 'markdown-it'
 
 export default class About extends Component {

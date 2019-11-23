@@ -5,11 +5,11 @@ import styles from './Column.scss'
 
 export default class Column extends Component {
   static propTypes = {
-      children: PropTypes.oneOfType([
-          PropTypes.arrayOf(PropTypes.node),
-          PropTypes.node
-      ]).isRequired,
-      left: PropTypes.bool
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node
+    ]).isRequired,
+    left: PropTypes.bool
   }
 
   static defaultProps = {
