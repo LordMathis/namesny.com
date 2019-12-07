@@ -58,7 +58,7 @@ app.use(helmet.contentSecurityPolicy({
 app.use('/static', expressStaticGzip('public/static'))
 
 app.get('/favicon.ico', (req, res) => {
-  res.status(404).send('Not Found !!!')
+  res.status(204).send('Not Found !!!')
 })
 
 let head = jsonfile.readFileSync(path.join(process.cwd(), 'config/head.json'))
