@@ -8,7 +8,7 @@
     "build-client": "NODE_ENV=production webpack --config webpack.client.js -p --progress",
     "build-server": "NODE_ENV=production webpack --config webpack.server.js -p --progress",
     "start": "NODE_ENV=production node ./build/server.js",
-    "start-dev": "NODE_ENV=development babel-node ./src/server.js"
+    "start-dev": "NODE_ENV=development nodemon --exec babel-node ./src/server.js --ignore data.json"
   },
   "keywords": [
     "porfolio",
@@ -63,6 +63,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "file-loader": "^4.2.0",
     "mini-css-extract-plugin": "^0.8.0",
+    "nodemon": "^2.0.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^8.0.0",

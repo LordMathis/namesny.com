@@ -147,44 +147,4 @@ export class Scanner {
 
     return metadata
   }
-
-  // scan () {
-  //   this.readdir(path.join(process.cwd(), 'content'))
-  //     .then(
-  //       (files) => {
-  //         const filtered = files.filter(
-  //           (file) => (
-  //             fs.statSync(path.join(process.cwd(), 'content', file)).isFile()
-  //           )
-  //         )
-
-  //         const images = filtered.filter(
-  //           (file) => (
-  //             path.extname(file) == '.jpg' || path.extname(file) == '.png' || path.extname(file) == '.gif'
-  //           )
-  //         )
-  //         Promise.all(images.map(this.copyImage))
-  //           .then((files) => files.map(this.gzipImage))
-
-  //         const posts = filtered.filter(
-  //           (file) => (
-  //             path.extname(file) == '.md'
-  //           )
-  //         )
-                 
-  //         return Promise.all(posts.map(this.readfile))
-  //       }
-  //     ).then(
-  //       (files) => {          
-  //         files.forEach(
-  //           (item) => { this.processFile(item[0], item[1]) }
-  //         )
-  //         return this.writeData()
-  //       }
-  //     ).then(
-  //       console.log('[Scanner] Scan complete')
-  //     ).catch(
-  //       (err) => console.log(err)
-  //     )
-  // }
 }
