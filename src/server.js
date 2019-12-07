@@ -7,7 +7,6 @@ import chokidar from 'chokidar'
 import jsonfile from 'jsonfile'
 import { ServerRenderer } from './utils/serverRender'
 import { Scanner } from './utils/scanner'
-import { DataGetter } from './utils/dataGetter'
 import { DataHolder } from './utils/dataHolder'
 
 const port = process.env.PORT || 3000
@@ -19,7 +18,7 @@ if (config == null) {
   throw new Error('Config file not found!')
 }
 
-const dataHolder = new DataHolder()
+const dataHolder = new DataHolder(config)
 const scanner = new Scanner(config, dataHolder)
 
 const watcher = chokidar.watch(path.join(process.cwd(), 'content'), {
@@ -68,8 +67,7 @@ if (head == null) {
   }
 }
 
-const dataGetter = new DataGetter(config, dataHolder)
-const serverRenderer = new ServerRenderer(head, config, dataGetter)
+const serverRenderer = new ServerRenderer(head, config, dataHolder)
 app.get('*', serverRenderer.render.bind(serverRenderer))
 
 app.listen(port, function (error) {

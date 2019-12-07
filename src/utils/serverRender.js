@@ -7,10 +7,10 @@ import serialize from 'serialize-javascript'
 import manifest from '../../public/static/manifest.json'
 
 export class ServerRenderer {
-  constructor (head, config, dataGetter) {
+  constructor (head, config, dataHolder) {
     this.head = head
     this.config = config
-    this.dataGetter = dataGetter
+    this.dataHolder = dataHolder
   }
 
   render (req, res, next) {
@@ -27,7 +27,7 @@ export class ServerRenderer {
       )
       res.status(404).send(renderFullPage(markup, head, {}, config))
     } else {
-      const promise = this.dataGetter.getData(req.path.split('/').pop())
+      const promise = this.dataHolder.getData(req.path.split('/').pop())
 
       promise.then((data) => {
         const context = [data, config]
