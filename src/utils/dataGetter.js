@@ -3,8 +3,9 @@ import jsonfile from 'jsonfile'
 import path from 'path'
 
 export class DataGetter {
-  constructor (config) {
+  constructor (config, dataHolder) {
     this.config = config
+    this.dataHolder = dataHolder
   }
 
   getData (reqPath) {
@@ -15,7 +16,7 @@ export class DataGetter {
 
   getDataFromFile (reqPath) {
     if (reqPath === '') {
-      return this.readJson(path.join(process.cwd(), 'data.json'))
+      return Promise.resolve(this.dataHolder.data)
     } else if (reqPath === 'resume') {
       const fileName = path.join(process.cwd(), 'content', reqPath + '.md')
       return this.readFile(fileName, 'resume', 'utf8')

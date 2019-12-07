@@ -2,20 +2,12 @@ import fs from 'fs'
 import path from 'path'
 import fm from 'front-matter'
 import moment from 'moment'
-import jsonfile from 'jsonfile'
 import zlib from 'zlib'
 
 export class Scanner {
-  constructor (config) {
+  constructor (config, dataHolder) {
     this.config = config
-    this.initData()
-  }
-
-  initData () {
-    this.data = {
-      posts: [],
-      other: {}
-    }
+    this.dataHolder = dataHolder
   }
 
   addFile (filepath) {
@@ -25,7 +17,6 @@ export class Scanner {
     } else {
       this.readfile(filepath)
         .then((data) => this.processFile(data[0], data[1]))
-        .then(() => this.writeData())
     }
   }
 
@@ -35,9 +26,7 @@ export class Scanner {
   }
 
   deleteFile (filepath) {
-    this.data.posts = this.data.posts.filter((post) =>
-      post.filename !== filepath
-    )
+    this.dataHolder.deleteFile(filepath)
   }
 
   readfile (filePath) {
@@ -113,25 +102,12 @@ export class Scanner {
         link: '/post/' + metadata.filename
       }
 
-      this.data.posts.push(post)
+      this.dataHolder.addPost(post)
     } else {
-      this.data.other[metadata.filename] = data
+      this.dataHolder.addOther(metadata.filename, data)
     }
 
     return Promise.resolve()
-  }
-
-  writeData () {
-    return new Promise((resolve, reject) => {
-      jsonfile.writeFile(path.join(process.cwd(), 'data.json'), this.data, (err) => {
-        if (err) {
-          reject(err)
-        } else {
-          this.initData()
-          resolve()
-        }
-      })
-    })
   }
 
   fileMetadata (filepath) {
