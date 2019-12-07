@@ -11,7 +11,7 @@ import moment from 'moment'
 export default class Post extends Component {
   static propTypes = {
     isLoading: PropTypes.bool.isRequired,
-    post: PropTypes.object.isRequired,
+    post: PropTypes.string.isRequired,
     config: PropTypes.object.isRequired
   }
 
