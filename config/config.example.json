@@ -9,8 +9,7 @@
     },
     "baseUrl": "example.com",
     "contentPath": "./content",
-    "renderPath": "./renders",
-    "dataPath": "./src/utils/data.json",
+    "storage": "file",
     "non-content-files": [
       "about.md", "resume.md"
     ]

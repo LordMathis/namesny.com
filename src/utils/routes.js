@@ -1,28 +1,18 @@
 import { MainContainer, ContentContainer } from '../containers'
-import { getData } from './api'
 
 const routes = [
   {
     path: '/',
     exact: true,
-    component: MainContainer,
-    getData: (path = '') => getData(
-      path.split('/').pop()
-    )
+    component: MainContainer
   },
   {
     path: '/post/:postname',
-    component: ContentContainer,
-    getData: (path = '') => getData(
-      path.split('/').pop()
-    )
+    component: ContentContainer
   },
   {
     path: '/resume',
-    component: ContentContainer,
-    getData: (path = '') => getData(
-      path.split('/').pop()
-    )
+    component: ContentContainer
   }
 ]
 

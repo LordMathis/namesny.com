@@ -7,6 +7,7 @@ import chokidar from 'chokidar'
 import jsonfile from 'jsonfile'
 import { ServerRenderer } from './utils/serverRender'
 import { Scanner } from './utils/scanner'
+import { DataGetter } from './utils/dataGetter'
 
 const port = process.env.PORT || 3000
 const app = express()
@@ -65,7 +66,8 @@ if (head == null) {
   }
 }
 
-const serverRenderer = new ServerRenderer(head, config)
+const dataGetter = new DataGetter(config)
+const serverRenderer = new ServerRenderer(head, config, dataGetter)
 app.get('*', serverRenderer.render.bind(serverRenderer))
 
 app.listen(port, function (error) {
