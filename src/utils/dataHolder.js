@@ -1,6 +1,7 @@
 import fs from 'fs'
 import jsonfile from 'jsonfile'
 import path from 'path'
+import mongoose from 'mongoose'
 
 export class DataHolder {
   constructor (config) {
@@ -11,6 +12,25 @@ export class DataHolder {
         posts: [],
         other: {}
       }
+    } else if (this.config.storage === 'mongo') {
+      mongoose.connect(config.mongourl, { useNewUrlParser: true })
+      this.db = mongoose.connection
+      this.db.on('error', (error) => console.error(`[DataHolder] ${error}`))
+      this.db.once('open', () => console.log('[DataHolder] Connected to database'))
+
+      this.Post = mongoose.model('Post', {
+        filename: String,
+        published: String,
+        title: String,
+        summary: String,
+        link: String,
+        body: String
+      })
+
+      this.Other = mongoose.model('Other', {
+        filename: String,
+        body: String
+      })
     }
   }
 
@@ -52,6 +72,7 @@ export class DataHolder {
   }
 
   addPost (post) {
+    delete post.body
     this.data.posts.push(post)
   }
 
