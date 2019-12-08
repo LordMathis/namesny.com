@@ -81,7 +81,7 @@ export class DataHolder {
   }
 
   deleteFile (filepath) {
-    this.data.posts = this.dataHolder.data.posts.filter((post) =>
+    this.data.posts = this.data.posts.filter((post) =>
       post.filename !== filepath
     )
   }
