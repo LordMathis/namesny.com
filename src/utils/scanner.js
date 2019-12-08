@@ -19,15 +19,15 @@ export class Scanner {
 
     watcher
       .on('add', filepath => {
-        console.log(`[Watcher] File ${filepath} has been added`)
+        console.log(`[Scanner] File ${filepath} has been added`)
         this.addFile(filepath)
       })
       .on('change', filepath => {
-        console.log(`[Watcher] File ${filepath} has been changed`)
+        console.log(`[Scanner] File ${filepath} has been changed`)
         this.updateFile(filepath)
       })
       .on('unlink', filepath => {
-        console.log(`[Watcher] File ${filepath} has been removed`)
+        console.log(`[Scanner] File ${filepath} has been removed`)
         this.deleteFile(filepath)
       })
   }

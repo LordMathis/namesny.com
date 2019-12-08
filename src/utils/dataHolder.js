@@ -13,11 +13,6 @@ export class DataHolder {
         other: {}
       }
     } else if (this.config.storage === 'mongo') {
-      mongoose.connect(config.mongourl, { useNewUrlParser: true })
-      this.db = mongoose.connection
-      this.db.on('error', (error) => console.error(`[DataHolder] ${error}`))
-      this.db.once('open', () => console.log('[DataHolder] Connected to database'))
-
       this.Post = mongoose.model('Post', {
         filename: String,
         published: String,

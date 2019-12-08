@@ -3,6 +3,7 @@ import helmet from 'helmet'
 import expressStaticGzip from 'express-static-gzip'
 import path from 'path'
 import morgan from 'morgan'
+import mongoose from 'mongoose'
 import jsonfile from 'jsonfile'
 import { ServerRenderer } from './utils/serverRender'
 import { Scanner } from './utils/scanner'
@@ -16,10 +17,6 @@ const config = jsonfile.readFileSync(path.join(process.cwd(), 'config/config.jso
 if (config == null) {
   throw new Error('Config file not found!')
 }
-
-const dataHolder = new DataHolder(config)
-const scanner = new Scanner(config, dataHolder)
-scanner.watch()
 
 app.use(morgan('common'))
 
@@ -48,13 +45,31 @@ if (head == null) {
   }
 }
 
+const dataHolder = new DataHolder(config)
+const scanner = new Scanner(config, dataHolder)
+
 const serverRenderer = new ServerRenderer(head, config, dataHolder)
 app.get('*', serverRenderer.render.bind(serverRenderer))
 
-app.listen(port, function (error) {
-  if (error) {
-    console.error(error)
-  } else {
-    console.info('[Server] Listening on port %s', port)
-  }
-})
+if (config.storage === 'mongo') {
+  mongoose.connect(config.mongourl, { useNewUrlParser: true })
+  const db = mongoose.connection
+  db.on('error', (error) => console.error(`[Server] Unable to connect to database\n${error}`))
+  db.once('open', () => {
+    console.log('[Server] Connected to database')
+    startServer()
+  })
+} else {
+  startServer()
+}
+
+function startServer () {
+  scanner.watch()
+  app.listen(port, function (error) {
+    if (error) {
+      console.error(`[Server] Unable to start server\n${error}`)
+    } else {
+      console.info(`[Server] Listening on port ${port}`)
+    }
+  })
+}
