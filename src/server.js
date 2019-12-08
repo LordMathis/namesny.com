@@ -20,25 +20,7 @@ if (config == null) {
 
 const dataHolder = new DataHolder(config)
 const scanner = new Scanner(config, dataHolder)
-
-const watcher = chokidar.watch(path.join(process.cwd(), 'content'), {
-  ignored: /(^|[/\\])\../, // ignore dotfiles
-  persistent: true
-})
-
-watcher
-  .on('add', filepath => {
-    console.log(`[Watcher] File ${filepath} has been added`)
-    scanner.addFile(filepath)
-  })
-  .on('change', filepath => {
-    console.log(`[Watcher] File ${filepath} has been changed`)
-    scanner.updateFile(filepath)
-  })
-  .on('unlink', filepath => {
-    console.log(`[Watcher] File ${filepath} has been removed`)
-    scanner.deleteFile(filepath)
-  })
+scanner.watch()
 
 app.use(morgan('common'))
 

@@ -3,11 +3,33 @@ import path from 'path'
 import fm from 'front-matter'
 import moment from 'moment'
 import zlib from 'zlib'
+import chokidar from 'chokidar'
 
 export class Scanner {
   constructor (config, dataHolder) {
     this.config = config
     this.dataHolder = dataHolder
+  }
+
+  watch () {
+    const watcher = chokidar.watch(path.join(process.cwd(), 'content'), {
+      ignored: /(^|[/\\])\../, // ignore dotfiles
+      persistent: true
+    })
+
+    watcher
+      .on('add', filepath => {
+        console.log(`[Watcher] File ${filepath} has been added`)
+        this.addFile(filepath)
+      })
+      .on('change', filepath => {
+        console.log(`[Watcher] File ${filepath} has been changed`)
+        this.updateFile(filepath)
+      })
+      .on('unlink', filepath => {
+        console.log(`[Watcher] File ${filepath} has been removed`)
+        this.deleteFile(filepath)
+      })
   }
 
   addFile (filepath) {
