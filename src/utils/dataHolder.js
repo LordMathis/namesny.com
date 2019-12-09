@@ -67,8 +67,10 @@ export class DataHolder {
   }
 
   addPost (post) {
-    delete post.body
-    this.data.posts.push(post)
+    if (this.config.storage === 'file') {
+      delete post.body
+      this.data.posts.push(post)
+    }
   }
 
   addOther (filename, data) {
