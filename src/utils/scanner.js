@@ -24,7 +24,7 @@ export class Scanner {
       })
       .on('change', filepath => {
         console.log(`[Scanner] File ${filepath} has been changed`)
-        this.updateFile(filepath)
+        this.addFile(filepath)
       })
       .on('unlink', filepath => {
         console.log(`[Scanner] File ${filepath} has been removed`)
@@ -40,11 +40,6 @@ export class Scanner {
       this.readfile(filepath)
         .then((data) => this.processFile(data[0], data[1]))
     }
-  }
-
-  updateFile (filepath) {
-    this.deleteFile(filepath)
-    this.addFile(filepath)
   }
 
   deleteFile (filepath) {

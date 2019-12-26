@@ -8,6 +8,8 @@ import jsonfile from 'jsonfile'
 import { ServerRenderer } from './utils/serverRender'
 import { Scanner } from './utils/scanner'
 import { DataHolder } from './utils/dataHolder'
+import { FileStorage } from './utils/storage/file'
+import { MongoStorage } from './utils/storage/mongo'
 
 const port = process.env.PORT || 3000
 const app = express()
@@ -45,7 +47,14 @@ if (head == null) {
   }
 }
 
-const dataHolder = new DataHolder(config)
+let storage
+if (config.storage === 'file') {
+  storage = new FileStorage()
+} else if (config.storage === 'mongo') {
+  storage = new MongoStorage()
+}
+
+const dataHolder = new DataHolder(storage)
 const scanner = new Scanner(config, dataHolder)
 
 const serverRenderer = new ServerRenderer(head, config, dataHolder)
