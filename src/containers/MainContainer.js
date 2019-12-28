@@ -18,6 +18,8 @@ export default class MainContainer extends Component {
       delete window.__INITIAL_DATA__
     }
 
+    console.log('MainContainer', data[0].other.about)
+
     this.state = {
       isLoadingBlog: !data[0].posts,
       isLoadingAbout: !data[0].other.about,

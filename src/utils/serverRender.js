@@ -30,6 +30,8 @@ export class ServerRenderer {
       const promise = this.dataHolder.getData(req.path.split('/').pop())
 
       promise.then((data) => {
+        console.log(data)
+        
         const context = [data, config]
         const markup = renderToString(
           <Router location={req.url} context={{ context }}>
