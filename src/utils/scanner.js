@@ -117,7 +117,7 @@ export class Scanner {
         title: frontMatter.attributes.title,
         summary: summary,
         link: '/post/' + metadata.filename,
-        body: frontMatter.body
+        body: data
       }
 
       this.dataHolder.addPost(post)

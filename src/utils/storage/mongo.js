@@ -64,30 +64,42 @@ export class MongoStorage {
         this._getAllPosts()
       ]).then((res) => {
         data.other.about = res[0].body
-        data.posts = res[1]
+        data.posts = res[1].map((post) => {
+          delete post.body
+          return post
+        })
         return data
       })
     } else if (reqPath === 'resume') {
       return Promise.resolve({})
     } else {
-
+      return this._getPost(reqPath)
     }
   }
 
   _getOther (filename) {
     return new Promise((resolve, reject) => {
       this.Other.findOne({ filename: filename }, (err, res) => {
-        if (err) reject(err)
-        resolve(res)
+        err ? reject(err) : resolve(res)
       })
     })
   }
 
   _getAllPosts () {
     return new Promise((resolve, reject) => {
-      this.Post.find({}, (err, res) => {
-        if (err) reject(err)
-        resolve(res)
+      this.Post.find({}, (err, data) => {
+        err ? reject(err) : resolve(data)
+      })
+    })
+  }
+
+  _getPost (filename) {
+    return new Promise((resolve, reject) => {
+      this.Post.findOne({ filename: filename }, (err, data) => {
+        err ? reject(err) : resolve({
+          type: 'content',
+          data: data.body
+        })
       })
     })
   }

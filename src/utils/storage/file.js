@@ -2,7 +2,6 @@ import fs from 'fs'
 import path from 'path'
 
 export class FileStorage {
-
   constructor () {
     this.data = {
       posts: [],

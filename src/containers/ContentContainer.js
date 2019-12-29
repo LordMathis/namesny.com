@@ -18,6 +18,8 @@ export default class ContentContainer extends Component {
       delete window.__INITIAL_DATA__
     }
 
+    console.log('ContentContainer: ', data)
+
     this.state = {
       isLoading: !data,
       type: data[0].type,
