@@ -1,7 +1,9 @@
 import mongoose, { Schema } from 'mongoose'
 
 export class MongoStorage {
-  constructor () {
+  constructor (config) {
+    this.config = config
+
     const PostSchema = new Schema({
       filename: String,
       published: String,
@@ -49,7 +51,17 @@ export class MongoStorage {
   }
 
   deleteFile (filepath) {
-    //
+    const filename = filepath.split('/').pop()
+    const basename = filename.split('.')[0]
+    if (this.config['non-content-files'].indexOf(filename) === -1) {
+      this.Post.findOneAndDelete({ filename: basename }, (err) => {
+        if (err) throw err
+      })
+    } else {
+      this.Other.findOneAndDelete({ filename: basename }, (err) => {
+        if (err) throw err
+      })
+    }
   }
 
   getData (reqPath) {

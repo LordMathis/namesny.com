@@ -2,7 +2,8 @@ import fs from 'fs'
 import path from 'path'
 
 export class FileStorage {
-  constructor () {
+  constructor (config) {
+    this.config = config
     this.data = {
       posts: [],
       other: {}

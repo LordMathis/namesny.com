@@ -7,7 +7,6 @@ import mongoose from 'mongoose'
 import jsonfile from 'jsonfile'
 import { ServerRenderer } from './utils/serverRender'
 import { Scanner } from './utils/scanner'
-import { DataHolder } from './utils/dataHolder'
 import { FileStorage } from './utils/storage/file'
 import { MongoStorage } from './utils/storage/mongo'
 
@@ -49,15 +48,14 @@ if (head == null) {
 
 let storage
 if (config.storage === 'file') {
-  storage = new FileStorage()
+  storage = new FileStorage(config)
 } else if (config.storage === 'mongo') {
-  storage = new MongoStorage()
+  storage = new MongoStorage(config)
 }
 
-const dataHolder = new DataHolder(storage)
-const scanner = new Scanner(config, dataHolder)
+const scanner = new Scanner(config, storage)
 
-const serverRenderer = new ServerRenderer(head, config, dataHolder)
+const serverRenderer = new ServerRenderer(head, config, storage)
 app.get('*', serverRenderer.render.bind(serverRenderer))
 
 if (config.storage === 'mongo') {
