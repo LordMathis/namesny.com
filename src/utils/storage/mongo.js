@@ -53,7 +53,7 @@ export class MongoStorage {
   }
 
   getData (reqPath) {
-    if (reqPath === '') {
+    if (reqPath === '/') {
       const data = {
         posts: [],
         other: {}
@@ -63,24 +63,27 @@ export class MongoStorage {
         this._getOther('about'),
         this._getAllPosts()
       ]).then((res) => {
-        data.other.about = res[0].body
+        data.other.about = res[0].data
         data.posts = res[1].map((post) => {
           delete post.body
           return post
         })
         return data
       })
-    } else if (reqPath === 'resume') {
-      return Promise.resolve({})
+    } else if (reqPath.startsWith('/post')) {
+      return this._getPost(reqPath.split('/').pop())
     } else {
-      return this._getPost(reqPath)
+      return this._getOther(reqPath.split('/').pop())
     }
   }
 
   _getOther (filename) {
     return new Promise((resolve, reject) => {
-      this.Other.findOne({ filename: filename }, (err, res) => {
-        err ? reject(err) : resolve(res)
+      this.Other.findOne({ filename: filename }, (err, data) => {
+        err ? reject(err) : resolve({
+          type: filename,
+          data: data.body
+        })
       })
     })
   }

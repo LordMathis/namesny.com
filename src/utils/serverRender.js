@@ -27,7 +27,7 @@ export class ServerRenderer {
       )
       res.status(404).send(renderFullPage(markup, head, {}, config))
     } else {
-      const promise = this.dataHolder.getData(req.path.split('/').pop())
+      const promise = this.dataHolder.getData(req.path)
 
       promise.then((data) => {
         const context = [data, config]

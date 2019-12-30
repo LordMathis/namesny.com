@@ -35,6 +35,7 @@ export class FileStorage {
   }
 
   _getDataFromFile (reqPath) {
+    reqPath = reqPath.split('/').pop()
     if (reqPath === '') {
       return Promise.resolve(this.data)
     } else if (reqPath === 'resume') {
