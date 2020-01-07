@@ -12,14 +12,20 @@ export class MongoStorage {
       link: String,
       body: String
     })
-    PostSchema.index({ filename: 1 })
+    PostSchema.index({
+      body: 'text',
+      title: 'text'
+    })
+    PostSchema.index({
+      filename: 'hashed'
+    })
     this.Post = mongoose.model('Post', PostSchema)
 
     const OtherSchema = new Schema({
       filename: String,
       body: String
     })
-    OtherSchema.index({ filename: 1 })
+    OtherSchema.index({ filename: 'hashed' })
     this.Other = mongoose.model('Other', OtherSchema)
 
     this.options = {
@@ -76,10 +82,7 @@ export class MongoStorage {
         this._getAllPosts()
       ]).then((res) => {
         data.other.about = res[0].data
-        data.posts = res[1].map((post) => {
-          delete post.body
-          return post
-        })
+        data.posts = res[1]
         return data
       })
     } else if (reqPath.startsWith('/post')) {
@@ -102,7 +105,7 @@ export class MongoStorage {
 
   _getAllPosts () {
     return new Promise((resolve, reject) => {
-      this.Post.find({}, (err, data) => {
+      this.Post.find({}, { body: false }, (err, data) => {
         err ? reject(err) : resolve(data)
       })
     })

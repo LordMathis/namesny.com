@@ -9,6 +9,7 @@ import { ServerRenderer } from './utils/serverRender'
 import { Scanner } from './utils/scanner'
 import { FileStorage } from './utils/storage/file'
 import { MongoStorage } from './utils/storage/mongo'
+import { Api } from './utils/api'
 
 const port = process.env.PORT || 3000
 const app = express()
@@ -52,6 +53,9 @@ if (config.storage === 'file') {
 } else if (config.storage === 'mongo') {
   storage = new MongoStorage(config)
 }
+
+const postApi = new Api(storage)
+app.get('/api/v1/posts', postApi.getPosts.bind(postApi))
 
 const scanner = new Scanner(config, storage)
 
