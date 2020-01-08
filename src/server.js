@@ -54,8 +54,10 @@ if (config.storage === 'file') {
   storage = new MongoStorage(config)
 }
 
-const postApi = new Api(storage)
-app.get('/api/v1/posts', postApi.getPosts.bind(postApi))
+if (config.storage === 'mongo') {
+  const postApi = new Api(storage)
+  app.get('/api/v1/posts', postApi.getPosts.bind(postApi))
+}
 
 const scanner = new Scanner(config, storage)
 

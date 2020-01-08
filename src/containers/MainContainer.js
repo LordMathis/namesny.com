@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { About, Blog, Home, Wrapper, Column, Footer } from '../components'
+import { About, Home, Wrapper, Column, Footer } from '../components'
+import { BlogContainer } from '.'
 
 export default class MainContainer extends Component {
   static propTypes = {
@@ -37,8 +38,7 @@ export default class MainContainer extends Component {
               about={this.state.about}/>
           </Column>
           <Column left={false}>
-            <Blog isLoading={this.state.isLoadingBlog}
-              posts={this.state.posts}/>
+            <BlogContainer posts={this.state.posts}/>
           </Column>
         </Wrapper>
         <Footer config={this.state.config} />

@@ -24,3 +24,8 @@
 .postListItem {
   border-bottom: 5px solid $body;
 }
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+}

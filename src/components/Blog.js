@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { Spinner, Header } from '.'
+import { Spinner, Header, SearchBox } from '.'
 import '../stylesheets/globals.scss'
 import MarkdownIt from 'markdown-it'
 import styles from './Blog.scss'
@@ -39,8 +39,10 @@ export default class Blog extends Component {
 
     return (
       <div className={`${contentStyle.content}`} id="blog" role="region" aria-label="Blog posts">
-        <Header header={'Blog'} role="heading" aria-level="2"/>
-
+        <div className={styles.headerContainer}>
+          <Header header={'Blog'} role="heading" aria-level="2"/>
+          <SearchBox />
+        </div>
         <div className={`${styles.postsList}`} role="list">
           {postsHTML}
         </div>
