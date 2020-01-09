@@ -1,11 +1,10 @@
 module.exports = function (api) {
   const presets = [
     '@babel/preset-env',
-    '@babel/react'
+    '@babel/preset-react'
   ]
   const plugins = [
     '@babel/plugin-proposal-object-rest-spread',
-    '@babel/plugin-transform-runtime',
     '@babel/plugin-transform-template-literals',
     '@babel/plugin-proposal-class-properties'
   ]
@@ -13,9 +12,9 @@ module.exports = function (api) {
   if (api.env() === 'development') {
     plugins.push([
       'css-modules-transform', {
-        'generateScopedName': '[name]__[local]___[hash:base64:5]',
-        'preprocessCss': processSass,
-        'extensions': ['.css', '.scss']
+        generateScopedName: '[name]__[local]___[hash:base64:5]',
+        preprocessCss: processSass,
+        extensions: ['.css', '.scss']
       }
     ])
   }
