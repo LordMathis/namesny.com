@@ -9,7 +9,9 @@ import contentStyle from '../stylesheets/content.scss'
 export default class Blog extends Component {
   static propTypes = {
     isLoading: PropTypes.bool.isRequired,
-    posts: PropTypes.arrayOf(PropTypes.object).isRequired
+    posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+    searchString: PropTypes.string.isRequired,
+    handleChange: PropTypes.func.isRequired
   }
 
   render () {
@@ -41,7 +43,7 @@ export default class Blog extends Component {
       <div className={`${contentStyle.content}`} id="blog" role="region" aria-label="Blog posts">
         <div className={styles.headerContainer}>
           <Header header={'Blog'} role="heading" aria-level="2"/>
-          <SearchBox />
+          <SearchBox searchString={this.props.searchString} handleChange={this.props.handleChange} />
         </div>
         <div className={`${styles.postsList}`} role="list">
           {postsHTML}

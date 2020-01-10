@@ -12,13 +12,18 @@ export default class BlogContainer extends Component {
     super(props)
     this.state = {
       isLoading: false,
-      posts: props.posts
+      posts: props.posts,
+      searchString: ''
     }
+  }
+
+  handleChange (event) {
+    this.setState({ searchString: event.target.value })
   }
 
   render () {
     return (
-      <Blog isLoading={ this.state.isLoading } posts={ this.state.posts } />
+      <Blog isLoading={ this.state.isLoading } posts={ this.state.posts } searchString={this.state.searchString} handleChange={this.handleChange.bind(this)} />
     )
   }
 }

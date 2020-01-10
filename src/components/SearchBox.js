@@ -5,14 +5,17 @@ import styles from './SearchBox.scss'
 
 export default class SearchBox extends Component {
   static propTypes = {
-    query: PropTypes.string
+    handleChange: PropTypes.func.isRequired,
+    searchString: PropTypes.string
   }
 
   render () {
     return (
       <div className={styles.container}>
-        <input placeholder='Search' className={styles.search} type="text" />
-        <i className="fa fa-search"></i>
+        <input placeholder='Search' className={styles.search} type="text" value={this.props.searchString} onChange={this.props.handleChange}/>
+        <span>
+          <i className={`fa fa-search ${styles.icon}`}></i>
+        </span>
       </div>
     )
   }

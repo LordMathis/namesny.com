@@ -11,13 +11,11 @@ export default class NotFoundContainer extends Component {
   constructor (props) {
     super(props)
     let data
-
-    // eslint-disable-next-line no-undef
-    if (__isBrowser__) {
+    if (typeof window === 'undefined') {
+      data = props.staticContext.context
+    } else {
       data = window.__INITIAL_DATA__
       delete window.__INITIAL_DATA__
-    } else {
-      data = props.staticContext.context
     }
 
     this.state = {
