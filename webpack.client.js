@@ -1,14 +1,12 @@
 const { resolve } = require('path')
-const webpack = require('webpack')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const WebpackCleanupPlugin = require('webpack-cleanup-plugin')
 
 const browserConfig = {
-  mode: 'production',
   entry: {
     bundle: [
       './src/app-client.js'
@@ -26,7 +24,7 @@ const browserConfig = {
         use: [
           'babel-loader'
         ],
-        exclude: '/node_modules/'
+        include: resolve(__dirname, 'src')
       },
       {
         test: /\.scss$/,
@@ -67,8 +65,7 @@ const browserConfig = {
   },
   plugins: [
     new ManifestPlugin(),
-    new webpack.DefinePlugin({ __isBrowser__: 'true' }),
-    new CleanWebpackPlugin(),
+    new WebpackCleanupPlugin(),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
     new CompressionPlugin({})
   ],

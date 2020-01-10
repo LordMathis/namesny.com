@@ -1,9 +1,7 @@
 const { resolve } = require('path')
-const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CreateFileWebpack = require('create-file-webpack')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const WebpackCleanupPlugin = require('webpack-cleanup-plugin')
 
 const serverConfig = {
   entry: './src/server.js',
@@ -55,19 +53,8 @@ const serverConfig = {
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      __isBrowser__: 'false'
-    }),
     new MiniCssExtractPlugin(),
-    new CleanWebpackPlugin(),
-    new CreateFileWebpack({
-      path: './',
-      fileName: 'data.json',
-      content: JSON.stringify({
-        'posts': [],
-        'other': {}
-      })
-    })
+    new WebpackCleanupPlugin()
   ]
 }
 
