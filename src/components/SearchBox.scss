@@ -21,8 +21,10 @@
   transition: width 0.4s ease;
   outline: none;
   box-sizing: border-box;
-  
-  &:focus{ width: 300px; }
+}
+
+.expanded {
+  width: 300px;
 }
 
 .icon{

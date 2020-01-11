@@ -10,8 +10,13 @@ export default class Blog extends Component {
   static propTypes = {
     isLoading: PropTypes.bool.isRequired,
     posts: PropTypes.arrayOf(PropTypes.object).isRequired,
-    searchString: PropTypes.string.isRequired,
-    handleChange: PropTypes.func.isRequired
+    searchString: PropTypes.string,
+    expanded: PropTypes.bool.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleFocus: PropTypes.func.isRequired,
+    handleBlur: PropTypes.func.isRequired,
+    handleEnter: PropTypes.func.isRequired,
+    handleSearch: PropTypes.func.isRequired
   }
 
   render () {
@@ -19,8 +24,17 @@ export default class Blog extends Component {
 
     if (this.props.isLoading) {
       return (
-        <div className={contentStyle.contentWrapper} id="blog">
-          <Spinner/>
+        <div className={`${contentStyle.content}`} id="blog" role="region" aria-label="Blog posts">
+          <div className={styles.headerContainer}>
+            <Header header={'Blog'} role="heading" aria-level="2"/>
+            <SearchBox searchString={this.props.searchString}
+              expanded={this.props.expanded}
+              handleChange={this.props.handleChange}
+              handleFocus={this.props.handleFocus}
+              handleBlur={this.props.handleBlur}
+              handleSearch={this.props.handleSearch} />
+          </div>
+          <Spinner />
         </div>
       )
     }
@@ -28,7 +42,7 @@ export default class Blog extends Component {
     const posts = this.props.posts.sort((a, b) => {
       return new Date(b.published) - new Date(a.published)
     })
-    const postsHTML = posts.map((post) =>
+    let postsHTML = posts.map((post) =>
       <div key={post.title} className={styles.postListItem} role="listitem">
         <div className={styles.postHeader} >
           <a href={post.link} className={styles.postTitle}>{post.title}</a>
@@ -39,16 +53,29 @@ export default class Blog extends Component {
       </div>
     )
 
+    if (postsHTML.length < 1) {
+      postsHTML = (
+        <div>
+          <span>No posts found</span>
+        </div>
+      )
+    }
+
     return (
       <div className={`${contentStyle.content}`} id="blog" role="region" aria-label="Blog posts">
         <div className={styles.headerContainer}>
           <Header header={'Blog'} role="heading" aria-level="2"/>
-          <SearchBox searchString={this.props.searchString} handleChange={this.props.handleChange} />
+          <SearchBox searchString={this.props.searchString}
+            expanded={this.props.expanded}
+            handleChange={this.props.handleChange}
+            handleFocus={this.props.handleFocus}
+            handleBlur={this.props.handleBlur}
+            handleEnter={this.props.handleEnter}
+            handleSearch={this.props.handleSearch} />
         </div>
         <div className={`${styles.postsList}`} role="list">
           {postsHTML}
         </div>
-
       </div>
     )
   }

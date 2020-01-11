@@ -16,3 +16,7 @@
     font-family: $font-header;
   }
 }
+
+@-ms-viewport{
+  width: device-width;
+}

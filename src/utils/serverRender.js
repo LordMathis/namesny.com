@@ -50,15 +50,16 @@ function renderFullPage (html, head, data, config) {
     <html lang="en">
       <head>
         <title>${config.title}</title>
-          <!-- Google Fonts -->
-          <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:700&amp;subset=latin-ext" rel="stylesheet" rel="preload">
-          <!-- Font Awesome -->
-          <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" rel="preload" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-          <!-- Stylesheet -->
-          <link href=${manifest['bundle.css']} rel="stylesheet" rel="preload">
-          <!-- Initial Data -->
-          <script>window.__INITIAL_DATA__ = ${serialize(initialData)}</script>
-          ${head.scripts.join('\n')}
+        <meta name="viewport" content="width=device-width">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:700&amp;subset=latin-ext" rel="stylesheet" rel="preload">
+        <!-- Font Awesome -->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" rel="preload" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+        <!-- Stylesheet -->
+        <link href=${manifest['bundle.css']} rel="stylesheet" rel="preload">
+        <!-- Initial Data -->
+        <script>window.__INITIAL_DATA__ = ${serialize(initialData)}</script>
+        ${head.scripts.join('\n')}
       </head>
       <body>
         <div id="root">${html}</div>
