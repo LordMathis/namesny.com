@@ -11,14 +11,16 @@ import { FileStorage } from './utils/storage/file'
 import { MongoStorage } from './utils/storage/mongo'
 import { Api } from './utils/api'
 
-const port = process.env.PORT || 3000
+const configPath = process.argv[2] || path.join(process.cwd(), 'config/config.json')
+
 const app = express()
 app.set('trust proxy', true)
 
-const config = jsonfile.readFileSync(path.join(process.cwd(), 'config/config.json'))
+const config = jsonfile.readFileSync(configPath)
 if (config == null) {
   throw new Error('Config file not found!')
 }
+const port = config.port || 3000
 
 app.use(morgan('common'))
 

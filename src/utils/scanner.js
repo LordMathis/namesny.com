@@ -12,7 +12,7 @@ export class Scanner {
   }
 
   watch () {
-    const watcher = chokidar.watch(path.join(process.cwd(), 'content'), {
+    const watcher = chokidar.watch(this.config.contentPath, {
       ignored: /(^|[/\\])\../, // ignore dotfiles
       persistent: true
     })
