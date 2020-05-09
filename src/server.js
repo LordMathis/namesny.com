@@ -9,6 +9,7 @@ import { ServerRenderer } from './utils/serverRender'
 import { Scanner } from './utils/scanner'
 import { FileStorage } from './utils/storage/file'
 import { MongoStorage } from './utils/storage/mongo'
+import { Config } from './utils/config'
 import { Api } from './utils/api'
 
 const configPath = process.argv[2] || path.join(process.cwd(), 'config/config.json')
@@ -16,7 +17,7 @@ const configPath = process.argv[2] || path.join(process.cwd(), 'config/config.js
 const app = express()
 app.set('trust proxy', true)
 
-const config = jsonfile.readFileSync(configPath)
+const config = new Config(jsonfile.readFileSync(configPath))
 if (config == null) {
   throw new Error('Config file not found!')
 }
