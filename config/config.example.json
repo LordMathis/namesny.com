@@ -10,7 +10,7 @@
     "baseUrl": "example.com",
     "contentPath": "./content",
     "storage": "file",
-    "non-content-files": [
+    "specialFiles": [
       "about.md", "resume.md"
     ]
   }
