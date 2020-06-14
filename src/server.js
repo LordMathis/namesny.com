@@ -68,7 +68,7 @@ const serverRenderer = new ServerRenderer(head, config, storage)
 app.get('*', serverRenderer.render.bind(serverRenderer))
 
 if (config.storage === 'mongo') {
-  mongoose.connect(config.mongourl, { useNewUrlParser: true })
+  mongoose.connect(config.mongoUrl, { useNewUrlParser: true })
   const db = mongoose.connection
   db.on('error', (error) => console.error(`[Server] Unable to connect to database\n${error}`))
   db.once('open', () => {
