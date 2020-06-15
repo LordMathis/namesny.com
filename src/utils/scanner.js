@@ -95,7 +95,7 @@ export class Scanner {
     const filePath = path.join(process.cwd(), 'content', file)
     const metadata = this.fileMetadata(filePath)
 
-    if (this.config['non-content-files'].indexOf(file) === -1) {
+    if (this.config.specialFiles.indexOf(file) === -1) {
       const frontMatter = fm(data)
 
       if (frontMatter.attributes.draft) {
