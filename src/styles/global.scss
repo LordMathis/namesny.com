@@ -1,0 +1,22 @@
+@import "./variables.scss";
+
+:global(body, html) {
+    height: 100%;
+}
+
+:global(body) {
+  font-family: $fontParagraph;
+  color: $white;
+  background-color: $blackRussian;
+  margin: 0;
+}
+
+@for $i from 1 through 6 {
+  :global(h#{$i}) {
+    font-family: $fontParagraph;
+  }
+}
+
+@-ms-viewport{
+  width: device-width;
+}
