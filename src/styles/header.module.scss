@@ -1,0 +1,24 @@
+@import "./variables.scss";
+
+.header {
+  overflow: auto;
+}
+
+.links {
+  float: left;
+  ul {
+    list-style: none;
+    li {
+      display: inline;
+      margin: 5px;
+      a {
+        color: $white;
+        text-decoration: none;
+      }
+    }
+  }
+}
+  
+.nameLink {
+  font-size: 1.4em;
+}

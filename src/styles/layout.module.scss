@@ -1,0 +1,11 @@
+@import "./variables.scss";
+
+.content {
+  text-align: center;
+  margin: 0 auto;
+
+  @media only screen and (min-width: $breakLarge) {
+    width: 80%;
+    display: flex;
+  }
+}
