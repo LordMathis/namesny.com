@@ -37,10 +37,12 @@ const Layout = ({ children, title }) => {
         socialNames={data.site.siteMetadata.social.names}
         socialLinks={data.site.siteMetadata.social.links}
         email={data.site.siteMetadata.email} />
-      <div className={styles.content}>
-        <main>{children}</main>
+      <div className={styles.flexWrapper}>
+        <div className={styles.content}>
+          <main>{children}</main>
+        </div>
+        <Footer authorName={data.site.siteMetadata.author}/>
       </div>
-      <Footer authorName={data.site.siteMetadata.author}/>
     </>
   )
 }

@@ -2,6 +2,9 @@
 
 .header {
   overflow: auto;
+  border-bottom: 1px solid $blue;
+  height: 70px;
+  box-sizing: border-box;
 }
 
 .links {
