@@ -16,8 +16,8 @@ const Layout = ({ children, title }) => {
           author
           email
           social {
-            names
-            links
+            name
+            link
           }
         }
       }
@@ -34,8 +34,7 @@ const Layout = ({ children, title }) => {
       </Helmet>
       <Header
         siteTitle={data.site.siteMetadata.title}
-        socialNames={data.site.siteMetadata.social.names}
-        socialLinks={data.site.siteMetadata.social.links}
+        social={data.site.siteMetadata.social}
         email={data.site.siteMetadata.email} />
       <div className={styles.flexWrapper}>
         <div className={styles.content}>

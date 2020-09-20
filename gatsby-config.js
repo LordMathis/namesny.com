@@ -4,17 +4,36 @@ module.exports = {
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `Matúš Námešný`,
     email: "matus@namesny.com",
-    social: {
-      names: ["github", "codepen", "linkedin"],
-      links: [
-        "https://github.com/LordMathis",
-        "https://codepen.io/LordMathis/",
-        "https://www.linkedin.com/in/mat%C3%BA%C5%A1-n%C3%A1me%C5%A1n%C3%BD-3903b6128/",
-      ]
-    },  
+    social: [
+      {
+        name: "github",
+        link: "https://github.com/LordMathis",
+      },
+      {
+        name: "codepen",
+        link: "https://codepen.io/LordMathis/",
+      },
+      {
+        name: "linkedin",
+        link: "https://www.linkedin.com/in/mat%C3%BA%C5%A1-n%C3%A1me%C5%A1n%C3%BD-3903b6128/",
+      }
+    ],
   },
   plugins: [
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`,
+        path: `${__dirname}/content/posts/`,
+      },
+    },
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        excerpt_separator: `<!-- end -->`
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

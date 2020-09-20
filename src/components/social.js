@@ -5,25 +5,18 @@ import styles from '../styles/social.module.scss'
 
 export default class Social extends Component {
   static propTypes = {
-    links: PropTypes.arrayOf(PropTypes.string),
-    names: PropTypes.arrayOf(PropTypes.string),
+    social: PropTypes.arrayOf(PropTypes.object),
     email: PropTypes.string
   }
 
   render () {
     let key = 0
-    const names = this.props.names
-    const links = this.props.links
 
-    const zipped = names.map(function(e, i) {
-      return [e, links[i]];
-    });
-
-    const socialLinks = zipped.map((val) => {
+    const socialLinks = this.props.social.map((val) => {
       const link = (
         <li key={key}>
-          <a href={val[1]} role="link">
-            {val[0]}
+          <a href={val.link} role="link">
+            {val.name}
           </a>
         </li>
       )

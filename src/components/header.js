@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 import React from "react"
 import styles from "../styles/header.module.scss"
 
-const Header = ({ siteTitle, socialNames, socialLinks, email }) => (
+const Header = ({ siteTitle, social, email }) => (
   <header className={styles.header}>
     <nav className={styles.links}>
       <ul>
@@ -23,20 +23,18 @@ const Header = ({ siteTitle, socialNames, socialLinks, email }) => (
         </li>
       </ul>
     </nav>
-    <Social links={ socialLinks } names={ socialNames } email={ email }/>
+    <Social social={ social } email={ email }/>
   </header>
 )
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-  socialNames: PropTypes.arrayOf(PropTypes.string),
-  socialLinks: PropTypes.arrayOf(PropTypes.string),
+  socials: PropTypes.arrayOf(PropTypes.object),
 }
 
 Header.defaultProps = {
   siteTitle: ``,
-  socialNames: [],
-  socialLinks: [],
+  social: [],
   email: ``,
 }
 
