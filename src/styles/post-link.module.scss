@@ -1,0 +1,31 @@
+@import "./variables.scss";
+
+.postDate {
+  float: right;
+}
+
+.postTitle {
+  color: $blue;
+  text-decoration: none;
+  text-transform: capitalize;
+  font-family: $fontParagraph;
+  font-size: 1.2em;
+  float: left;
+}
+
+.postHeader {
+  overflow: hidden;
+}
+
+.postsList {
+  margin-top: 20px;
+}
+
+.postListItem {
+  border-bottom: 1px solid $blue;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+}

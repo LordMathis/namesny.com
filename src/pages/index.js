@@ -10,7 +10,10 @@ const IndexPage = () => {
 
   const data = useStaticQuery(graphql`
     query {
-      allMarkdownRemark(filter: {frontmatter: {draft: {ne: true}}}) {
+      allMarkdownRemark(
+          sort: { order: DESC, fields: [frontmatter___date] }
+          filter: {frontmatter: {draft: {ne: true}}}
+        ) {
         edges {
           node {
             id
@@ -18,7 +21,6 @@ const IndexPage = () => {
             frontmatter {
               date
               title
-              slug
             }
           }
         }
@@ -30,9 +32,6 @@ const IndexPage = () => {
 
   return (
     <Layout title="Home">
-      <h1>Hi people</h1>
-      <p>Welcome to your new Gatsby site.</p>
-      <p>Now go build something great.</p>
       <Blog edges={data.allMarkdownRemark.edges}/>
     </Layout>
   )

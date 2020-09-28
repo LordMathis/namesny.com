@@ -38,7 +38,7 @@ const Layout = ({ children, title }) => {
         email={data.site.siteMetadata.email} />
       <div className={styles.flexWrapper}>
         <div className={styles.content}>
-          <main>{children}</main>
+          <main className={styles.main}>{children}</main>
         </div>
         <Footer authorName={data.site.siteMetadata.author}/>
       </div>

@@ -5,8 +5,8 @@
   margin: 0 auto;
 
   @media only screen and (min-width: $breakLarge) {
-    width: 80%;
     display: flex;
+    width: 80%;
   }
 }
 
@@ -15,4 +15,8 @@
   min-height: calc(100vh - 70px);
   flex-direction: column;
   justify-content: space-between;
+}
+
+.main {
+  width: 100%;
 }
