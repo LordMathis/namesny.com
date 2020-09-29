@@ -5,7 +5,9 @@ $black: #2f2f2f;
 $blue: #0f52bf;
 
 //Fonts
-$fontParagraph: Fira Code, Monaco, Consolas, Ubuntu Mono, monospace;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=VT323&display=swap');
+$fontHeader: 'VT323', monospace;
+$fontParagraph: 'Open Sans', sans-serif;
 
 // Content
 $breakLarge: 992px;

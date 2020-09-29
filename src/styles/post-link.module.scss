@@ -8,7 +8,7 @@
   color: $blue;
   text-decoration: none;
   text-transform: capitalize;
-  font-family: $fontParagraph;
+  font-family: $fontHeader;
   font-size: 1.2em;
   float: left;
 }
@@ -23,6 +23,10 @@
 
 .postListItem {
   border-bottom: 1px solid $blue;
+}
+
+.postExcerpt {
+  text-align: initial;
 }
 
 .headerContainer {

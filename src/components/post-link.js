@@ -14,7 +14,7 @@ const PostLink = ({ post }) => {
         <a href={post.frontmatter.link} className={styles.postTitle}>{post.frontmatter.title}</a>
         <span className={styles.postDate}>{postDateString}</span>
       </div>
-      <div>
+      <div className={styles.postExcerpt}>
         <p>{post.excerpt}</p>
       </div>
     </div>
