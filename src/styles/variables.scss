@@ -4,10 +4,14 @@ $white: #f8f8ff;
 $black: #2f2f2f;
 $blue: #0f52bf;
 
+$backgroundDarker: #252627;
+$backgroundDark: #292a2d;
+
 //Fonts
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=VT323&display=swap');
-$fontHeader: 'VT323', monospace;
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@500&family=Open+Sans&display=swap');
+$fontHeader: 'Fira Mono', monospace;
 $fontParagraph: 'Open Sans', sans-serif;
 
 // Content
 $breakLarge: 992px;
+$width: 760px;
