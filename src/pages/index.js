@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Layout from "../components/layout"
 
 import "../styles/global.scss"
+import Index from "../components"
 
 const IndexPage = () => {
 
@@ -24,8 +25,8 @@ const IndexPage = () => {
   `)
 
   return (
-    <Layout title="Home" author={data.site.siteMetadata.author} >
-      <h1>Hello</h1>
+    <Layout title="Home" author={data.site.siteMetadata.author} vertical={true} >
+      <Index author={data.site.siteMetadata.author} social={data.site.siteMetadata.social} email={data.site.siteMetadata.email}/>
     </Layout>
   )
 }
