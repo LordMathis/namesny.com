@@ -12,7 +12,6 @@ const IndexPage = () => {
     query SiteDataQuery {
       site {
         siteMetadata {
-          title
           author
           email
           social {
@@ -25,7 +24,7 @@ const IndexPage = () => {
   `)
 
   return (
-    <Layout title="Home" author={data.site.siteMetadata.author} vertical={true} >
+    <Layout title="Home" vertical={true} >
       <Index author={data.site.siteMetadata.author} social={data.site.siteMetadata.social} email={data.site.siteMetadata.email}/>
     </Layout>
   )

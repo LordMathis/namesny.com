@@ -7,12 +7,13 @@ import Footer from "./footer"
 import { Helmet } from "react-helmet"
 import styles from "../styles/layout.module.scss"
 
-const Layout = ({ children, title, author, vertical}) => {
+const Layout = ({ children, title, vertical}) => {
 
   const data = useStaticQuery(graphql`
   query SiteTitleQuery {
     site {
       siteMetadata {
+        author
         user
         hostname
       }
@@ -24,7 +25,7 @@ const Layout = ({ children, title, author, vertical}) => {
   return (
     <div className={styles.flexWrapper}>
       <Helmet
-        titleTemplate={`%s | ${author}`}>
+        titleTemplate={`%s | ${data.site.siteMetadata.author}`}>
         <html lang="en" amp />
         <title>{title}</title>
       </Helmet>
@@ -34,7 +35,7 @@ const Layout = ({ children, title, author, vertical}) => {
       <div className={classes}>
         <main className={styles.main}>{children}</main>
       </div>
-      <Footer authorName={author}/>
+      <Footer authorName={data.site.siteMetadata.author}/>
     </div>
   )
 }

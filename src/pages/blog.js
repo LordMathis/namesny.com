@@ -31,7 +31,7 @@ const IndexPage = () => {
   console.log(data.allMarkdownRemark.edges)
 
   return (
-    <Layout title="Home">
+    <Layout title="Blog">
       <Blog edges={data.allMarkdownRemark.edges}/>
     </Layout>
   )
