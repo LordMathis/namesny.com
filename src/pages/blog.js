@@ -17,11 +17,13 @@ const IndexPage = () => {
         edges {
           node {
             id
-            fileAbsolutePath
             excerpt
             frontmatter {
               date
               title
+            }
+            fields {
+              slug
             }
           }
         }

@@ -26,18 +26,27 @@
   padding: 20px;
   background-color: $black;
   margin-bottom: 20px;
-
-  p {
-    text-decoration: none;
-    color: $white;
-  }
 }
 
 .postExcerpt {
   text-align: initial;
+  text-decoration: none;
+  color: $white;
 }
 
 .headerContainer {
   display: flex;
   justify-content: space-between;
+}
+
+.noDecoration {
+  text-decoration: none;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active{
+  text-decoration: none;
 }
