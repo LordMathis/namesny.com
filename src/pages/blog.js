@@ -12,7 +12,7 @@ const IndexPage = () => {
     query {
       allMarkdownRemark(
           sort: { order: DESC, fields: [frontmatter___date] }
-          filter: {frontmatter: {draft: {ne: true}}}
+          filter: {frontmatter: {draft: {ne: true}}, fields: {collection: {eq: "posts"}}}
         ) {
         edges {
           node {

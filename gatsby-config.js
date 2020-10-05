@@ -23,15 +23,30 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `data`,
+        path: `${__dirname}/content/pages`,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        filter: node => node.sourceInstanceName === `data`,
+        type: `MarkdownPage`
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `posts`,
         path: `${__dirname}/content/posts/`,
       },
     },
-    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        excerpt_separator: `<!-- end -->`
+        filter: node => node.sourceInstanceName === `pages`,
+        excerpt_separator: `<!-- end -->`,
+        type: `BlogPost`
       }
     },
     {
@@ -43,6 +58,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
