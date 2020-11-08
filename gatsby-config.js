@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     author: `Matúš Námešný`,
-    user: "guest",
+    user: "hello",
     hostname: "namesny.com",
     email: "matus@namesny.com",
     social: [
@@ -30,7 +30,7 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        filter: node => node.sourceInstanceName === `data`,
+        filter: node => node.sourceInstanceName === `pages`,
         type: `MarkdownPage`
       }
     },
@@ -44,7 +44,7 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        filter: node => node.sourceInstanceName === `pages`,
+        filter: node => node.sourceInstanceName === `posts`,
         excerpt_separator: `<!-- end -->`,
         type: `BlogPost`
       }
