@@ -1,15 +1,19 @@
-export { default as Home } from './Home'
-export { default as Blog } from './Blog'
-export { default as About } from './About'
-export { default as Post } from './Post'
-export { default as NotFoundPage } from './NotFoundPage'
-export { default as Spinner } from './Spinner'
-export { default as Header } from './Header'
-export { default as Wrapper } from './Wrapper'
-export { default as Navbar } from './Navbar'
-export { default as App } from './App'
-export { default as SocialLinks } from './SocialLinks'
-export { default as Column } from './Column'
-export { default as Resume } from './Resume'
-export { default as Footer } from './Footer'
-export { default as SearchBox } from './SearchBox'
+import { Link } from "gatsby"
+import PropTypes from "prop-types"
+import React from "react"
+import styles from "../styles/index.module.scss"
+import Social from "./social"
+
+const Index = ({ author, social, email }) => (
+  <div className={styles.indexWrapper}>
+      <div>
+        <h1 className={styles.header}>{ author }</h1>
+      </div>
+      <Social social={social} email={email}/>
+  </div>
+)
+
+Index.propTypes = {
+}
+
+export default Index
