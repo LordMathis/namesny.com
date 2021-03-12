@@ -8,7 +8,8 @@ $backgroundDarker: #252627;
 $backgroundDark: #292a2d;
 
 //Fonts
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@500&family=Open+Sans&display=swap');
+@import "~@fontsource/fira-mono/500.css";
+@import "~@fontsource/open-sans/index.css"; // Weight 400.
 $fontHeader: 'Fira Mono', monospace;
 $fontParagraph: 'Open Sans', sans-serif;
 
